@@ -15,7 +15,7 @@ export class ForTime implements Activity {
     }
 
     constructor(
-        public readonly duration: Duration,
+        public readonly duration: Duration | undefined,
         public readonly activities: Activity[],
         public readonly comment: string | undefined,
     ) {
