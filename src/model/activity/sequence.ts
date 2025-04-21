@@ -1,4 +1,5 @@
 import {Activity} from "./activity.ts";
+import {ActivityType} from "./activity-type.ts";
 
 export class Sequence implements Activity {
 
@@ -8,7 +9,7 @@ export class Sequence implements Activity {
     ) {
     }
 
-    type(): string {
-        return 'SEQUENCE';
+    type(): ActivityType {
+        return ActivityType.SEQUENCE;
     }
 }

@@ -1,5 +1,6 @@
 import {Activity} from "./activity.ts";
 import {Duration} from "./duration.ts";
+import {ActivityType} from "./activity-type.ts";
 
 export class Rest implements Activity {
 
@@ -9,8 +10,8 @@ export class Rest implements Activity {
     ) {
     }
 
-    type(): string {
-        return 'REST';
+    type(): ActivityType {
+        return ActivityType.REST;
     }
 
 }

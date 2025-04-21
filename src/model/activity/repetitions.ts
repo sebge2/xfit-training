@@ -1,4 +1,5 @@
 import {Activity} from "./activity.ts";
+import {ActivityType} from "./activity-type.ts";
 
 export class Repetitions implements Activity {
 
@@ -9,7 +10,7 @@ export class Repetitions implements Activity {
     ) {
     }
 
-    type(): string {
-        return 'REPETITIONS';
+    type(): ActivityType {
+        return ActivityType.REPETITIONS;
     }
 }

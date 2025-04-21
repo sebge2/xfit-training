@@ -1,5 +1,6 @@
 import {Activity} from "./activity.ts";
 import {Duration} from "./duration.ts";
+import {ActivityType} from "./activity-type.ts";
 
 export class Enom implements Activity {
 
@@ -10,7 +11,7 @@ export class Enom implements Activity {
     ) {
     }
 
-    type(): string {
-        return 'ENOM';
+    type(): ActivityType {
+        return ActivityType.ENOM;
     }
 }

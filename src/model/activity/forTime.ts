@@ -1,5 +1,6 @@
 import {Activity} from "./activity.ts";
 import {Duration} from "./duration.ts";
+import {ActivityType} from "./activity-type.ts";
 
 export class ForTime implements Activity {
 
@@ -10,7 +11,7 @@ export class ForTime implements Activity {
     ) {
     }
 
-    type(): string {
-        return 'FOR_TIME';
+    type(): ActivityType {
+        return ActivityType.FOR_TIME;
     }
 }

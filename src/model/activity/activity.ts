@@ -1,6 +1,8 @@
+import {ActivityType} from "./activity-type.ts";
+
 export interface Activity {
 
-    type(): string;
+    type(): ActivityType;
 
     get comment(): string | undefined;
 }

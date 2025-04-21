@@ -1,5 +1,6 @@
 import {Activity} from "./activity.ts";
 import {Duration} from "./duration.ts";
+import {ActivityType} from "./activity-type.ts";
 
 export class Amrap implements Activity {
 
@@ -10,7 +11,7 @@ export class Amrap implements Activity {
     ) {
     }
 
-    type(): string {
-        return 'AMRAP';
+    type(): ActivityType {
+        return ActivityType.AMRAP;
     }
 }
