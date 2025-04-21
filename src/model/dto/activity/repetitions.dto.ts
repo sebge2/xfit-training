@@ -4,5 +4,5 @@ export interface RepetitionsDto extends ActivityDto {
 
     get repetitions(): number;
 
-    get activities(): ActivityDto[];
+    get activity(): ActivityDto;
 }

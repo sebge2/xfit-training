@@ -4,9 +4,8 @@ import {ActivityDisplay} from "./activity-display.tsx";
 export function ForTimeDisplay({forTime}: {forTime: ForTime}) {
     return (
         <>
-            <ul>
-                {forTime.activities.map(activity => <li><ActivityDisplay activity={activity}/></li>)}
-            </ul>
+            For time: {forTime.duration && forTime.duration?.minutes + 'm'} {forTime.duration && forTime.duration.seconds > 0 && forTime.duration?.seconds + 's'}
+            <ActivityDisplay activity={forTime.activity} />
         </>
     );
 }

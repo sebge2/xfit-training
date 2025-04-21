@@ -5,6 +5,6 @@ export interface ForTimeDto extends ActivityDto {
 
     get duration(): DurationDto | undefined;
 
-    get activities(): ActivityDto[];
+    get activity(): ActivityDto;
 
 }

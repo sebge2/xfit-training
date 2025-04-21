@@ -8,15 +8,15 @@ export class Amrap implements Activity {
 
     static fromDto(dto: AmrapDto): Amrap {
         return new Amrap(
-            Duration.fromDto(dto.duration),
-            ActivityDeserializer.deserializeAll(dto.activities),
+            Duration.fromDto(dto.duration) as Duration,
+            ActivityDeserializer.deserialize(dto.activity),
             dto.comment
         );
     }
 
     constructor(
         public readonly duration: Duration,
-        public readonly activities: Activity[],
+        public readonly activity: Activity,
         public readonly comment: string | undefined,
     ) {
     }

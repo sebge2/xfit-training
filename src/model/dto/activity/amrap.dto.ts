@@ -5,6 +5,6 @@ export interface AmrapDto extends ActivityDto {
 
     get duration(): DurationDto;
 
-    get activities(): ActivityDto[];
+    get activity(): ActivityDto;
 
 }

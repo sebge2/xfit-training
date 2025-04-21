@@ -8,14 +8,14 @@ export class Repetitions implements Activity {
     static fromDto(dto: RepetitionsDto): Repetitions {
         return new Repetitions(
             dto.repetitions,
-            ActivityDeserializer.deserializeAll(dto.activities),
+            ActivityDeserializer.deserialize(dto.activity),
             dto.comment
         );
     }
 
     constructor(
         public readonly repetitions: number,
-        public readonly activities: Activity[],
+        public readonly activity: Activity,
         public readonly comment: string | undefined,
     ) {
     }

@@ -9,14 +9,14 @@ export class ForTime implements Activity {
     static fromDto(dto: ForTimeDto): ForTime {
         return new ForTime(
             Duration.fromDto(dto.duration),
-            ActivityDeserializer.deserializeAll(dto.activities),
+            ActivityDeserializer.deserialize(dto.activity),
             dto.comment
         );
     }
 
     constructor(
         public readonly duration: Duration | undefined,
-        public readonly activities: Activity[],
+        public readonly activity: Activity,
         public readonly comment: string | undefined,
     ) {
     }

@@ -8,15 +8,15 @@ export class Enom implements Activity {
 
     static fromDto(dto: EnomDto): Enom {
         return new Enom(
-            Duration.fromDto(dto.duration),
-            ActivityDeserializer.deserializeAll(dto.activities),
+            Duration.fromDto(dto.duration) as Duration,
+            ActivityDeserializer.deserialize(dto.activity),
             dto.comment
         );
     }
 
     constructor(
         public readonly duration: Duration,
-        public readonly activities: Activity[],
+        public readonly activity: Activity,
         public readonly comment: string | undefined,
     ) {
     }
