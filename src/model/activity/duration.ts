@@ -15,4 +15,8 @@ export class Duration {
         public readonly seconds: number = 0,
     ) {
     }
+
+    hasDuration(): boolean {
+        return this.minutes > 0 || this.seconds > 0;
+    }
 }
