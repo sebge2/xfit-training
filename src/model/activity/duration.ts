@@ -10,13 +10,29 @@ export class Duration {
         return new Duration(dto.minutes, dto.seconds);
     }
 
+    static fromSeconds(seconds: number): Duration {
+        if (seconds <= 0) {
+            return new Duration(0);
+        }
+
+        return new Duration(Math.floor(seconds / 60), Math.floor(seconds % 60));
+    }
+
+    static fromMilliSeconds(milliSeconds: number): Duration {
+        return this.fromSeconds(milliSeconds / 1000);
+    }
+
     constructor(
         public readonly minutes: number,
         public readonly seconds: number = 0,
     ) {
     }
 
-    hasDuration(): boolean {
+    get hasDuration(): boolean {
         return this.minutes > 0 || this.seconds > 0;
+    }
+
+    get totalSeconds(): number {
+        return (this.minutes * 60) + this.seconds;
     }
 }
