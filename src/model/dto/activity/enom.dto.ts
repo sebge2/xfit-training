@@ -5,6 +5,8 @@ export interface EnomDto extends ActivityDto {
 
     get duration(): DurationDto;
 
+    get repetitions(): number;
+
     get activity(): ActivityDto;
 
 }

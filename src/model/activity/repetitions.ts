@@ -2,6 +2,9 @@ import {Activity} from "./activity.ts";
 import {ActivityType} from "./activity-type.ts";
 import {ActivityDeserializer} from "./activity-deserializer.ts";
 import {RepetitionsDto} from "../dto/activity/repetitions.dto.ts";
+import {v4 as uuidv4} from "uuid";
+import { TaskSet } from "../sequencer/task-set.ts";
+import {BoardTextInfo} from "../sequencer/board-text-info.ts";
 
 export class Repetitions implements Activity {
 
@@ -13,14 +16,24 @@ export class Repetitions implements Activity {
         );
     }
 
+    public readonly id: string;
+
     constructor(
         public readonly repetitions: number,
         public readonly activity: Activity,
         public readonly comment: string | undefined,
     ) {
+        this.id = uuidv4();
     }
 
-    type(): ActivityType {
+    get type(): ActivityType {
         return ActivityType.REPETITIONS;
+    }
+
+    toSequencerTasks(parent?: BoardTextInfo): TaskSet {
+        return new TaskSet(
+            Array.from({ length: this.repetitions }, (_, index) => this.activity.toSequencerTasks( BoardTextInfo.single(`${index}/${this.repetitions}`, undefined).mergeWithParent(parent)).tasks)
+                .flat()
+        );
     }
 }

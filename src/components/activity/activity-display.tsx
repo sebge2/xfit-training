@@ -16,7 +16,7 @@ import {RepetitionsDisplay} from "./repetitions-display.tsx";
 import {Repetitions} from "../../model/activity/repetitions.ts";
 
 export function ActivityDisplay({activity}: { activity: Activity }) {
-    switch (activity.type()) {
+    switch (activity.type) {
         case ActivityType.EXERCISE:
             return (<ActivityExerciseDisplay exercise={activity as ActivityExercise}/>);
         case ActivityType.SEQUENCE:
@@ -32,6 +32,6 @@ export function ActivityDisplay({activity}: { activity: Activity }) {
         case ActivityType.FOR_TIME:
             return (<ForTimeDisplay forTime={activity as ForTime}/>);
         default:
-            throw Error(`Unsupported type ${activity.type()}.`);
+            throw Error(`Unsupported type ${activity.type}.`);
     }
 }

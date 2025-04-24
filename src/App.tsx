@@ -9,6 +9,7 @@ import {Repetitions} from "./model/activity/repetitions.ts";
 import {Duration} from "./model/activity/duration.ts";
 import {ChronometerService} from "./services/chronometer/chronometer-service.ts";
 import DurationDisplay from "./components/activity/duration-display.tsx";
+import {Enom} from "./model/activity/enom.ts";
 
 const initialState = Duration.fromSeconds(61);
 const service = new ChronometerService(initialState).start();
@@ -31,8 +32,9 @@ export default function App() {
 
     const wod = new Wod(
         "1",
-        new ForTime(
-            undefined,
+        new Enom(
+            new Duration(3),
+            3,
             new Sequence(
                 [
                     new ActivityExercise("1000m", new Exercise("1", "run", ["cardio"], undefined), undefined),
@@ -87,6 +89,9 @@ export default function App() {
         [],
         "Time Intention : 17-20min"
     );
+
+    //console.log( wod.activity.toSequencerTasks(BoardTextInfo.empty()));
+    //console.log( wod2.activity.toSequencerTasks(BoardTextInfo.empty()));
 
     return (
         <div>
