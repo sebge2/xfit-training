@@ -6,7 +6,7 @@ export class Task {
     constructor(
         public readonly activityId: string,
         public readonly board: BoardTextInfo | undefined,
-        public readonly duration: Duration | undefined,
+        public readonly duration: Duration,
     ) {
     }
 }
