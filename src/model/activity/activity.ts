@@ -1,6 +1,6 @@
 import {ActivityType} from "./activity-type.ts";
-import {TaskSet} from "../sequencer/task-set.ts";
-import {BoardTextInfo} from "../sequencer/board-text-info.ts";
+import {TaskSet} from "../board/task-set.ts";
+import {BoardTextInfo} from "../board/board-text-info.ts";
 
 export interface Activity {
 

@@ -1,6 +1,6 @@
 import {Duration} from "../../model/activity/duration.ts";
-import {ChronometerStatus} from "../../model/chronometer/chronometer-status.ts";
-import {ChronometerState} from "../../model/chronometer/chronometer-state.ts";
+import {ChronometerStatus} from "../../model/board/chronometer-status.ts";
+import {ChronometerState} from "../../model/board/chronometer-state.ts";
 
 export class ChronometerService {
 
@@ -81,7 +81,8 @@ export class ChronometerService {
     }
 
     private _computeRemainingTimeInMs(): number {
-        return this._remainingTimeInMs - this._computeElapsedTimeInMs();
+        const number = this._remainingTimeInMs - this._computeElapsedTimeInMs();
+        return (number > 0) ? number : 0;
     }
 
     private _computeElapsedTimeInMs(): number {

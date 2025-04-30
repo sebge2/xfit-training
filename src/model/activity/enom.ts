@@ -4,9 +4,9 @@ import {ActivityType} from "./activity-type.ts";
 import {ActivityDeserializer} from "./activity-deserializer.ts";
 import {EnomDto} from "../dto/activity/enom.dto.ts";
 import {v4 as uuidv4} from "uuid";
-import {TaskSet} from "../sequencer/task-set.ts";
-import {Task} from "../sequencer/task.ts";
-import {BoardTextInfo} from "../sequencer/board-text-info.ts";
+import {TaskSet} from "../board/task-set.ts";
+import {Task} from "../board/task.ts";
+import {BoardTextInfo} from "../board/board-text-info.ts";
 
 export class Enom implements Activity {
 

@@ -3,8 +3,8 @@ import {ActivityType} from "./activity-type.ts";
 import {ActivityDeserializer} from "./activity-deserializer.ts";
 import {SequenceDto} from "../dto/activity/sequence.dto.ts";
 import { v4 as uuidv4 } from 'uuid';
-import {TaskSet} from "../sequencer/task-set.ts";
-import {BoardTextInfo} from "../sequencer/board-text-info.ts";
+import {TaskSet} from "../board/task-set.ts";
+import {BoardTextInfo} from "../board/board-text-info.ts";
 
 export class Sequence implements Activity {
 
