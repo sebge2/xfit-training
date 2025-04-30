@@ -57,6 +57,7 @@ export class ChronometerService {
             case ChronometerStatus.NOT_STARTED:
                 throw new Error('The chronometer is not started yet.');
             case ChronometerStatus.PAUSED:
+                this.start();
                 break;
             case ChronometerStatus.RUNNING:
                 this._status = ChronometerStatus.PAUSED;

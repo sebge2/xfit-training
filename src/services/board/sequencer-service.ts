@@ -10,11 +10,13 @@ const PREPARATION_TASKSET = new TaskSet([
     new Task("initial", BoardTextInfo.single(undefined, "Be Ready!"), Duration.fromSeconds(10))
 ]);
 
+const INITIAL_TASK_INDEX = -1;
+
 export class SequencerService {
 
-    private _chronometer: ChronometerService | undefined;
     private readonly _sequencerTasks: TaskSet;
-    private _currentTaskIndex = -1;
+    private _chronometer: ChronometerService | undefined;
+    private _currentTaskIndex = INITIAL_TASK_INDEX;
 
     constructor(
         public readonly wod: Wod,
@@ -23,13 +25,13 @@ export class SequencerService {
     }
 
     get board(): Board | undefined {
-        if ((this._currentTaskIndex < 0) || (this._chronometer === undefined)) {
+        if (!this._hasStarted()) {
             return undefined;
-        } else if (this._currentTaskIndex > this._sequencerTasks.tasks.length) {
+        } else if (this._hasFinished()) {
             return undefined;
         }
 
-        if (!this._chronometer.remainingTime.hasDuration) {
+        if (!this._chronometer?.remainingTime.hasDuration) {
             this._startNextTask();
 
             return this.board;
@@ -37,7 +39,7 @@ export class SequencerService {
 
         return new Board(
             this._sequencerTasks.tasks[this._currentTaskIndex].board,
-            this._chronometer.remainingTime,
+            this._chronometer.state,
         );
     }
 
@@ -45,23 +47,25 @@ export class SequencerService {
         if (this._currentTaskIndex >= 0) {
             throw Error('The sequence already started.');
         }
+
         this._startNextTask();
     }
 
     pause() {
-        if ((this._currentTaskIndex < 0) || (this._chronometer === undefined)) {
+        if (!this._hasStarted()) {
             throw Error('The sequence hasn\'t started yet.');
         }
 
-        this._chronometer.pause();
+        this._chronometer?.pause();
     }
 
     stop() {
-        if ((this._currentTaskIndex < 0) || (this._chronometer === undefined)) {
+        if (!this._hasStarted()) {
             throw Error('The sequence hasn\'t started yet.');
         }
 
-        this._chronometer.stop();
+        this._chronometer?.stop();
+        this._currentTaskIndex = INITIAL_TASK_INDEX;
     }
 
     private _initTaskSet(wod: Wod): TaskSet {
@@ -74,7 +78,15 @@ export class SequencerService {
         return PREPARATION_TASKSET.merge(wodTaskSet);
     }
 
-    private _startNextTask() {
+    private _hasStarted(): boolean {
+        return (this._currentTaskIndex >= 0) && (this._chronometer !== undefined);
+    }
+
+    private _hasFinished(): boolean {
+        return this._currentTaskIndex >= this._sequencerTasks.tasks.length;
+    }
+
+    private _startNextTask(): void {
         if (this._chronometer) {
             this._chronometer.stop();
         }
