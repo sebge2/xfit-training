@@ -8,13 +8,14 @@ export class ChronometerService {
     private _status: ChronometerStatus = ChronometerStatus.NOT_STARTED;
     private _startTime: Date | undefined;
 
-    constructor(public readonly duration: Duration) {
-        this._remainingTimeInMs = duration.totalSeconds * 1000;
+    constructor(public readonly initialDuration: Duration) {
+        this._remainingTimeInMs = initialDuration.totalSeconds * 1000;
     }
 
     get state(): ChronometerState {
         return new ChronometerState(
             this.status,
+            this.initialDuration,
             this.remainingTime,
         );
     }
@@ -66,18 +67,6 @@ export class ChronometerService {
                 break;
             case ChronometerStatus.FINISHED:
                 throw new Error('The chronometer finished and cannot be resumed.');
-        }
-    }
-
-    stop() {
-        switch (this._status) {
-            case ChronometerStatus.NOT_STARTED:
-            case ChronometerStatus.RUNNING:
-            case ChronometerStatus.PAUSED:
-                this._status = ChronometerStatus.FINISHED;
-                break;
-            case ChronometerStatus.FINISHED:
-                break;
         }
     }
 

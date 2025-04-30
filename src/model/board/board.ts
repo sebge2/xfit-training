@@ -5,7 +5,7 @@ export class Board {
 
     constructor(
         public readonly text: BoardTextInfo,
-        public readonly state: ChronometerState,
+        public readonly chronometer: ChronometerState,
     ) {
     }
 }

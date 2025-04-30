@@ -59,15 +59,6 @@ export class SequencerService {
         this._chronometer?.pause();
     }
 
-    stop() {
-        if (!this._hasStarted()) {
-            throw Error('The sequence hasn\'t started yet.');
-        }
-
-        this._chronometer?.stop();
-        this._currentTaskIndex = INITIAL_TASK_INDEX;
-    }
-
     private _initTaskSet(wod: Wod): TaskSet {
         const wodTaskSet = wod.activity.toSequencerTasks(BoardTextInfo.empty());
 
@@ -87,10 +78,6 @@ export class SequencerService {
     }
 
     private _startNextTask(): void {
-        if (this._chronometer) {
-            this._chronometer.stop();
-        }
-
         this._currentTaskIndex++;
         this._chronometer = new ChronometerService(this._sequencerTasks.tasks[this._currentTaskIndex].duration);
         this._chronometer.start();
