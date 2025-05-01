@@ -7,7 +7,7 @@ export class Duration {
             return undefined;
         }
 
-        return new Duration(dto.minutes, dto.seconds);
+        return new Duration(dto.hours, dto.minutes, dto.seconds);
     }
 
     static fromSeconds(seconds: number): Duration {
@@ -15,24 +15,29 @@ export class Duration {
             return new Duration(0);
         }
 
-        return new Duration(Math.floor(seconds / 60), Math.floor(seconds % 60));
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+
+        return new Duration(hours, minutes, remainingSeconds);
     }
 
     static fromMilliSeconds(milliSeconds: number): Duration {
-        return this.fromSeconds(milliSeconds / 1000);
+        return this.fromSeconds(Math.floor(milliSeconds / 1000));
     }
 
     constructor(
-        public readonly minutes: number,
+        public readonly hours: number,
+        public readonly minutes: number = 0,
         public readonly seconds: number = 0,
     ) {
     }
 
     get hasDuration(): boolean {
-        return this.minutes > 0 || this.seconds > 0;
+        return (this.hours > 0) || (this.minutes > 0) || (this.seconds > 0);
     }
 
     get totalSeconds(): number {
-        return (this.minutes * 60) + this.seconds;
+        return (this.hours * 3600) + (this.minutes * 60) + this.seconds;
     }
 }

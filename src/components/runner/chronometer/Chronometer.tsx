@@ -1,4 +1,5 @@
 import style from './Chronometer.module.scss';
+import {Duration} from "../../../model/activity/duration.ts";
 
 const number = [
     [1, 1, 1, 0, 1, 1, 1], // 0
@@ -31,15 +32,13 @@ function format(value: number): number[] {
     return `${value <= 9 ? '0' : ''}${value}`.split('').map(char => +char);
 }
 
-export default function Chronometer({hours, minutes, seconds, scale = 1}: {
-    hours: number,
-    minutes: number,
-    seconds: number,
+export default function Chronometer({duration, scale = 1}: {
+    duration: Duration,
     scale?: number
 }) {
-    const formattedHours = format(hours)
-    const formattedMinutes = format(minutes)
-    const formattedSeconds = format(seconds)
+    const formattedHours = format(duration?.hours || 0);
+    const formattedMinutes = format(duration?.minutes || 0);
+    const formattedSeconds = format(duration?.seconds || 0);
 
     display('a', formattedHours[0]);
     display('b', formattedHours[1]);
