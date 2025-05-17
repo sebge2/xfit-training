@@ -34,7 +34,7 @@ export class Enom implements Activity {
         return ActivityType.ENOM;
     }
 
-    toSequencerTasks(parent?: BoardTextInfo): TaskSet {
+    toSequencerTasks(parent: BoardTextInfo): TaskSet {
         return new TaskSet(
             Array
                 .from({length: this.repetitions}, (_, index) => new Task(

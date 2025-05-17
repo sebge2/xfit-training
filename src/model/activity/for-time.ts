@@ -12,7 +12,7 @@ export class ForTime implements Activity {
 
     static fromDto(dto: ForTimeDto): ForTime {
         return new ForTime(
-            Duration.fromDto(dto.duration),
+            Duration.fromDto(dto.duration) as Duration,
             ActivityDeserializer.deserialize(dto.activity),
             dto.comment
         );
@@ -21,7 +21,7 @@ export class ForTime implements Activity {
     public readonly id: string;
 
     constructor(
-        public readonly duration: Duration | undefined,
+        public readonly duration: Duration,
         public readonly activity: Activity,
         public readonly comment: string | undefined,
     ) {
@@ -32,7 +32,7 @@ export class ForTime implements Activity {
         return ActivityType.FOR_TIME;
     }
 
-    toSequencerTasks(parent?: BoardTextInfo): TaskSet {
+    toSequencerTasks(parent: BoardTextInfo): TaskSet {
         return new TaskSet([
             new Task(
                 this.id,

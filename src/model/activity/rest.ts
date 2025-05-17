@@ -29,7 +29,7 @@ export class Rest implements Activity {
         return ActivityType.REST;
     }
 
-    toSequencerTasks(parent?: BoardTextInfo): TaskSet {
+    toSequencerTasks(parent: BoardTextInfo): TaskSet {
         return new TaskSet([
             new Task(
                 this.id,

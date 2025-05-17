@@ -30,7 +30,7 @@ export class Repetitions implements Activity {
         return ActivityType.REPETITIONS;
     }
 
-    toSequencerTasks(parent?: BoardTextInfo): TaskSet {
+    toSequencerTasks(parent: BoardTextInfo): TaskSet {
         return new TaskSet(
             Array.from({ length: this.repetitions }, (_, index) => this.activity.toSequencerTasks( BoardTextInfo.single(`${index}/${this.repetitions}`, undefined).mergeWithParent(parent)).tasks)
                 .flat()

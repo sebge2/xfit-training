@@ -32,7 +32,7 @@ export class Amrap implements Activity {
         return ActivityType.AMRAP;
     }
 
-    toSequencerTasks(board?: BoardTextInfo): TaskSet {
+    toSequencerTasks(board: BoardTextInfo): TaskSet {
         return new TaskSet([
             new Task(
                 this.id,

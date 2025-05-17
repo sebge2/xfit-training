@@ -10,6 +10,6 @@ export interface Activity {
 
     get comment(): string | undefined;
 
-    toSequencerTasks(parent?: BoardTextInfo): TaskSet;
+    toSequencerTasks(parent: BoardTextInfo): TaskSet;
 
 }

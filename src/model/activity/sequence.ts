@@ -28,7 +28,7 @@ export class Sequence implements Activity {
         return ActivityType.SEQUENCE;
     }
 
-    toSequencerTasks(parent?: BoardTextInfo): TaskSet {
+    toSequencerTasks(parent: BoardTextInfo): TaskSet {
         return this.activities.reduce((acc, activity) => acc.merge(activity.toSequencerTasks(parent)), new TaskSet([]));
     }
 }
