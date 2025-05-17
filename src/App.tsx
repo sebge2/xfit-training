@@ -7,7 +7,7 @@ import {WodDisplay} from "./components/activity/wod-display.tsx";
 import {Sequence} from "./model/activity/sequence.ts";
 import {Repetitions} from "./model/activity/repetitions.ts";
 import {Duration} from "./model/activity/duration.ts";
-import {ChronometerService} from "./services/chronometer/chronometer-service.ts";
+import {ChronometerService} from "./services/board/chronometer-service.ts";
 import DurationDisplay from "./components/activity/duration-display.tsx";
 import {Enom} from "./model/activity/enom.ts";
 
