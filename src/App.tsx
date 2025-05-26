@@ -5,6 +5,7 @@ import WodSearchPage from "./pages/wod/WodSearchPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import WodPage from "./pages/wod/WodPage.tsx";
 import ExercisePage from "./pages/exercise/ExercisePage.tsx";
+import WodRunner from "./pages/wod/WodRunner.tsx";
 
 
 export default function App() {
@@ -32,7 +33,16 @@ export default function App() {
                 },
                 {
                     path: 'wod/:id',
-                    element: <WodPage />
+                    children: [
+                        {
+                            path: '',
+                            element: <WodPage />,
+                        },
+                        {
+                            path: 'run',
+                            element: <WodRunner />,
+                        }
+                    ]
                 }
             ]
         }
