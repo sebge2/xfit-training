@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
-import {Wod} from "../model/activity/wod.ts";
-import {Enom} from "../model/activity/enom.ts";
-import {Duration} from "../model/activity/duration.ts";
-import {Sequence} from "../model/activity/sequence.ts";
-import {ActivityExercise} from "../model/activity/activity-exercise.ts";
-import {Exercise} from "../model/exercise/exercise.ts";
-import {ForTime} from "../model/activity/for-time.ts";
-import {Repetitions} from "../model/activity/repetitions.ts";
-import {WodDisplay} from "../components/activity/wod-display.tsx";
-import DurationDisplay from "../components/activity/duration-display.tsx";
-import {ChronometerService} from "../services/board/chronometer-service.ts";
+import {Wod} from "../../model/activity/wod.ts";
+import {Enom} from "../../model/activity/enom.ts";
+import {Duration} from "../../model/activity/duration.ts";
+import {Sequence} from "../../model/activity/sequence.ts";
+import {ActivityExercise} from "../../model/activity/activity-exercise.ts";
+import {Exercise} from "../../model/exercise/exercise.ts";
+import {ForTime} from "../../model/activity/for-time.ts";
+import {Repetitions} from "../../model/activity/repetitions.ts";
+import {WodDisplay} from "../../components/activity/wod-display.tsx";
+import DurationDisplay from "../../components/activity/duration-display.tsx";
+import {ChronometerService} from "../../services/board/chronometer-service.ts";
 
 const initialState = Duration.fromSeconds(61);
 const service = new ChronometerService(initialState).start();
