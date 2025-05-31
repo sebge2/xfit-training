@@ -1,6 +1,6 @@
-export interface ExerciseDto {
+import {DocumentData} from "firebase/firestore";
 
-    get id(): string,
+export interface ExerciseDto extends DocumentData{
 
     get name(): string;
 
