@@ -16,7 +16,7 @@ export default function App() {
             errorElement: <ErrorPage />,
             children: [
                 {
-                    path: '',
+                    index: true,
                     element: <Navigate to="/exercises" replace />
                 },
                 {
@@ -28,11 +28,11 @@ export default function App() {
                     element: <ExercisePage/>
                 },
                 {
-                    path: 'wod',
+                    path: 'wods',
                     element: <WodSearchPage/>
                 },
                 {
-                    path: 'wod/:id',
+                    path: 'wods/:id',
                     children: [
                         {
                             path: '',
