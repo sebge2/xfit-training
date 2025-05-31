@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Exercise} from "../../model/exercise/exercise.ts";
-import {EXERCISES_SERVICE} from "../../services/exercise-service.ts";
+import {EXERCISE_SERVICE} from "../../services/exercise-service.ts";
 
 export default function ExercisePage() {
     const {id} = useParams();
@@ -20,7 +20,7 @@ export default function ExercisePage() {
 
             try {
                 setLoading(true);
-                const fetchedWod = await EXERCISES_SERVICE.findById(id);
+                const fetchedWod = await EXERCISE_SERVICE.findById(id);
 
                 if (!fetchedWod) {
                     setError(`Workout with ID ${id} not found`);

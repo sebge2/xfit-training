@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {EXERCISES_SERVICE} from "../../services/exercise-service.ts";
+import {EXERCISE_SERVICE} from "../../services/exercise-service.ts";
 import {Exercise} from "../../model/exercise/exercise.ts";
 import {Link} from "react-router-dom";
 
@@ -12,7 +12,7 @@ export default function ExercisesPage() {
         const fetchWods = async () => {
             try {
                 setLoading(true);
-                const fetchedWods = await EXERCISES_SERVICE.findAll();
+                const fetchedWods = await EXERCISE_SERVICE.findAll();
                 setWods(fetchedWods);
                 setError(null);
             } catch (err) {

@@ -1,23 +1,69 @@
-import {Link, useParams} from "react-router-dom";
-import {WodDisplay} from "../../components/activity/wod-display.tsx";
+import {Link, Navigate, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 import {Wod} from "../../model/activity/wod.ts";
-import {wod1, wod2} from "../../model/wod-temp.tsx";
+import {WOD_SERVICE} from "../../services/wod-service.ts";
 
 export default function WodPage() {
     const {id} = useParams();
-    let wod: Wod;
-    if (id === '1')
-        wod = wod1;
-    else if (id === '2')
-        wod = wod2;
-    else
-        throw new Error('Wod not found');
+    const [wod, setWod] = useState<Wod | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchWod = async () => {
+            if (!id) {
+                setError("No workout ID provided");
+                setLoading(false);
+                return;
+            }
+
+            try {
+                setLoading(true);
+                const fetchedWod = await WOD_SERVICE.findById(id);
+
+                if (!fetchedWod) {
+                    setError(`Workout with ID ${id} not found`);
+                } else {
+                    setWod(fetchedWod);
+                    setError(null);
+                }
+            } catch (err) {
+                console.error(`Error fetching workout with ID ${id}:`, err);
+                setError("Failed to load workout. Please try again later.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchWod();
+    }, [id]);
+
+    if (loading) {
+        return <p>Loading workout...</p>;
+    }
+
+    if (error) {
+        return (
+            <div>
+                <p className="error">{error}</p>
+                <Link to="/wod">Back to Workouts</Link>
+            </div>
+        );
+    }
+
+    if (!wod) {
+        return <Navigate to="/wod"/>;
+    }
+
+    //<!--<WodDisplay wod={wod} />-->
 
     return (
         <>
-            <WodDisplay wod={wod}/>
-
+            <p>{wod.name}</p>
             <Link to="run">Run</Link>
+            <div>
+                <Link to="/wod">Back to Workouts</Link>
+            </div>
         </>
     );
 }

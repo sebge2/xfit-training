@@ -47,4 +47,4 @@ export class ExerciseService {
     }
 }
 
-export const EXERCISES_SERVICE = new ExerciseService();
+export const EXERCISE_SERVICE = new ExerciseService();
