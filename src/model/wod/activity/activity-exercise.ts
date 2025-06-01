@@ -1,10 +1,9 @@
 import {Activity} from "./activity.ts";
 import {ActivityType} from "./activity-type.ts";
 import {ActivityExerciseDto} from "../../dto/wod/activity/activity-exercise.dto.ts";
-import {v4 as uuidv4} from "uuid";
-import { TaskSet } from "../board/task-set.ts";
+import {TaskSet} from "../board/task-set.ts";
 
-export class ActivityExercise implements Activity {
+export class ActivityExercise extends Activity {
 
     static fromDto(dto: ActivityExerciseDto): ActivityExercise {
         return new ActivityExercise(
@@ -14,18 +13,21 @@ export class ActivityExercise implements Activity {
         );
     }
 
-    public readonly id: string;
+    static toDto(activity: ActivityExercise): ActivityExerciseDto {
+        return {
+            type: activity.type,
+            repetitions: activity.repetitions,
+            exercise: activity.exercise,
+            comment: activity.comment,
+        };
+    }
 
     constructor(
         public readonly repetitions: string,
         public readonly exercise: string,
-        public readonly comment: string | undefined,
+        comment: string | undefined,
     ) {
-        this.id = uuidv4();
-    }
-
-    get type(): ActivityType {
-        return ActivityType.EXERCISE;
+        super(ActivityType.EXERCISE, comment);
     }
 
     toSequencerTasks(): TaskSet {

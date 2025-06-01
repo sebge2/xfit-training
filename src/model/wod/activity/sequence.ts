@@ -3,7 +3,7 @@ import {ActivityType} from "./activity-type.ts";
 import {SequenceDto} from "../../dto/wod/activity/sequence.dto.ts";
 import {TaskSet} from "../board/task-set.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
-import {mapActivityFromAllDto} from "./activity-utils.ts";
+import {mapActivityFromAllDto, mapActivityToAllDto} from "./activity-utils.ts";
 
 export class Sequence extends Activity {
 
@@ -14,9 +14,17 @@ export class Sequence extends Activity {
         );
     }
 
+    static toDto(activity: Sequence): SequenceDto {
+        return {
+            type: activity.type,
+            activities: mapActivityToAllDto(activity.activities),
+            comment: activity.comment,
+        };
+    }
+
     constructor(
         public readonly activities: Activity[],
-        public readonly comment: string | undefined,
+        comment: string | undefined,
     ) {
         super(ActivityType.SEQUENCE, comment);
     }

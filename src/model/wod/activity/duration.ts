@@ -10,6 +10,18 @@ export class Duration {
         return new Duration(dto.hours, dto.minutes, dto.seconds);
     }
 
+    static toDto(duration: Duration | undefined): DurationDto | undefined {
+        if (!duration) {
+            return undefined;
+        }
+
+        return {
+            hours: duration.hours,
+            minutes: duration.minutes,
+            seconds: duration.seconds,
+        };
+    }
+
     static fromSeconds(seconds: number): Duration {
         if (seconds <= 0) {
             return new Duration(0);

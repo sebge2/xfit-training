@@ -1,12 +1,11 @@
 import {Activity} from "./activity.ts";
 import {ActivityType} from "./activity-type.ts";
 import {RepetitionsDto} from "../../dto/wod/activity/repetitions.dto.ts";
-import {v4 as uuidv4} from "uuid";
 import {TaskSet} from "../board/task-set.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
 import {mapActivityFromDto} from "./activity-utils.ts";
 
-export class Repetitions implements Activity {
+export class Repetitions extends Activity {
 
     static fromDto(dto: RepetitionsDto): Repetitions {
         return new Repetitions(
@@ -16,18 +15,21 @@ export class Repetitions implements Activity {
         );
     }
 
-    public readonly id: string;
+    static toDto(activity: Repetitions): RepetitionsDto {
+        return {
+            type: activity.type,
+            repetitions: activity.repetitions,
+            activity: activity.activity,
+            comment: activity.comment,
+        };
+    }
 
     constructor(
         public readonly repetitions: number,
         public readonly activity: Activity,
-        public readonly comment: string | undefined,
+        comment: string | undefined,
     ) {
-        this.id = uuidv4();
-    }
-
-    get type(): ActivityType {
-        return ActivityType.REPETITIONS;
+        super(ActivityType.REPETITIONS, comment);
     }
 
     toSequencerTasks(parent: BoardTextInfo): TaskSet {

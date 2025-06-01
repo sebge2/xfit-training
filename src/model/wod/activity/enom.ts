@@ -2,13 +2,12 @@ import {Activity} from "./activity.ts";
 import {Duration} from "./duration.ts";
 import {ActivityType} from "./activity-type.ts";
 import {EnomDto} from "../../dto/wod/activity/enom.dto.ts";
-import {v4 as uuidv4} from "uuid";
 import {TaskSet} from "../board/task-set.ts";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
 import {mapActivityFromDto} from "./activity-utils.ts";
 
-export class Enom implements Activity {
+export class Enom extends Activity {
 
     static fromDto(dto: EnomDto): Enom {
         return new Enom(
@@ -19,19 +18,26 @@ export class Enom implements Activity {
         );
     }
 
-    public readonly id: string;
+    static toDto(enom: Enom): EnomDto {
+        return {
+            type: enom.type,
+            duration: Duration.toDto(enom.duration) as Duration,
+            repetitions: enom.repetitions,
+            activity: enom.activity,
+            comment: enom.comment,
+        };
+    }
 
     constructor(
         public readonly duration: Duration,
         public readonly repetitions: number,
         public readonly activity: Activity,
-        public readonly comment: string | undefined,
+        comment: string | undefined,
     ) {
-        this.id = uuidv4();
-    }
-
-    get type(): ActivityType {
-        return ActivityType.ENOM;
+        super(
+            ActivityType.ENOM,
+            comment,
+        );
     }
 
     toSequencerTasks(parent: BoardTextInfo): TaskSet {

@@ -3,12 +3,11 @@ import {Duration} from "./duration.ts";
 import {ActivityType} from "./activity-type.ts";
 import {AmrapDto} from "../../dto/wod/activity/amrap.dto.ts";
 import {TaskSet} from "../board/task-set.ts";
-import {v4 as uuidv4} from "uuid";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
 import {mapActivityFromDto} from "./activity-utils.ts";
 
-export class Amrap implements Activity {
+export class Amrap extends Activity {
 
     static fromDto(dto: AmrapDto): Amrap {
         return new Amrap(
@@ -18,18 +17,24 @@ export class Amrap implements Activity {
         );
     }
 
-    public readonly id: string;
+    static toDto(amrap: Amrap): AmrapDto {
+        return {
+            type: amrap.type,
+            duration: Duration.toDto(amrap.duration) as Duration,
+            activity: amrap.activity,
+            comment: amrap.comment,
+        };
+    }
 
     constructor(
         public readonly duration: Duration,
         public readonly activity: Activity,
-        public readonly comment: string | undefined,
+        comment: string | undefined,
     ) {
-        this.id = uuidv4();
-    }
-
-    get type(): ActivityType {
-        return ActivityType.AMRAP;
+        super(
+            ActivityType.AMRAP,
+            comment,
+        );
     }
 
     toSequencerTasks(board: BoardTextInfo): TaskSet {

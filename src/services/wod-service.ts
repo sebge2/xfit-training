@@ -1,4 +1,14 @@
-import {collection, doc, DocumentSnapshot, getDoc, getDocs} from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    DocumentSnapshot,
+    getDoc,
+    getDocs,
+    UpdateData,
+    updateDoc
+} from "firebase/firestore";
 import {db} from "../firebase";
 import {Wod} from "../model/wod/wod.ts";
 import {WodDto} from "../model/dto/wod/wod.dto.ts";
@@ -30,7 +40,28 @@ export class WodService {
         }
 
         return this._mapWodFromDto(snapshot as DocumentSnapshot<WodDto>);
+    }
+
+    async create(wod: Wod): Promise<Wod | null> {
+        const docRef = await addDoc(collection(db, WODS_COLLECTION), Wod.toDto(wod));
+
+        wod.id = docRef.id;
+
+        return wod;
     };
+
+    async update(wod: Wod): Promise<Wod | null> {
+        await updateDoc(
+            doc(db, WODS_COLLECTION, wod.id as string),
+            Wod.toDto(wod) as UpdateData<WodDto>
+        );
+
+        return wod;
+    }
+
+    async delete(id: string): Promise<void> {
+        return await deleteDoc(doc(db, WODS_COLLECTION, id));
+    }
 
     private _mapWodFromDto(snapshot: DocumentSnapshot<WodDto>): Wod | null {
         const data = snapshot.data();

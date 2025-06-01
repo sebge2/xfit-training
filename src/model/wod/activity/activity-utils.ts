@@ -40,3 +40,28 @@ export function mapActivityFromDto(dto: ActivityDto): Activity {
 export function mapActivityFromAllDto(dtos: ActivityDto[]): Activity[] {
     return dtos.map(dto => mapActivityFromDto(dto));
 }
+
+export function mapActivityToDto(activity: Activity): ActivityDto {
+    switch (activity.type) {
+        case ActivityType.EXERCISE:
+            return ActivityExercise.toDto(<ActivityExercise>activity);
+        case ActivityType.SEQUENCE:
+            return Sequence.toDto(<Sequence>activity);
+        case ActivityType.REPETITIONS:
+            return Repetitions.toDto(<Repetitions>activity);
+        case ActivityType.REST:
+            return Rest.toDto(<Rest>activity);
+        case ActivityType.AMRAP:
+            return Amrap.toDto(<Amrap>activity);
+        case ActivityType.ENOM:
+            return Enom.toDto(<Enom>activity);
+        case ActivityType.FOR_TIME:
+            return ForTime.toDto(<ForTime>activity);
+        default:
+            throw Error(`Unsupported type ${activity.type}.`);
+    }
+}
+
+export function mapActivityToAllDto(activities: Activity[]): ActivityDto[] {
+    return activities.map(dto => mapActivityToDto(dto));
+}

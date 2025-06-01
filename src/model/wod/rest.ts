@@ -4,10 +4,9 @@ import {ActivityType} from "./activity/activity-type.ts";
 import {RestDto} from "../dto/wod/activity/rest.dto.ts";
 import {TaskSet} from "./board/task-set.ts";
 import {Task} from "./board/task.ts";
-import { v4 as uuidv4 } from 'uuid';
 import {BoardTextInfo} from "./board/board-text-info.ts";
 
-export class Rest implements Activity {
+export class Rest extends Activity {
 
     static fromDto(dto: RestDto): Rest {
         return new Rest(
@@ -16,27 +15,31 @@ export class Rest implements Activity {
         );
     }
 
-    public readonly id: string;
+    static toDto(rest: Rest): RestDto {
+        return {
+            type: rest.type,
+            duration: Duration.toDto(rest.duration) as Duration,
+            comment: rest.comment,
+        };
+    }
 
     constructor(
         public readonly duration: Duration,
-        public readonly comment: string | undefined,
+        comment: string | undefined,
     ) {
-        this.id = uuidv4();
-    }
-
-    get type(): ActivityType {
-        return ActivityType.REST;
+        super(
+            ActivityType.REST,
+            comment,
+        )
     }
 
     toSequencerTasks(parent: BoardTextInfo): TaskSet {
         return new TaskSet([
             new Task(
                 this.id,
-                 BoardTextInfo.single(undefined, "REST").mergeWithParent(parent),
+                BoardTextInfo.single(undefined, "REST").mergeWithParent(parent),
                 this.duration
             )
         ]);
     }
-
 }
