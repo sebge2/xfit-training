@@ -1,4 +1,4 @@
-import {Enom} from "../../model/wod/activity/enom.ts";
+import {Enom} from "../../../model/wod/activity/enom.ts";
 import {ActivityDisplay} from "./activity-display.tsx";
 import DurationDisplay from "./duration-display.tsx";
 

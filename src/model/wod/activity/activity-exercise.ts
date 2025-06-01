@@ -2,7 +2,7 @@ import {Activity} from "./activity.ts";
 import {ActivityType} from "./activity-type.ts";
 import {ActivityExerciseDto} from "../../dto/wod/activity/activity-exercise.dto.ts";
 import {v4 as uuidv4} from "uuid";
-import { TaskSet } from "../../board/task-set.ts";
+import { TaskSet } from "../board/task-set.ts";
 
 export class ActivityExercise implements Activity {
 

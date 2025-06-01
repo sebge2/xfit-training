@@ -1,5 +1,5 @@
 import {ActivityDisplay} from "./activity-display.tsx";
-import {Sequence} from "../../model/wod/activity/sequence.ts";
+import {Sequence} from "../../../model/wod/activity/sequence.ts";
 
 export function SequenceDisplay({sequence}: { sequence: Sequence }) {
     return (

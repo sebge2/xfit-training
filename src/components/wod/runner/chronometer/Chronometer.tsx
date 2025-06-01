@@ -1,5 +1,5 @@
 import style from './Chronometer.module.scss';
-import {Duration} from "../../../model/wod/activity/duration.ts";
+import {Duration} from "../../../../model/wod/activity/duration.ts";
 
 const number = [
     [1, 1, 1, 0, 1, 1, 1], // 0

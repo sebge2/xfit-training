@@ -3,9 +3,9 @@ import {Duration} from "./duration.ts";
 import {ActivityType} from "./activity-type.ts";
 import {ForTimeDto} from "../../dto/wod/activity/for-time.dto.ts";
 import {v4 as uuidv4} from "uuid";
-import {TaskSet} from "../../board/task-set.ts";
-import {Task} from "../../board/task.ts";
-import {BoardTextInfo} from "../../board/board-text-info.ts";
+import {TaskSet} from "../board/task-set.ts";
+import {Task} from "../board/task.ts";
+import {BoardTextInfo} from "../board/board-text-info.ts";
 
 export class ForTime implements Activity {
 

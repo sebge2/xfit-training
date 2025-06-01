@@ -1,9 +1,9 @@
 import {Wod} from "../../model/wod/wod.ts";
-import {TaskSet} from "../../model/board/task-set.ts";
-import {BoardTextInfo} from "../../model/board/board-text-info.ts";
+import {TaskSet} from "../../model/wod/board/task-set.ts";
+import {BoardTextInfo} from "../../model/wod/board/board-text-info.ts";
 import {ChronometerService} from "./chronometer-service.ts";
-import {Board} from "../../model/board/board.ts";
-import {Task} from "../../model/board/task.ts";
+import {Board} from "../../model/wod/board/board.ts";
+import {Task} from "../../model/wod/board/task.ts";
 import {Duration} from "../../model/wod/activity/duration.ts";
 
 const PREPARATION_TASKSET = new TaskSet([

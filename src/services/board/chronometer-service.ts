@@ -1,6 +1,6 @@
 import {Duration} from "../../model/wod/activity/duration.ts";
-import {ChronometerStatus} from "../../model/board/chronometer-status.ts";
-import {ChronometerState} from "../../model/board/chronometer-state.ts";
+import {ChronometerStatus} from "../../model/wod/board/chronometer-status.ts";
+import {ChronometerState} from "../../model/wod/board/chronometer-state.ts";
 
 export class ChronometerService {
 

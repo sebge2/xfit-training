@@ -1,5 +1,5 @@
 import {ChronometerStatus} from "./chronometer-status.ts";
-import {Duration} from "../wod/activity/duration.ts";
+import {Duration} from "../activity/duration.ts";
 
 export class ChronometerState {
 

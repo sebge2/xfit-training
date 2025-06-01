@@ -1,8 +1,8 @@
 import {Activity} from "./activity.ts";
 import {ActivityType} from "./activity-type.ts";
 import {SequenceDto} from "../../dto/wod/activity/sequence.dto.ts";
-import {TaskSet} from "../../board/task-set.ts";
-import {BoardTextInfo} from "../../board/board-text-info.ts";
+import {TaskSet} from "../board/task-set.ts";
+import {BoardTextInfo} from "../board/board-text-info.ts";
 
 export class Sequence extends Activity {
 

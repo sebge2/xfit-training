@@ -1,4 +1,4 @@
-import {Amrap} from "../../model/wod/activity/amrap.ts";
+import {Amrap} from "../../../model/wod/activity/amrap.ts";
 import {ActivityDisplay} from "./activity-display.tsx";
 import DurationDisplay from "./duration-display.tsx";
 

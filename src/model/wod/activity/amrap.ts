@@ -2,10 +2,10 @@ import {Activity} from "./activity.ts";
 import {Duration} from "./duration.ts";
 import {ActivityType} from "./activity-type.ts";
 import {AmrapDto} from "../../dto/wod/activity/amrap.dto.ts";
-import {TaskSet} from "../../board/task-set.ts";
+import {TaskSet} from "../board/task-set.ts";
 import {v4 as uuidv4} from "uuid";
-import {Task} from "../../board/task.ts";
-import {BoardTextInfo} from "../../board/board-text-info.ts";
+import {Task} from "../board/task.ts";
+import {BoardTextInfo} from "../board/board-text-info.ts";
 
 export class Amrap implements Activity {
 

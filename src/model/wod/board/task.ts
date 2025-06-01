@@ -1,4 +1,4 @@
-import {Duration} from "../wod/activity/duration.ts";
+import {Duration} from "../activity/duration.ts";
 import {BoardTextInfo} from "./board-text-info.ts";
 
 export class Task {

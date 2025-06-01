@@ -1,4 +1,4 @@
-import {Repetitions} from "../../model/wod/activity/repetitions.ts";
+import {Repetitions} from "../../../model/wod/activity/repetitions.ts";
 import {ActivityDisplay} from "./activity-display.tsx";
 
 export function RepetitionsDisplay({repetitions}: { repetitions: Repetitions }) {

@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Duration} from "../../model/wod/activity/duration.ts";
 import {ChronometerService} from "../../services/board/chronometer-service.ts";
-import DurationDisplay from "../../components/activity/duration-display.tsx";
+import DurationDisplay from "../../components/wod/activity/duration-display.tsx";
 
 const initialState = Duration.fromSeconds(61);
 const service = new ChronometerService(initialState).start();
