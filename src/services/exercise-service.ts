@@ -38,12 +38,7 @@ export class ExerciseService {
             return null;
         }
 
-        return new Exercise(
-            snapshot.id,
-            data.name,
-            data.tags || [],
-            data.comment
-        );
+        return Exercise.fromDto(snapshot.id, data);
     }
 }
 

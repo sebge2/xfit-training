@@ -1,7 +1,6 @@
-import {Activity} from "./activity.ts";
+import {Activity} from "../wod/activity.ts";
 import {Duration} from "./duration.ts";
 import {ActivityType} from "./activity-type.ts";
-import {ActivityDeserializer} from "./activity-deserializer.ts";
 import {EnomDto} from "../dto/activity/enom.dto.ts";
 import {v4 as uuidv4} from "uuid";
 import {TaskSet} from "../board/task-set.ts";
@@ -14,7 +13,7 @@ export class Enom implements Activity {
         return new Enom(
             Duration.fromDto(dto.duration) as Duration,
             dto.repetitions,
-            ActivityDeserializer.deserialize(dto.activity),
+            Activity.mapFromDto(dto.activity),
             dto.comment
         );
     }

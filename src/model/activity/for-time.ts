@@ -1,7 +1,6 @@
-import {Activity} from "./activity.ts";
+import {Activity} from "../wod/activity.ts";
 import {Duration} from "./duration.ts";
 import {ActivityType} from "./activity-type.ts";
-import {ActivityDeserializer} from "./activity-deserializer.ts";
 import {ForTimeDto} from "../dto/activity/for-time.dto.ts";
 import {v4 as uuidv4} from "uuid";
 import {TaskSet} from "../board/task-set.ts";
@@ -13,7 +12,7 @@ export class ForTime implements Activity {
     static fromDto(dto: ForTimeDto): ForTime {
         return new ForTime(
             Duration.fromDto(dto.duration) as Duration,
-            ActivityDeserializer.deserialize(dto.activity),
+            Activity.mapFromDto(dto.activity),
             dto.comment
         );
     }

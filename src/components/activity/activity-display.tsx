@@ -1,4 +1,4 @@
-import {Activity} from "../../model/activity/activity.ts";
+import {Activity} from "../../model/wod/activity.ts";
 import {ActivityType} from "../../model/activity/activity-type.ts";
 import {ActivityExerciseDisplay} from "./activity-exercise-display.tsx";
 import {ForTimeDisplay} from "./for-time-display.tsx";
@@ -9,7 +9,7 @@ import {Sequence} from "../../model/activity/sequence.ts";
 import {AmrapDisplay} from "./amrap-display.tsx";
 import {Amrap} from "../../model/activity/amrap.ts";
 import {RestDisplay} from "./rest-display.tsx";
-import {Rest} from "../../model/activity/rest.ts";
+import {Rest} from "../../model/wod/rest.ts";
 import {EnomDisplay} from "./enom-display.tsx";
 import {Enom} from "../../model/activity/enom.ts";
 import {RepetitionsDisplay} from "./repetitions-display.tsx";

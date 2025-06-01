@@ -2,8 +2,8 @@ import {ExerciseDto} from "../dto/exercise/exercise.dto.ts";
 
 export class Exercise {
 
-    static fromDto(dto: ExerciseDto): Exercise {
-        return new Exercise(dto.id, dto.name, dto.tags, dto.comment);
+    static fromDto(id: string, dto: ExerciseDto): Exercise {
+        return new Exercise(id, dto.name, dto.tags, dto.comment);
     }
 
     constructor(

@@ -1,9 +1,8 @@
-import {Activity} from "./activity.ts";
+import {Activity} from "../wod/activity.ts";
 import {ActivityType} from "./activity-type.ts";
-import {ActivityDeserializer} from "./activity-deserializer.ts";
 import {RepetitionsDto} from "../dto/activity/repetitions.dto.ts";
 import {v4 as uuidv4} from "uuid";
-import { TaskSet } from "../board/task-set.ts";
+import {TaskSet} from "../board/task-set.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
 
 export class Repetitions implements Activity {
@@ -11,7 +10,7 @@ export class Repetitions implements Activity {
     static fromDto(dto: RepetitionsDto): Repetitions {
         return new Repetitions(
             dto.repetitions,
-            ActivityDeserializer.deserialize(dto.activity),
+            Activity.mapFromDto(dto.activity),
             dto.comment
         );
     }
@@ -32,7 +31,7 @@ export class Repetitions implements Activity {
 
     toSequencerTasks(parent: BoardTextInfo): TaskSet {
         return new TaskSet(
-            Array.from({ length: this.repetitions }, (_, index) => this.activity.toSequencerTasks( BoardTextInfo.single(`${index}/${this.repetitions}`, undefined).mergeWithParent(parent)).tasks)
+            Array.from({length: this.repetitions}, (_, index) => this.activity.toSequencerTasks(BoardTextInfo.single(`${index}/${this.repetitions}`, undefined).mergeWithParent(parent)).tasks)
                 .flat()
         );
     }

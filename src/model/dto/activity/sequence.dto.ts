@@ -1,4 +1,4 @@
-import {ActivityDto} from "./activity-dto.ts";
+import {ActivityDto} from "../wod/activity-dto.ts";
 
 export interface SequenceDto extends ActivityDto {
 

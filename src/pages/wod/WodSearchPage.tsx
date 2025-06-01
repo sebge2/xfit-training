@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Wod} from "../../model/activity/wod";
+import {Wod} from "../../model/wod/wod.ts";
 import {WOD_SERVICE} from "../../services/wod-service.ts";
 
 export default function WodSearchPage() {

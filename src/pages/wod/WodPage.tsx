@@ -1,6 +1,6 @@
 import {Link, Navigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Wod} from "../../model/activity/wod.ts";
+import {Wod} from "../../model/wod/wod.ts";
 import {WOD_SERVICE} from "../../services/wod-service.ts";
 
 export default function WodPage() {
@@ -60,6 +60,7 @@ export default function WodPage() {
     return (
         <>
             <p>{wod.name}</p>
+            <p>{wod.tags}</p>
             <Link to="run">Run</Link>
             <div>
                 <Link to="/wod">Back to Workouts</Link>

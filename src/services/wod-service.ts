@@ -1,8 +1,7 @@
 import {collection, doc, DocumentSnapshot, getDoc, getDocs} from "firebase/firestore";
 import {db} from "../firebase";
-import {Wod} from "../model/activity/wod.ts";
+import {Wod} from "../model/wod/wod.ts";
 import {WodDto} from "../model/dto/wod/wod.dto.ts";
-import {Activity} from "../model/activity/activity.ts";
 
 const WODS_COLLECTION = "wods";
 
@@ -19,7 +18,7 @@ export class WodService {
         }
 
         return wods.docs
-            .map(dto => this._mapFromDto(dto as DocumentSnapshot<WodDto>))
+            .map(dto => this._mapWodFromDto(dto as DocumentSnapshot<WodDto>))
             .filter(exercise => exercise !== null);
     }
 
@@ -30,22 +29,16 @@ export class WodService {
             return null;
         }
 
-        return this._mapFromDto(snapshot as DocumentSnapshot<WodDto>);
+        return this._mapWodFromDto(snapshot as DocumentSnapshot<WodDto>);
     };
 
-    private _mapFromDto(snapshot: DocumentSnapshot<WodDto>): Wod | null {
+    private _mapWodFromDto(snapshot: DocumentSnapshot<WodDto>): Wod | null {
         const data = snapshot.data();
         if (!data) {
             return null;
         }
 
-        return new Wod(
-            snapshot.id,
-            null as Activity,
-            data.name,
-            data.tags || [],
-            data.comment
-        );
+        return Wod.fromDto(snapshot.id, data);
     }
 }
 

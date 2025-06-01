@@ -1,4 +1,4 @@
-import {Wod} from "./activity/wod.ts";
+import {Wod} from "./wod/wod.ts";
 import {Enom} from "./activity/enom.ts";
 import {Duration} from "./activity/duration.ts";
 import {Sequence} from "./activity/sequence.ts";

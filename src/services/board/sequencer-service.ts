@@ -1,4 +1,4 @@
-import {Wod} from "../../model/activity/wod.ts";
+import {Wod} from "../../model/wod/wod.ts";
 import {TaskSet} from "../../model/board/task-set.ts";
 import {BoardTextInfo} from "../../model/board/board-text-info.ts";
 import {ChronometerService} from "./chronometer-service.ts";

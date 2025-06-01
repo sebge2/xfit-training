@@ -1,4 +1,4 @@
-import {Wod} from "../../model/activity/wod.ts";
+import {Wod} from "../../model/wod/wod.ts";
 import {ActivityDisplay} from "./activity-display.tsx";
 
 export function WodDisplay({wod}: { wod: Wod }) {

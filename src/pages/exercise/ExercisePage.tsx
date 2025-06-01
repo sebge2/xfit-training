@@ -52,7 +52,10 @@ export default function ExercisePage() {
             )}
 
             {!loading && !error && wod && (
+                <>
                 <div>{wod.name}</div>
+                <div>{wod.tags.map(tag => ' ' + tag)}</div>
+                </>
             )}
         </>
     );
