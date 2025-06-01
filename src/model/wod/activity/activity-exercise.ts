@@ -25,7 +25,7 @@ export class ActivityExercise extends Activity {
     constructor(
         public readonly repetitions: string,
         public readonly exercise: string,
-        comment: string | undefined,
+        comment: string | null,
     ) {
         super(ActivityType.EXERCISE, comment);
     }

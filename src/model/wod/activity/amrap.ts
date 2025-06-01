@@ -17,19 +17,19 @@ export class Amrap extends Activity {
         );
     }
 
-    static toDto(amrap: Amrap): AmrapDto {
+    static toDto(activity: Amrap): AmrapDto {
         return {
-            type: amrap.type,
-            duration: Duration.toDto(amrap.duration) as Duration,
-            activity: amrap.activity,
-            comment: amrap.comment,
+            type: activity.type,
+            duration: Duration.toDto(activity.duration) as Duration,
+            activity: activity.activity,
+            comment: activity.comment,
         };
     }
 
     constructor(
         public readonly duration: Duration,
         public readonly activity: Activity,
-        comment: string | undefined,
+        comment: string | null,
     ) {
         super(
             ActivityType.AMRAP,

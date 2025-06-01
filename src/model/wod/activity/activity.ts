@@ -9,7 +9,7 @@ export abstract class Activity {
 
     protected constructor(
         public readonly type: ActivityType,
-        public readonly comment: string | undefined,
+        public readonly comment: string | null,
     ) {
         this.id = uuidv4();
     }

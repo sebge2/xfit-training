@@ -2,17 +2,17 @@ import {DurationDto} from "../../dto/wod/activity/duration.dto.ts";
 
 export class Duration {
 
-    static fromDto(dto: DurationDto | undefined): Duration | undefined {
+    static fromDto(dto: DurationDto | null): Duration | null {
         if (!dto) {
-            return undefined;
+            return null;
         }
 
         return new Duration(dto.hours, dto.minutes, dto.seconds);
     }
 
-    static toDto(duration: Duration | undefined): DurationDto | undefined {
+    static toDto(duration: Duration | null): DurationDto | null {
         if (!duration) {
-            return undefined;
+            return null;
         }
 
         return {

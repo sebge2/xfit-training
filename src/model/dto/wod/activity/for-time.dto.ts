@@ -3,7 +3,7 @@ import {DurationDto} from "./duration.dto.ts";
 
 export interface ForTimeDto extends ActivityDto {
 
-    get duration(): DurationDto | undefined;
+    get duration(): DurationDto | null;
 
     get activity(): ActivityDto;
 

@@ -38,7 +38,7 @@ export function mapActivityFromDto(dto: ActivityDto): Activity {
 }
 
 export function mapActivityFromAllDto(dtos: ActivityDto[]): Activity[] {
-    return dtos.map(dto => mapActivityFromDto(dto));
+    return (dtos || []).map(dto => mapActivityFromDto(dto));
 }
 
 export function mapActivityToDto(activity: Activity): ActivityDto {

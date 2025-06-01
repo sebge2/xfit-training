@@ -18,13 +18,13 @@ export class Enom extends Activity {
         );
     }
 
-    static toDto(enom: Enom): EnomDto {
+    static toDto(activity: Enom): EnomDto {
         return {
-            type: enom.type,
-            duration: Duration.toDto(enom.duration) as Duration,
-            repetitions: enom.repetitions,
-            activity: enom.activity,
-            comment: enom.comment,
+            type: activity.type,
+            duration: Duration.toDto(activity.duration) as Duration,
+            repetitions: activity.repetitions,
+            activity: activity.activity,
+            comment: activity.comment,
         };
     }
 
@@ -32,7 +32,7 @@ export class Enom extends Activity {
         public readonly duration: Duration,
         public readonly repetitions: number,
         public readonly activity: Activity,
-        comment: string | undefined,
+        comment: string | null,
     ) {
         super(
             ActivityType.ENOM,

@@ -8,5 +8,5 @@ export interface WodDto {
 
     get tags(): string[];
 
-    get comment(): string | undefined;
+    get comment(): string | null;
 }

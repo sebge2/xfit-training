@@ -10,7 +10,7 @@ export class Wod {
             mapActivityFromDto(dto.activity),
             dto.name,
             dto.tags || [],
-            dto.comment
+            dto.comment,
         );
     }
 
@@ -24,11 +24,11 @@ export class Wod {
     }
 
     constructor(
-        public id: string | undefined,
+        public id: string | null,
         public activity: Activity,
         public name: string,
         public tags: string[],
-        public comment: string | undefined,
+        public comment: string | null,
     ) {
     }
 }

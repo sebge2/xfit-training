@@ -24,7 +24,7 @@ export class Sequence extends Activity {
 
     constructor(
         public readonly activities: Activity[],
-        comment: string | undefined,
+        comment: string | null,
     ) {
         super(ActivityType.SEQUENCE, comment);
     }
