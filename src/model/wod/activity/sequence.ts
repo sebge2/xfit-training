@@ -3,12 +3,13 @@ import {ActivityType} from "./activity-type.ts";
 import {SequenceDto} from "../../dto/wod/activity/sequence.dto.ts";
 import {TaskSet} from "../board/task-set.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
+import {mapActivityFromAllDto} from "./activity-utils.ts";
 
 export class Sequence extends Activity {
 
     static fromDto(dto: SequenceDto): Sequence {
         return new Sequence(
-            Activity.mapFromAllDto(dto.activities),
+            mapActivityFromAllDto(dto.activities),
             dto.comment
         );
     }

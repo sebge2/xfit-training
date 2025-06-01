@@ -6,13 +6,14 @@ import {TaskSet} from "../board/task-set.ts";
 import {v4 as uuidv4} from "uuid";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
+import {mapActivityFromDto} from "./activity-utils.ts";
 
 export class Amrap implements Activity {
 
     static fromDto(dto: AmrapDto): Amrap {
         return new Amrap(
             Duration.fromDto(dto.duration) as Duration,
-            Activity.mapFromDto(dto.activity),
+            mapActivityFromDto(dto.activity),
             dto.comment
         );
     }

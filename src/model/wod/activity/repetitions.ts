@@ -4,13 +4,14 @@ import {RepetitionsDto} from "../../dto/wod/activity/repetitions.dto.ts";
 import {v4 as uuidv4} from "uuid";
 import {TaskSet} from "../board/task-set.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
+import {mapActivityFromDto} from "./activity-utils.ts";
 
 export class Repetitions implements Activity {
 
     static fromDto(dto: RepetitionsDto): Repetitions {
         return new Repetitions(
             dto.repetitions,
-            Activity.mapFromDto(dto.activity),
+            mapActivityFromDto(dto.activity),
             dto.comment
         );
     }

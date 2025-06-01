@@ -6,13 +6,14 @@ import {v4 as uuidv4} from "uuid";
 import {TaskSet} from "../board/task-set.ts";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
+import {mapActivityFromDto} from "./activity-utils.ts";
 
 export class ForTime implements Activity {
 
     static fromDto(dto: ForTimeDto): ForTime {
         return new ForTime(
             Duration.fromDto(dto.duration) as Duration,
-            Activity.mapFromDto(dto.activity),
+            mapActivityFromDto(dto.activity),
             dto.comment
         );
     }

@@ -1,12 +1,13 @@
 import {Activity} from "./activity/activity.ts";
 import {WodDto} from "../dto/wod/wod.dto.ts";
+import {mapActivityFromDto} from "./activity/activity-utils.ts";
 
 export class Wod {
 
     static fromDto(id: string, dto: WodDto): Wod {
         return new Wod(
             id,
-            Activity.mapFromDto(dto.activity),
+            mapActivityFromDto(dto.activity),
             dto.name,
             dto.tags || [],
             dto.comment
