@@ -1,16 +1,16 @@
-import {Activity} from "../wod/activity.ts";
+import {Activity} from "./activity.ts";
 import {Duration} from "./duration.ts";
 import {ActivityType} from "./activity-type.ts";
-import {ForTimeDto} from "../dto/activity/for-time.dto.ts";
+import {AmrapDto} from "../../dto/wod/activity/amrap.dto.ts";
+import {TaskSet} from "../../board/task-set.ts";
 import {v4 as uuidv4} from "uuid";
-import {TaskSet} from "../board/task-set.ts";
-import {Task} from "../board/task.ts";
-import {BoardTextInfo} from "../board/board-text-info.ts";
+import {Task} from "../../board/task.ts";
+import {BoardTextInfo} from "../../board/board-text-info.ts";
 
-export class ForTime implements Activity {
+export class Amrap implements Activity {
 
-    static fromDto(dto: ForTimeDto): ForTime {
-        return new ForTime(
+    static fromDto(dto: AmrapDto): Amrap {
+        return new Amrap(
             Duration.fromDto(dto.duration) as Duration,
             Activity.mapFromDto(dto.activity),
             dto.comment
@@ -28,14 +28,14 @@ export class ForTime implements Activity {
     }
 
     get type(): ActivityType {
-        return ActivityType.FOR_TIME;
+        return ActivityType.AMRAP;
     }
 
-    toSequencerTasks(parent: BoardTextInfo): TaskSet {
+    toSequencerTasks(board: BoardTextInfo): TaskSet {
         return new TaskSet([
             new Task(
                 this.id,
-                parent,
+                board,
                 this.duration
             )
         ]);

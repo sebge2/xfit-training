@@ -1,4 +1,4 @@
-import {ForTime} from "../../model/activity/for-time.ts";
+import {ForTime} from "../../model/wod/activity/for-time.ts";
 import {ActivityDisplay} from "./activity-display.tsx";
 import DurationDisplay from "./duration-display.tsx";
 

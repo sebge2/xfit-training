@@ -1,4 +1,4 @@
-import {Duration} from "../../model/activity/duration.ts";
+import {Duration} from "../../model/wod/activity/duration.ts";
 
 export default function DurationDisplay({duration}: { duration: Duration | undefined }) {
     return (

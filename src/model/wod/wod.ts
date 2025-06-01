@@ -1,4 +1,4 @@
-import {Activity} from "./activity.ts";
+import {Activity} from "./activity/activity.ts";
 import {WodDto} from "../dto/wod/wod.dto.ts";
 
 export class Wod {

@@ -1,4 +1,4 @@
-import {ActivityType} from "../../activity/activity-type.ts";
+import {ActivityType} from "../../../wod/activity/activity-type.ts";
 
 export interface ActivityDto {
 

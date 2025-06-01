@@ -1,4 +1,4 @@
-import {Duration} from "../../model/activity/duration.ts";
+import {Duration} from "../../model/wod/activity/duration.ts";
 import {ChronometerStatus} from "../../model/board/chronometer-status.ts";
 import {ChronometerState} from "../../model/board/chronometer-state.ts";
 

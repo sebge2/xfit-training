@@ -1,10 +1,10 @@
 import {Wod} from "./wod/wod.ts";
-import {Enom} from "./activity/enom.ts";
-import {Duration} from "./activity/duration.ts";
-import {Sequence} from "./activity/sequence.ts";
-import {ActivityExercise} from "./activity/activity-exercise.ts";
-import {ForTime} from "./activity/for-time.ts";
-import {Repetitions} from "./activity/repetitions.ts";
+import {Enom} from "./wod/activity/enom.ts";
+import {Duration} from "./wod/activity/duration.ts";
+import {Sequence} from "./wod/activity/sequence.ts";
+import {ActivityExercise} from "./wod/activity/activity-exercise.ts";
+import {ForTime} from "./wod/activity/for-time.ts";
+import {Repetitions} from "./wod/activity/repetitions.ts";
 import {Exercise} from "./exercise/exercise.ts";
 
 export const wod1 = new Wod(

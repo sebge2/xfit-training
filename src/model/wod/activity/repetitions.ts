@@ -1,9 +1,9 @@
-import {Activity} from "../wod/activity.ts";
+import {Activity} from "./activity.ts";
 import {ActivityType} from "./activity-type.ts";
-import {RepetitionsDto} from "../dto/activity/repetitions.dto.ts";
+import {RepetitionsDto} from "../../dto/wod/activity/repetitions.dto.ts";
 import {v4 as uuidv4} from "uuid";
-import {TaskSet} from "../board/task-set.ts";
-import {BoardTextInfo} from "../board/board-text-info.ts";
+import {TaskSet} from "../../board/task-set.ts";
+import {BoardTextInfo} from "../../board/board-text-info.ts";
 
 export class Repetitions implements Activity {
 

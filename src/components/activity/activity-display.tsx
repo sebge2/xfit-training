@@ -1,19 +1,19 @@
-import {Activity} from "../../model/wod/activity.ts";
-import {ActivityType} from "../../model/activity/activity-type.ts";
+import {Activity} from "../../model/wod/activity/activity.ts";
+import {ActivityType} from "../../model/wod/activity/activity-type.ts";
 import {ActivityExerciseDisplay} from "./activity-exercise-display.tsx";
 import {ForTimeDisplay} from "./for-time-display.tsx";
-import {ActivityExercise} from "../../model/activity/activity-exercise.ts";
-import {ForTime} from "../../model/activity/for-time.ts";
+import {ActivityExercise} from "../../model/wod/activity/activity-exercise.ts";
+import {ForTime} from "../../model/wod/activity/for-time.ts";
 import {SequenceDisplay} from "./sequence-display.tsx";
-import {Sequence} from "../../model/activity/sequence.ts";
+import {Sequence} from "../../model/wod/activity/sequence.ts";
 import {AmrapDisplay} from "./amrap-display.tsx";
-import {Amrap} from "../../model/activity/amrap.ts";
+import {Amrap} from "../../model/wod/activity/amrap.ts";
 import {RestDisplay} from "./rest-display.tsx";
 import {Rest} from "../../model/wod/rest.ts";
 import {EnomDisplay} from "./enom-display.tsx";
-import {Enom} from "../../model/activity/enom.ts";
+import {Enom} from "../../model/wod/activity/enom.ts";
 import {RepetitionsDisplay} from "./repetitions-display.tsx";
-import {Repetitions} from "../../model/activity/repetitions.ts";
+import {Repetitions} from "../../model/wod/activity/repetitions.ts";
 
 export function ActivityDisplay({activity}: { activity: Activity }) {
     switch (activity.type) {

@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Duration} from "../../model/activity/duration.ts";
+import {Duration} from "../../model/wod/activity/duration.ts";
 import {ChronometerService} from "../../services/board/chronometer-service.ts";
 import DurationDisplay from "../../components/activity/duration-display.tsx";
 

@@ -1,4 +1,4 @@
-import {ActivityDto} from "../wod/activity-dto.ts";
+import {ActivityDto} from "./activity-dto.ts";
 
 export interface ActivityExerciseDto extends ActivityDto {
 

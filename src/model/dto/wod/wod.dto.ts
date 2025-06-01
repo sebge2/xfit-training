@@ -1,4 +1,4 @@
-import {ActivityDto} from "./activity-dto.ts";
+import {ActivityDto} from "./activity/activity-dto.ts";
 
 export interface WodDto {
 

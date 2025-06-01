@@ -1,4 +1,4 @@
-import {DurationDto} from "../dto/activity/duration.dto.ts";
+import {DurationDto} from "../../dto/wod/activity/duration.dto.ts";
 
 export class Duration {
 

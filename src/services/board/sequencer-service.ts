@@ -4,7 +4,7 @@ import {BoardTextInfo} from "../../model/board/board-text-info.ts";
 import {ChronometerService} from "./chronometer-service.ts";
 import {Board} from "../../model/board/board.ts";
 import {Task} from "../../model/board/task.ts";
-import {Duration} from "../../model/activity/duration.ts";
+import {Duration} from "../../model/wod/activity/duration.ts";
 
 const PREPARATION_TASKSET = new TaskSet([
     new Task("initial", BoardTextInfo.single(undefined, "Be Ready!"), Duration.fromSeconds(10))
