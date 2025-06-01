@@ -7,7 +7,7 @@ import DurationDisplay from "../../components/wod/activity/duration-display.tsx"
 const initialState = Duration.fromSeconds(61);
 const service = new ChronometerService(initialState).start();
 
-export default function WodRunner() {
+export default function WodRunnerPage() {
     const {id} = useParams();
     const [elapsedTime, setElapsedTime] = useState(initialState);
 

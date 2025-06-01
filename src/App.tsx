@@ -5,7 +5,7 @@ import WodSearchPage from "./pages/wod/WodSearchPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import WodPage from "./pages/wod/WodPage.tsx";
 import ExercisePage from "./pages/exercise/ExercisePage.tsx";
-import WodRunner from "./pages/wod/WodRunner.tsx";
+import WodRunnerPage from "./pages/wod/WodRunnerPage.tsx";
 
 
 export default function App() {
@@ -40,7 +40,7 @@ export default function App() {
                         },
                         {
                             path: 'run',
-                            element: <WodRunner />,
+                            element: <WodRunnerPage />,
                         }
                     ]
                 }

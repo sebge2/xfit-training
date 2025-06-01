@@ -2,6 +2,7 @@ import {Link, Navigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Wod} from "../../model/wod/wod.ts";
 import {WOD_SERVICE} from "../../services/wod-service.ts";
+import {WodDisplay} from "../../components/wod/activity/wod-display.tsx";
 
 export default function WodPage() {
     const {id} = useParams();
@@ -55,12 +56,13 @@ export default function WodPage() {
         return <Navigate to="/wod"/>;
     }
 
-    //<!--<WodDisplay wod={wod} />-->
-
     return (
         <>
             <p>{wod.name}</p>
             <p>{wod.tags}</p>
+
+            <WodDisplay wod={wod} />
+
             <Link to="run">Run</Link>
             <div>
                 <Link to="/wod">Back to Workouts</Link>
