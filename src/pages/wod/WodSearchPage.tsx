@@ -42,7 +42,7 @@ export default function WodSearchPage() {
                 <ul>
                     {wods.map((wod) => (
                         <li key={wod.id}>
-                            <Link to={wod.id} relative="path">
+                            <Link to={wod.id as string} relative="path">
                                 {wod.name || `Wod ${wod.id}`}
                             </Link>
                         </li>

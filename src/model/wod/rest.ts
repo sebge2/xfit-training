@@ -25,7 +25,7 @@ export class Rest extends Activity {
 
     constructor(
         public readonly duration: Duration,
-        comment: string | undefined,
+        comment: string | null,
     ) {
         super(
             ActivityType.REST,

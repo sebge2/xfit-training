@@ -5,7 +5,7 @@ import DurationDisplay from "./duration-display.tsx";
 export function ForTimeDisplay({forTime}: {forTime: ForTime}) {
     return (
         <>
-            For time: <DurationDisplay duration={forTime.duration}/>
+            For time: {forTime.duration && <DurationDisplay duration={forTime.duration}/>}
             <ActivityDisplay activity={forTime.activity} />
         </>
     );
