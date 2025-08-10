@@ -22,6 +22,7 @@ export default function App() {
                 },
                 {
                     path: 'exercises',
+                    handle: {pageName: 'Exercises'},
                     children: [
                         {
                             index: true,
@@ -35,6 +36,7 @@ export default function App() {
                 },
                 {
                     path: 'wods',
+                    handle: {pageName: 'Workouts'},
                     children: [
                         {
                             index: true,
@@ -57,7 +59,8 @@ export default function App() {
                 },
                 {
                     path: 'settings',
-                    element: <SettingsPage/>
+                    element: <SettingsPage/>,
+                    handle: {pageName: 'Settings'},
                 },
             ]
         }

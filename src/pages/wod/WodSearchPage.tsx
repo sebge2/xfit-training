@@ -28,8 +28,6 @@ export default function WodSearchPage() {
 
     return (
         <>
-            <div>Wod Search Page</div>
-
             {loading && <p>Loading workouts...</p>}
 
             {error && <p className="error">{error}</p>}

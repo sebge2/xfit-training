@@ -28,8 +28,6 @@ export default function ExercisesPage() {
 
     return (
         <>
-            <div>Exercises</div>
-
             {loading && <p>Loading workouts...</p>}
 
             {error && <p className="error">{error}</p>}

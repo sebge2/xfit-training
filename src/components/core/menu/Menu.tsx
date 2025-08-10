@@ -8,7 +8,8 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useMatches} from 'react-router-dom';
+import {AppBar, Toolbar, Typography} from "@mui/material";
 
 export default function Menu({children}: { children: React.ReactNode }) {
     const ref = React.useRef<HTMLDivElement>(null);
@@ -35,12 +36,42 @@ export default function Menu({children}: { children: React.ReactNode }) {
         }
     };
 
+    function usePageName(): string | undefined {
+        const matches = useMatches();
+
+        for (let i = matches.length - 1; i >= 0; i--) {
+            const pageName = (matches[i]?.handle as { pageName: string })?.pageName;
+
+            if (pageName) {
+                return pageName;
+            }
+        }
+
+        return 'Xfit Training';
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{pb: 7}} ref={ref}>
-                <CssBaseline/>
+                <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
+                    <AppBar position="fixed">
+                        <Toolbar>
+                            <Typography variant="h6" component="div">
+                                {usePageName()}
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
 
-                {children}
+                    <Box component="main" sx={{
+                        flexGrow: 1,
+                        pt: 8
+                    }}>
+                        <CssBaseline/>
+
+                        {children}
+                    </Box>
+                </Box>
+
 
                 <Paper
                     sx={{
