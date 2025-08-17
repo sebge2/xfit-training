@@ -1,52 +1,32 @@
-import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {Await, Link, useLoaderData} from "react-router-dom";
 import {Wod} from "../../model/wod/wod.ts";
-import {WOD_SERVICE} from "../../services/wod-service.ts";
+import {Suspense} from "react";
+import {ErrorComponent} from "../../components/core/ErrorComponent.tsx";
 
 export default function WodSearchPage() {
-    const [wods, setWods] = useState<Wod[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const routeData = useLoaderData() as { wods: Wod[] };
 
-    useEffect(() => {
-        const fetchWods = async () => {
-            try {
-                setLoading(true);
-                const fetchedWods = await WOD_SERVICE.findAll();
-                setWods(fetchedWods);
-                setError(null);
-            } catch (err) {
-                console.error("Error fetching wods:", err);
-                setError("Failed to load workouts. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
+    return <Suspense fallback={<p>Loading workouts...</p>}>
+        <Await resolve={routeData.wods} errorElement={<ErrorComponent/>}>
+            {(wods: Wod[]) => (
+                <>
+                    {wods.length === 0 && (
+                        <p>No workouts found. Add some workouts to get started!</p>
+                    )}
 
-        fetchWods();
-    }, []);
-
-    return (
-        <>
-            {loading && <p>Loading workouts...</p>}
-
-            {error && <p className="error">{error}</p>}
-
-            {!loading && !error && wods.length === 0 && (
-                <p>No workouts found. Add some workouts to get started!</p>
+                    {wods.length > 0 && (
+                        <ul>
+                            {wods.map((wod) => (
+                                <li key={wod.id}>
+                                    <Link to={wod.id as string} relative="path">
+                                        {wod.name || `Wod ${wod.id}`}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </>
             )}
-
-            {!loading && !error && wods.length > 0 && (
-                <ul>
-                    {wods.map((wod) => (
-                        <li key={wod.id}>
-                            <Link to={wod.id as string} relative="path">
-                                {wod.name || `Wod ${wod.id}`}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </>
-    );
+        </Await>
+    </Suspense>;
 }

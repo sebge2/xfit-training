@@ -7,7 +7,8 @@ import WodPage, {sendWod} from "./pages/wod/WodPage.tsx";
 import ExercisePage from "./pages/exercise/ExercisePage.tsx";
 import WodRunnerPage from "./pages/wod/WodRunnerPage.tsx";
 import SettingsPage from "./pages/settings/SettingsPage.tsx";
-
+import {WOD_SERVICE} from "./services/wod-service.ts";
+import {EXERCISE_SERVICE} from "./services/exercise-service.ts";
 
 export default function App() {
     const router = createBrowserRouter([
@@ -26,6 +27,11 @@ export default function App() {
                     children: [
                         {
                             index: true,
+                            loader: () => {
+                                return {
+                                    exercises: EXERCISE_SERVICE.findAll()
+                                }
+                            },
                             element: <ExercisesPage/>
                         },
                         {
@@ -40,6 +46,11 @@ export default function App() {
                     children: [
                         {
                             index: true,
+                            loader: () => {
+                                return {
+                                    wods: WOD_SERVICE.findAll()
+                                }
+                            },
                             element: <WodSearchPage/>
                         },
                         {
