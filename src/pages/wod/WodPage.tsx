@@ -1,8 +1,8 @@
-import {Form, Link, Navigate, redirect, useNavigation, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {Await, Form, Link, redirect, useNavigation, useRouteLoaderData} from "react-router-dom";
+import {Suspense} from "react";
 import {Wod} from "../../model/wod/wod.ts";
-import {WOD_SERVICE} from "../../services/wod-service.ts";
 import {WodDisplay} from "../../components/wod/activity/wod-display.tsx";
+import {ErrorComponent} from "../../components/core/ErrorComponent.tsx";
 
 export async function sendWod({params, request}: { params: any, request: any }): Promise<Response> {
     const data = await request.formData();
@@ -16,82 +16,34 @@ export async function sendWod({params, request}: { params: any, request: any }):
 }
 
 export default function WodPage() {
-    const {id} = useParams();
-    const [wod, setWod] = useState<Wod | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const routeData = useRouteLoaderData('wod-details') as { wod: Wod };
     const navigation = useNavigation();
 
-    useEffect(() => {
-        const fetchWod = async () => {
-            if (!id) {
-                setError("No workout ID provided");
-                setLoading(false);
-                return;
-            }
+    return <Suspense fallback={<p>Loading wod...</p>}>
+        <Await resolve={routeData.wod} errorElement={<ErrorComponent/>}>
+            {(wod: Wod) => (
+                <>
+                    <Form method="post">
+                        <p>
+                            <label htmlFor="name">Name</label>
+                            <input type="text" name="name" defaultValue={wod.name}/>
+                        </p>
+                        <p>
+                            <label htmlFor="tags">Tags</label>
+                            <input type="text" name="tags" defaultValue={wod.tags}/>
+                        </p>
 
-            try {
-                setLoading(true);
-                const fetchedWod = await WOD_SERVICE.findById(id);
+                        <button type="submit" disabled={navigation.state === 'submitting'}>Save</button>
+                    </Form>
 
-                if (!fetchedWod) {
-                    setError(`Workout with ID ${id} not found`);
-                } else {
-                    setWod(fetchedWod);
-                    setError(null);
-                }
-            } catch (err) {
-                console.error(`Error fetching workout with ID ${id}:`, err);
-                setError("Failed to load workout. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
+                    <WodDisplay wod={wod}/>
 
-        fetchWod();
-    }, [id]);
-
-    if (loading) {
-        return <p>Loading workout...</p>;
-    }
-
-    if (error) {
-        return (
-            <div>
-                <p className="error">{error}</p>
-                <Link to="/wod">Back to Workouts</Link>
-            </div>
-        );
-    }
-
-    if (!wod) {
-        return <Navigate to="/wod"/>;
-    }
-
-    return (
-        <>
-            {/*            <p>{wod.name}</p>
-            <p>{wod.tags}</p>*/}
-
-            <Form method="post">
-                <p>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" name="name" defaultValue={wod.name}/>
-                </p>
-                <p>
-                    <label htmlFor="tags">Tags</label>
-                    <input type="text" name="tags" defaultValue={wod.tags}/>
-                </p>
-
-                <button type="submit" disabled={navigation.state === 'submitting'}>Save</button>
-            </Form>
-
-            <WodDisplay wod={wod}/>
-
-            <Link to="run">Run</Link>
-            <div>
-                <Link to="/wod">Back to Workouts</Link>
-            </div>
-        </>
-    );
+                    <Link to="run">Run</Link>
+                    <div>
+                        <Link to="/wods">Back to Workouts</Link>
+                    </div>
+                </>
+            )}
+        </Await>
+    </Suspense>;
 }

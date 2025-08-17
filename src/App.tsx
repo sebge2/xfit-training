@@ -10,6 +10,10 @@ import SettingsPage from "./pages/settings/SettingsPage.tsx";
 import {WOD_SERVICE} from "./services/wod-service.ts";
 import {EXERCISE_SERVICE} from "./services/exercise-service.ts";
 
+export type Params<Key extends string = string> = {
+    readonly [key in Key]: string | undefined;
+};
+
 export default function App() {
     const router = createBrowserRouter([
         {
@@ -35,7 +39,13 @@ export default function App() {
                             element: <ExercisesPage/>
                         },
                         {
+                            id: 'exercise-details',
                             path: ':id',
+                            loader: ({params}: {params: Params}) => {
+                                return {
+                                    exercise: EXERCISE_SERVICE.findById(params.id as string)
+                                }
+                            },
                             element: <ExercisePage/>
                         },
                     ]
@@ -54,7 +64,13 @@ export default function App() {
                             element: <WodSearchPage/>
                         },
                         {
+                            id: 'wod-details',
                             path: ':id',
+                            loader: ({params}: {params: Params}) => {
+                                return {
+                                    wod: WOD_SERVICE.findById(params.id as string)
+                                }
+                            },
                             children: [
                                 {
                                     index: true,
