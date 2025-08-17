@@ -3,7 +3,7 @@ import ExercisesPage from "./pages/exercise/ExercisesPage.tsx";
 import RootLayout from "./pages/RootLayout.tsx";
 import WodSearchPage from "./pages/wod/WodSearchPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
-import WodPage from "./pages/wod/WodPage.tsx";
+import WodPage, {sendWod} from "./pages/wod/WodPage.tsx";
 import ExercisePage from "./pages/exercise/ExercisePage.tsx";
 import WodRunnerPage from "./pages/wod/WodRunnerPage.tsx";
 import SettingsPage from "./pages/settings/SettingsPage.tsx";
@@ -48,6 +48,7 @@ export default function App() {
                                 {
                                     index: true,
                                     element: <WodPage/>,
+                                    action: sendWod
                                 },
                                 {
                                     path: 'run',
