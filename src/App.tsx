@@ -9,6 +9,7 @@ import WodRunnerPage from "./pages/wod/WodRunnerPage.tsx";
 import SettingsPage from "./pages/settings/SettingsPage.tsx";
 import {WOD_SERVICE} from "./services/wod-service.ts";
 import {EXERCISE_SERVICE} from "./services/exercise-service.ts";
+import {USER_RECORDS_SERVICE} from "./services/user-records-service.ts";
 
 export type Params<Key extends string = string> = {
     readonly [key in Key]: string | undefined;
@@ -43,7 +44,8 @@ export default function App() {
                             path: ':id',
                             loader: ({params}: {params: Params}) => {
                                 return {
-                                    exercise: EXERCISE_SERVICE.findById(params.id as string)
+                                    exercise: EXERCISE_SERVICE.findById(params.id as string),
+                                    records: USER_RECORDS_SERVICE.findForCurrentUserAndExercise(params.id as string),
                                 }
                             },
                             element: <ExercisePage/>
