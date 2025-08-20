@@ -6,7 +6,7 @@ export class UserExerciseRecords {
     static fromDto(dto: UserExerciseRecordsDto): UserExerciseRecords {
         const groups = new Map<number, UserExerciseGroupRecords>();
 
-        Object.keys(dto)
+        Object.keys(dto || {})
             .map(group => Number(group))
             .forEach((group) => groups.set(group, UserExerciseGroupRecords.fromDto(dto[group])));
 
@@ -26,6 +26,10 @@ export class UserExerciseRecords {
     constructor(
         public groups: Map<number, UserExerciseGroupRecords>,
     ) {
+    }
+
+    get groupKeys(): number[] {
+        return Array.from(this.groups.keys());
     }
 
 }

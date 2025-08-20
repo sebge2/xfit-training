@@ -1,18 +1,19 @@
 import {UserRecordDto} from "../dto/record/user-record.dto.ts";
+import {fromDateDto, toDateDto} from "../dto/date.dto.ts";
 
 export class UserRecord {
 
     static fromDto(dto: UserRecordDto): UserRecord {
         return new UserRecord(
             dto.value,
-            dto.date,
+            fromDateDto(dto.date),
         );
     }
 
     static toDto(record: UserRecord): UserRecordDto {
         return {
             value: record.value,
-            date: record.date,
+            date: toDateDto(record.date),
         };
     }
 

@@ -7,12 +7,8 @@ const RECORDS_COLLECTION = "records";
 
 export class UserRecordsService {
 
-    async findForCurrentUserAndExercise(exerciseId: string): Promise<UserExerciseRecords | null> {
+    async findForCurrentUserAndExercise(exerciseId: string): Promise<UserExerciseRecords> {
         const userRecords = await getDoc(doc(db, RECORDS_COLLECTION, 'sebge3@gmail.com', 'exercises', exerciseId)); // TODO get current user
-
-        if (!userRecords.exists()) {
-            return null;
-        }
 
         return UserExerciseRecords.fromDto(userRecords.data() as UserExerciseRecordsDto);
     }

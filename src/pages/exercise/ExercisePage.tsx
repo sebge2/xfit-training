@@ -24,7 +24,11 @@ export default function ExercisePage() {
             <Await resolve={routeData.records} errorElement={<ErrorComponent/>}>
                 {(records: UserExerciseRecords) => (
                     <>
-                        <div>{JSON.stringify(records.groups.get(1)?.records[0].value)}</div>
+                        {records.groupKeys.map(groupKey =>
+                            records.groups.get(groupKey)?.records.map(record =>
+                            <div>{record.value} at {record.date.toDateString()}</div>
+                            )
+                        )}
                     </>
                 )}
             </Await>
