@@ -2,13 +2,14 @@ import {doc, getDoc} from "firebase/firestore";
 import {db} from "../firebase.ts";
 import {UserExerciseRecordsDto} from "../model/dto/record/user-exercise-records.dto.ts";
 import {UserExerciseRecords} from "../model/record/user-exercise-records.tsx";
+import {AUTHENTICATION_SERVICE} from "./authentication-service.ts";
 
 const RECORDS_COLLECTION = "records";
 
 export class UserRecordsService {
 
     async findForCurrentUserAndExercise(exerciseId: string): Promise<UserExerciseRecords> {
-        const userRecords = await getDoc(doc(db, RECORDS_COLLECTION, 'sebge3@gmail.com', 'exercises', exerciseId)); // TODO get current user
+        const userRecords = await getDoc(doc(db, RECORDS_COLLECTION, AUTHENTICATION_SERVICE.currentUserOrFail.email, 'exercises', exerciseId));
 
         return UserExerciseRecords.fromDto(userRecords.data() as UserExerciseRecordsDto);
     }

@@ -1,0 +1,19 @@
+import {User} from "@firebase/auth";
+
+export class CurrentUser {
+
+    static fromDto(dto: User): CurrentUser {
+        return new CurrentUser(
+            dto.displayName || '',
+            dto.email || '',
+            dto.photoURL || '',
+        );
+    }
+
+    constructor(
+        public readonly displayName: string,
+        public readonly email: string,
+        public readonly avatarUrl: string,
+    ) {
+    }
+}
