@@ -10,8 +10,7 @@ import SettingsPage from "./pages/settings/SettingsPage.tsx";
 import {WOD_SERVICE} from "./services/wod-service.ts";
 import {EXERCISE_SERVICE} from "./services/exercise-service.ts";
 import {USER_RECORDS_SERVICE} from "./services/user-records-service.ts";
-import {AuthenticationRequired} from "./components/core/authentication/AuthenticationRequired.tsx";
-import { Login } from "./components/core/authentication/Login.tsx";
+import {Login} from "./components/core/authentication/Login.tsx";
 
 export type Params<Key extends string = string> = {
     readonly [key in Key]: string | undefined;
@@ -21,12 +20,11 @@ export default function App() {
     const router = createBrowserRouter([
         {
             path: '/',
-            element: <RootLayout/>,
             errorElement: <ErrorPage/>,
             children: [
                 {
                     path: '/',
-                    element: <AuthenticationRequired/>,
+                    element: <RootLayout/>,
                     children: [
                         {
                             index: true,
@@ -102,7 +100,7 @@ export default function App() {
                 },
                 {
                     path: 'login',
-                    element: <Login />
+                    element: <Login/>
                 }
             ]
         }

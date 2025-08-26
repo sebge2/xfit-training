@@ -1,7 +1,8 @@
-import {Navigate, Outlet, useLocation} from "react-router-dom";
+import {Navigate, useLocation} from "react-router-dom";
 import {AUTHENTICATION_SERVICE} from "../../../services/authentication-service.ts";
+import {ReactElement} from "react";
 
-export function AuthenticationRequired() {
+export function AuthenticationRequired({children}: { children?: ReactElement | null }) {
     const location = useLocation();
 
     if (!AUTHENTICATION_SERVICE.currentUser) {
@@ -9,6 +10,6 @@ export function AuthenticationRequired() {
     }
 
     return <>
-        <Outlet/>
+        {children}
     </>;
 }
