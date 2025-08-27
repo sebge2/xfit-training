@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {Link, useLocation, useMatches} from 'react-router-dom';
 import {AppBar, Toolbar, Typography} from "@mui/material";
+import {UserAvatarMenu} from "./UserAvatarMenu.tsx";
 
 export default function Menu({children}: { children: React.ReactNode }) {
     const ref = React.useRef<HTMLDivElement>(null);
@@ -59,6 +60,10 @@ export default function Menu({children}: { children: React.ReactNode }) {
                             <Typography variant="h6" component="div">
                                 {usePageName()}
                             </Typography>
+
+                            <Box sx={{ml: "auto"}}>
+                                <UserAvatarMenu/>
+                            </Box>
                         </Toolbar>
                     </AppBar>
 

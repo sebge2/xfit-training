@@ -1,4 +1,5 @@
-import {auth} from "../firebase";
+import {auth, googleProvider} from '../firebase'; // Adjust the path to your Firebase config file
+import {signInWithPopup} from 'firebase/auth';
 import {CurrentUser} from "../model/auth/current-user.ts";
 
 export class AuthenticationService {
@@ -23,6 +24,13 @@ export class AuthenticationService {
         return user;
     }
 
+    async login() {
+        await signInWithPopup(auth, googleProvider);
+    }
+
+    async logout() {
+        await auth.signOut();
+    }
 }
 
 export const AUTHENTICATION_SERVICE = new AuthenticationService();
