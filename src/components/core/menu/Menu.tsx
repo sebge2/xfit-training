@@ -7,20 +7,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {ThemeProvider} from '@mui/material/styles';
 import {Link, useLocation, useMatches} from 'react-router-dom';
 import {AppBar, Toolbar, Typography} from "@mui/material";
 import {UserAvatarMenu} from "./UserAvatarMenu.tsx";
+import {THEME_SERVICE} from "../../../services/theme-service.ts";
 
 export default function Menu({children}: { children: React.ReactNode }) {
     const ref = React.useRef<HTMLDivElement>(null);
     const location = useLocation();
 
-    const theme = createTheme({
-        palette: {
-            mode: 'light',
-        },
-    });
     /*
     TODO create an object with menu
      */
@@ -52,7 +48,7 @@ export default function Menu({children}: { children: React.ReactNode }) {
     }
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={THEME_SERVICE.theme}>
             <Box sx={{pb: 7}} ref={ref}>
                 <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
                     <AppBar position="fixed">

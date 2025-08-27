@@ -24,7 +24,7 @@ export function UserAvatarMenu(): ReactElement {
 
             await AUTHENTICATION_SERVICE.logout();
 
-            navigate("/login", {replace: true});
+            navigate("/login", {replace: true}); // TODO extract this to service
         } catch (e) {
             // You can show a toast/snackbar here
             console.error("Failed to sign out:", e);

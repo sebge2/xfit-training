@@ -6,7 +6,7 @@ export function AuthenticationRequired({children}: { children?: ReactElement | n
     const location = useLocation();
 
     if (!AUTHENTICATION_SERVICE.currentUser) {
-        return <Navigate to="/login" replace state={{from: location}}/>;
+        return <Navigate to="/login" replace state={{from: location}}/>; // TODO extract this to service
     }
 
     return <>
