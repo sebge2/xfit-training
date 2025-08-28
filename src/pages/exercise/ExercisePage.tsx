@@ -3,6 +3,7 @@ import {Exercise} from "../../model/exercise/exercise.ts";
 import {Suspense} from "react";
 import {ErrorComponent} from "../../components/core/ErrorComponent.tsx";
 import {UserExerciseRecords} from "../../model/record/user-exercise-records.tsx";
+import {ActivityTags} from "../../components/core/exercise/ActivityTags.tsx";
 
 export default function ExercisePage() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
@@ -14,7 +15,9 @@ export default function ExercisePage() {
                     <>
                         <div>{exercise.name}</div>
                         <div>Unit: {exercise.unit}</div>
-                        <div>{exercise.tags.map(tag => ' ' + tag)}</div>
+                        <div>
+                            <ActivityTags tags={exercise.tags} />
+                        </div>
                     </>
                 )}
             </Await>
