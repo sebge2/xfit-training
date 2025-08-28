@@ -1,8 +1,8 @@
 import {Await, Form, Link, redirect, useNavigation, useRouteLoaderData} from "react-router-dom";
 import {Suspense} from "react";
-import {Wod} from "../../model/wod/wod.ts";
-import {WodDisplay} from "../../components/wod/activity/wod-display.tsx";
-import {ErrorComponent} from "../../components/core/ErrorComponent.tsx";
+import {Wod} from "../../../model/wod/wod.ts";
+import {WodDisplay} from "../../../components/wod/activity/wod-display.tsx";
+import {ErrorComponent} from "../../../components/core/ErrorComponent.tsx";
 
 export async function sendWod({params, request}: { params: any, request: any }): Promise<Response> {
     const data = await request.formData();
