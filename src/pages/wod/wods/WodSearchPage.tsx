@@ -2,7 +2,7 @@ import {Await, useLoaderData, useNavigate} from "react-router-dom";
 import {Wod} from "../../../model/wod/wod.ts";
 import {Suspense} from "react";
 import {ErrorComponent} from "../../../components/core/ErrorComponent.tsx";
-import {WodSearchPageSkeleton} from "./WodSearchPageSkeleton.tsx";
+import {WodsGridSkeleton} from "./WodsGridSkeleton.tsx";
 import {WodsGrid} from "./WodsGrid.tsx";
 import {WodCard} from "./WodCard.tsx";
 
@@ -10,7 +10,7 @@ export default function WodSearchPage() {
     const routeData = useLoaderData() as { wods: Wod[] };
     const navigate = useNavigate();
 
-    return <Suspense fallback={<WodSearchPageSkeleton/>}>
+    return <Suspense fallback={<WodsGridSkeleton/>}>
         <Await resolve={routeData.wods} errorElement={<ErrorComponent/>}>
             {(wods: Wod[]) => (
                 <>

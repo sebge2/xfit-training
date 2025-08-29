@@ -2,7 +2,7 @@ import {Skeleton} from "@mui/material";
 import {ReactElement} from "react";
 import {WodsGrid} from "./WodsGrid.tsx";
 
-export function WodSearchPageSkeleton(): ReactElement {
+export function WodsGridSkeleton(): ReactElement {
     const numberSkeletons = 10;
 
     return <WodsGrid>

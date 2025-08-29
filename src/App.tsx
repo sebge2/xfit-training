@@ -1,10 +1,10 @@
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
-import ExercisesPage from "./pages/exercise/ExercisesPage.tsx";
+import ExercisesPage from "./pages/exercise/exercises/ExercisesPage.tsx";
 import RootLayout from "./pages/RootLayout.tsx";
 import WodSearchPage from "./pages/wod/wods/WodSearchPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import WodPage, {sendWod} from "./pages/wod/viewer/WodPage.tsx";
-import ExercisePage from "./pages/exercise/ExercisePage.tsx";
+import ExercisePage from "./pages/exercise/viewer/ExercisePage.tsx";
 import WodRunnerPage from "./pages/wod/runner/WodRunnerPage.tsx";
 import SettingsPage from "./pages/settings/SettingsPage.tsx";
 import {WOD_SERVICE} from "./services/wod-service.ts";

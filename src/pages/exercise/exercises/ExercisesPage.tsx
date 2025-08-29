@@ -1,7 +1,7 @@
 import {Await, Link, useLoaderData} from "react-router-dom";
 import {Suspense} from "react";
-import {ErrorComponent} from "../../components/core/ErrorComponent.tsx";
-import {Exercise} from "../../model/exercise/exercise.ts";
+import {ErrorComponent} from "../../../components/core/ErrorComponent.tsx";
+import {Exercise} from "../../../model/exercise/exercise.ts";
 
 export default function ExercisesPage() {
     const routeData = useLoaderData() as { exercises: Exercise[] };
