@@ -1,31 +1,17 @@
-import {Await, Link, useLoaderData} from "react-router-dom";
+import {Await, useLoaderData} from "react-router-dom";
 import {Suspense} from "react";
 import {ErrorComponent} from "../../../components/core/ErrorComponent.tsx";
-import {Exercise} from "../../../model/exercise/exercise.ts";
+import {AllCategoriesExercisesTabs} from "./AllCategoriesExercisesTabs.tsx";
+import {ExercisesPageSkeleton} from "./ExercisesPageSkeleton.tsx";
+import {AllCategoriesExercises} from "../../../model/exercise/all-categories-exercises.ts";
 
 export default function ExercisesPage() {
-    const routeData = useLoaderData() as { exercises: Exercise[] };
+    const routeData = useLoaderData() as { exercises: AllCategoriesExercises };
 
-    return <Suspense fallback={<p>Loading workouts...</p>}>
+    return <Suspense fallback={<ExercisesPageSkeleton/>}>
         <Await resolve={routeData.exercises} errorElement={<ErrorComponent/>}>
-            {(exercises: Exercise[]) => (
-                <>
-                    {exercises.length === 0 && (
-                        <p>No exercise found. Add some exercises to get started!</p>
-                    )}
-
-                    {exercises.length > 0 && (
-                        <ul>
-                            {exercises.map((exercise) => (
-                                <li key={exercise.id}>
-                                    <Link to={exercise.id} relative="path">
-                                        {exercise.name || `Exercise ${exercise.id}`}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </>
+            {(exercises: AllCategoriesExercises) => (
+                <AllCategoriesExercisesTabs exercises={exercises}/>
             )}
         </Await>
     </Suspense>;

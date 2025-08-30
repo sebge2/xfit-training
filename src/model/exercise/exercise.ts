@@ -1,15 +1,19 @@
 import {ExerciseDto} from "../dto/exercise/exercise.dto.ts";
 import {MeasureUnit} from "./measure-unit.ts";
+import {MainCategory} from "./main-category.ts";
+import {SubCategory} from "./sub-category.ts";
 
 export class Exercise {
 
     static fromDto(id: string, dto: ExerciseDto): Exercise {
-        return new Exercise(id, dto.name, dto.tags, dto.unit, dto.comment);
+        return new Exercise(id, dto.name, dto.category, dto.subCategory, dto.tags, dto.unit, dto.comment);
     }
 
     static toDto(exercise: Exercise): ExerciseDto {
         return {
             name: exercise.name,
+            mainCategory: exercise.category,
+            subCategory: exercise.subCategory,
             tags: exercise.tags,
             unit: exercise.unit,
             comment: exercise.comment,
@@ -19,6 +23,8 @@ export class Exercise {
     constructor(
         public readonly id: string,
         public readonly name: string,
+        public readonly category: MainCategory,
+        public readonly subCategory: SubCategory,
         public readonly tags: string[],
         public readonly unit: MeasureUnit,
         public readonly comment: string | undefined,

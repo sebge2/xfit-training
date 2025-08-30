@@ -2,6 +2,7 @@ import {collection, doc, DocumentSnapshot, getDoc, getDocs} from "firebase/fires
 import {db} from "../firebase";
 import {Exercise} from "../model/exercise/exercise.ts";
 import {ExerciseDto} from "../model/dto/exercise/exercise.dto.ts";
+import {AllCategoriesExercises} from "../model/exercise/all-categories-exercises.ts";
 
 const EXERCISES_COLLECTION = "exercises";
 
@@ -20,6 +21,21 @@ export class ExerciseService {
         return exercises.docs
             .map(dto => this._mapFromDto(dto as DocumentSnapshot<ExerciseDto>))
             .filter(exercise => exercise !== null);
+    }
+
+    async findAllGrouped(): Promise<AllCategoriesExercises> {
+        const allCategories = AllCategoriesExercises.empty();
+
+        const exercises = await this.findAll();
+
+        exercises
+            .forEach(exercise => allCategories
+            .getCategory(exercise.category)
+            .getSubCategory(exercise.subCategory)
+            .addExercise(exercise)
+        );
+
+        return allCategories;
     }
 
     async findById(id: string): Promise<Exercise | null> {

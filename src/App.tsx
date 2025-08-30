@@ -38,7 +38,7 @@ export default function App() {
                                     index: true,
                                     loader: () => {
                                         return {
-                                            exercises: EXERCISE_SERVICE.findAll()
+                                            exercises: EXERCISE_SERVICE.findAllGrouped()
                                         }
                                     },
                                     element: <ExercisesPage/>
