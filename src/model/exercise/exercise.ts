@@ -12,7 +12,7 @@ export class Exercise {
     static toDto(exercise: Exercise): ExerciseDto {
         return {
             name: exercise.name,
-            mainCategory: exercise.category,
+            category: exercise.category,
             subCategory: exercise.subCategory,
             tags: exercise.tags,
             unit: exercise.unit,
