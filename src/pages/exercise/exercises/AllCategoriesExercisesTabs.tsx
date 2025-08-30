@@ -25,9 +25,11 @@ export function AllCategoriesExercisesTabs({exercises}: { exercises: AllCategori
 
             {Object.keys(MAIN_CATEGORY_LABELS)
                 .map(category => category as MainCategory)
-                .map(category => <TabPanel value={category}>
-                    <MainCategoryExercisesAccordion category={exercises.getCategory(category)}/>
-                </TabPanel>)}
+                .map(category =>
+                    <TabPanel value={category}>
+                        <MainCategoryExercisesAccordion category={exercises.getCategory(category)}/>
+                    </TabPanel>
+                )}
         </TabContext>
     </Box>;
 }

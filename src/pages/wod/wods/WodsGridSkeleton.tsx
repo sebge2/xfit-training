@@ -7,7 +7,7 @@ export function WodsGridSkeleton(): ReactElement {
 
     return <WodsGrid>
         {[...Array(numberSkeletons)].map((_, i) => (
-            <Skeleton key={i} variant="rectangular" width="25rem" height="10rem" />
+            <Skeleton key={i} variant="rectangular" width="20rem" height="10rem" />
         ))}
     </WodsGrid>;
 }
