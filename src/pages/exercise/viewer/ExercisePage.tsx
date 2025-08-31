@@ -6,7 +6,6 @@ import {UserExerciseRecords} from "../../../model/record/user-exercise-records.t
 import {ActivityTags} from "../../../components/core/exercise/ActivityTags.tsx";
 import {MAIN_CATEGORY_LABELS} from "../../../model/exercise/main-category.ts";
 import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
-import {MeasureUnitSelector} from "../../../components/activity/MeasureUnitSelector.tsx";
 
 export default function ExercisePage() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
@@ -17,10 +16,14 @@ export default function ExercisePage() {
                 {(exercise: Exercise) => (
                     <>
                         <div>{exercise.name}</div>
-                        <div>Unit: {exercise.unit} <MeasureUnitSelector originalValue={exercise.unit} id="measure-unit" /></div>
-                        <div>Location: {MAIN_CATEGORY_LABELS[exercise.category]} &gt; {SUB_CATEGORY_LABELS[exercise.subCategory]} </div>
+                        <div>Unit: {exercise.unit}
+                            {/*<MeasureUnitSelector originalValue={exercise.unit} id="measure-unit" />*/}
+                        </div>
+                        <div>Location: {MAIN_CATEGORY_LABELS[exercise.category]} &gt; {SUB_CATEGORY_LABELS[exercise.subCategory]}
+                            {/*<CategorySelector originalValue={exercise.subCategory} />*/}
+                        </div>
                         <div>
-                            <ActivityTags tags={exercise.tags} />
+                            <ActivityTags tags={exercise.tags}/>
                         </div>
                         <div>Comment: {exercise.comment}</div>
                     </>
@@ -34,7 +37,7 @@ export default function ExercisePage() {
                     <>
                         {records.groupKeys.map(groupKey =>
                             records.groups.get(groupKey)?.records.map(record =>
-                            <div>{record.value} at {record.date.toDateString()}</div>
+                                <div>{record.value} at {record.date.toDateString()}</div>
                             )
                         )}
                     </>
