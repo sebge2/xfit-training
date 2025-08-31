@@ -3,11 +3,11 @@ import {Exercise} from "../../../model/exercise/exercise.ts";
 import {Suspense} from "react";
 import {ErrorComponent} from "../../../components/core/ErrorComponent.tsx";
 import {UserExerciseRecords} from "../../../model/record/user-exercise-records.tsx";
-import {ActivityTags} from "../../../components/core/exercise/ActivityTags.tsx";
 import {MAIN_CATEGORY_LABELS} from "../../../model/exercise/main-category.ts";
 import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
 import {TagSelector} from "../../../components/activity/TagSelector.tsx";
 import {EXERCISE_TAG_LABELS, ExerciseTag} from "../../../model/exercise/exercise-tag.tsx";
+import {ExerciseTags} from "../../../components/core/exercise/ExerciseTags.tsx";
 
 export default function ExercisePage() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
@@ -25,7 +25,7 @@ export default function ExercisePage() {
                             {/*<CategorySelector originalValue={exercise.subCategory} />*/}
                         </div>
                         <div>
-                            <ActivityTags tags={exercise.tags}/>
+                            <ExerciseTags tags={exercise.tags}/>
 
                             <TagSelector<ExerciseTag> id="tags"
                                                       originalValues={exercise.tags}

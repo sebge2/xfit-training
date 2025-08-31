@@ -1,7 +1,7 @@
 import {Wod} from "../../../model/wod/wod.ts";
 import Box from "@mui/material/Box";
 import {Card, CardActionArea, CardContent, Typography} from "@mui/material";
-import {ActivityTags} from "../../../components/core/exercise/ActivityTags.tsx";
+import {WodTags} from "../../../components/core/exercise/WodTags.tsx";
 
 export function WodCard({wod, onClick}: { wod: Wod, onClick?: () => void }) {
     return <Card>
@@ -25,7 +25,7 @@ export function WodCard({wod, onClick}: { wod: Wod, onClick?: () => void }) {
                         {wod.comment}
                     </Box>
                     <Box sx={{mt: 1}}>
-                        <ActivityTags tags={wod.tags}/>
+                        <WodTags tags={wod.tags}/>
                     </Box>
                 </Typography>
             </CardContent>

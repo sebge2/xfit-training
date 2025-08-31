@@ -2,7 +2,6 @@ import {SubCategoryExercises} from "../../../model/exercise/sub-category-exercis
 import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
 import {AUTHENTICATION_SERVICE} from "../../../services/authentication-service.ts";
 import {Permission} from "../../../model/auth/permission.ts";
-import {ActivityTags} from "../../../components/core/exercise/ActivityTags.tsx";
 import {ActivityIcon} from "../../../components/activity/ActivityIcon.tsx";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -18,6 +17,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useMediaQuery} from '@mui/material';
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {ExerciseTags} from "../../../components/core/exercise/ExerciseTags.tsx";
 
 export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubCategoryExercises }) {
     const [expanded, setExpanded] = useState(subCategory.exercises.length > 0);
@@ -43,7 +43,7 @@ export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubC
                         <ListItemText primary={exercise.name}/>
                         {showTags &&
                             <ListItemIcon>
-                                <ActivityTags tags={exercise.tags}/>
+                                <ExerciseTags tags={exercise.tags}/>
                             </ListItemIcon>
                         }
                     </ListItemButton>

@@ -1,9 +1,14 @@
 import {Chip, Stack} from "@mui/material";
 
-export function ActivityTags({tags}: { tags: string[] }) {
+type ActivityTagsProps<T extends string> = {
+    tags: T[],
+    labelMaker: (tag: T) => string,
+};
+
+export function ActivityTags<T extends string>({tags, labelMaker}: ActivityTagsProps<T>) {
     return <Stack direction="row" spacing={1}>
         {(tags || []).map(tag =>
-            <Chip key={tag} label={tag} variant="outlined"/>
+            <Chip key={tag as string} label={labelMaker(tag)} variant="outlined"/>
         )}
     </Stack>;
 }
