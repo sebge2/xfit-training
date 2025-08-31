@@ -7,7 +7,7 @@ import {MAIN_CATEGORY_LABELS} from "../../../model/exercise/main-category.ts";
 import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
 import {TagSelector} from "../../../components/activity/TagSelector.tsx";
 import {EXERCISE_TAG_LABELS, ExerciseTag} from "../../../model/exercise/exercise-tag.tsx";
-import {ExerciseTags} from "../../../components/core/exercise/ExerciseTags.tsx";
+import {ExerciseTags} from "../../../components/core/activity/ExerciseTags.tsx";
 
 export default function ExercisePage() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };

@@ -1,7 +1,7 @@
 import {Wod} from "../../../model/wod/wod.ts";
 import Box from "@mui/material/Box";
 import {Card, CardActionArea, CardContent, Typography} from "@mui/material";
-import {WodTags} from "../../../components/core/exercise/WodTags.tsx";
+import {WodTags} from "../../../components/core/activity/WodTags.tsx";
 
 export function WodCard({wod, onClick}: { wod: Wod, onClick?: () => void }) {
     return <Card>
