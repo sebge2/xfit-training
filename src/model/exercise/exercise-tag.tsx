@@ -14,6 +14,14 @@ export enum ExerciseTag {
 
     PUSH = 'PUSH',
 
+    CLEAN = 'CLEAN',
+
+    SINGLE_DB = 'SINGLE_DB',
+
+    DOUBLE_DB = 'DOUBLE_DB',
+
+    BODY_WEIGHT = 'BODY_WEIGHT',
+
 }
 
 export const EXERCISE_TAG_LABELS: { [key in ExerciseTag]: string } = {
@@ -24,4 +32,8 @@ export const EXERCISE_TAG_LABELS: { [key in ExerciseTag]: string } = {
     [ExerciseTag.SNATCH]: 'Snatch',
     [ExerciseTag.JERK]: 'Jerk',
     [ExerciseTag.PUSH]: 'Push',
+    [ExerciseTag.CLEAN]: 'Clean',
+    [ExerciseTag.SINGLE_DB]: '1 DB',
+    [ExerciseTag.DOUBLE_DB]: '2 DB',
+    [ExerciseTag.BODY_WEIGHT]: 'Body Weight',
 }
