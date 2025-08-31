@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 type CategorySelectorProps = {
     id: string,
     originalValue: SubCategory,
-    onChange: (SubCategory) => void
+    onChange: (subCategory: SubCategory) => void
 };
 
 export function CategorySelector({id, originalValue, onChange}: CategorySelectorProps): ReactElement {
@@ -38,6 +38,7 @@ export function CategorySelector({id, originalValue, onChange}: CategorySelector
                 onChange={handleChange}
             >
                 {Object.keys(MainCategory)
+                    .map(mainCategory => mainCategory as MainCategory)
                     .flatMap(mainCategory =>
                         [
                             <ListSubheader value={mainCategory}>{MAIN_CATEGORY_LABELS[mainCategory]}</ListSubheader>,

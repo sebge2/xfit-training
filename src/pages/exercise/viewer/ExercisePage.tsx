@@ -6,6 +6,8 @@ import {UserExerciseRecords} from "../../../model/record/user-exercise-records.t
 import {ActivityTags} from "../../../components/core/exercise/ActivityTags.tsx";
 import {MAIN_CATEGORY_LABELS} from "../../../model/exercise/main-category.ts";
 import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
+import {TagSelector} from "../../../components/activity/TagSelector.tsx";
+import {EXERCISE_TAG_LABELS, ExerciseTag} from "../../../model/exercise/exercise-tag.tsx";
 
 export default function ExercisePage() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
@@ -24,6 +26,11 @@ export default function ExercisePage() {
                         </div>
                         <div>
                             <ActivityTags tags={exercise.tags}/>
+
+                            <TagSelector<ExerciseTag> id="tags"
+                                                      originalValues={exercise.tags}
+                                                      availableTags={Object.keys(ExerciseTag).map(tag => tag as ExerciseTag)}
+                                                      labelMaker={(tag) => EXERCISE_TAG_LABELS[tag]}/>
                         </div>
                         <div>Comment: {exercise.comment}</div>
                     </>

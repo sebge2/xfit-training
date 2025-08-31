@@ -9,7 +9,7 @@ import {MEASURE_UNIT_LABELS, MeasureUnit} from "../../model/exercise/measure-uni
 type MeasureUnitSelectorProps = {
     id: string,
     originalValue: MeasureUnit,
-    onChange: (MeasureUnit) => void
+    onChange: (unit: MeasureUnit) => void
 };
 
 export function MeasureUnitSelector({id, originalValue, onChange}: MeasureUnitSelectorProps): ReactElement {
@@ -36,6 +36,7 @@ export function MeasureUnitSelector({id, originalValue, onChange}: MeasureUnitSe
                 onChange={handleChange}
             >
                 {Object.keys(MeasureUnit)
+                    .map(unit => unit as MeasureUnit)
                     .map(unit => <MenuItem value={unit}>{MEASURE_UNIT_LABELS[unit]}</MenuItem>)
                 }
             </Select>

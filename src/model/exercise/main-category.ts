@@ -38,8 +38,14 @@ export const MAIN_SUB_CATEGORY_STRUCTURE: { [key in MainCategory]: SubCategory[]
 }
 
 export function findMainCategory(subCategory: SubCategory): MainCategory {
-    return Object
+    let category = Object
         .keys(MAIN_SUB_CATEGORY_STRUCTURE)
         .map((key) => key as MainCategory)
         .find((mainCategory) => MAIN_SUB_CATEGORY_STRUCTURE[mainCategory].includes(subCategory));
+
+    if (!category) {
+        throw new Error(`The sub-category ${subCategory} cannot be linked to a main category.`);
+    }
+
+    return category;
 }
