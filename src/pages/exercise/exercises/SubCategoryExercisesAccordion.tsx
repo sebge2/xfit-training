@@ -1,21 +1,23 @@
 import {SubCategoryExercises} from "../../../model/exercise/sub-category-exercises.ts";
+import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
+import {AUTHENTICATION_SERVICE} from "../../../services/authentication-service.ts";
+import {Permission} from "../../../model/auth/permission.ts";
+import {ActivityTags} from "../../../components/core/exercise/ActivityTags.tsx";
+import {ActivityIcon} from "../../../components/activity/ActivityIcon.tsx";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionActions from '@mui/material/AccordionActions';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
-import {useState} from "react";
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import {ActivityTags} from "../../../components/core/exercise/ActivityTags.tsx";
-import {ActivityIcon} from "../../../components/activity/ActivityIcon.tsx";
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useMediaQuery} from '@mui/material';
 import {useNavigate} from "react-router-dom";
-import Button from '@mui/material/Button';
+import {useState} from "react";
 
 export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubCategoryExercises }) {
     const [expanded, setExpanded] = useState(subCategory.exercises.length > 0);
@@ -49,7 +51,7 @@ export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubC
             </List>
         </AccordionDetails>
         <AccordionActions>
-            <Button>Add</Button>
+            {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.ADD_EXERCISE) && <Button>Add</Button>}
         </AccordionActions>
     </Accordion>;
 }

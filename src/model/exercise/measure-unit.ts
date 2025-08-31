@@ -7,3 +7,9 @@ export enum MeasureUnit {
     TIME = 'TIME',
 
 }
+
+export const MEASURE_UNIT_LABELS: { [key in MeasureUnit]: string } = {
+    [MeasureUnit.KILOGRAMS]: 'Kilograms',
+    [MeasureUnit.REPS]: 'REPS',
+    [MeasureUnit.TIME]: 'Time',
+}

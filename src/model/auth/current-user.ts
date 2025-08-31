@@ -1,4 +1,5 @@
 import {User} from "@firebase/auth";
+import {Permission} from "./permission.ts";
 
 export class CurrentUser {
 
@@ -15,5 +16,9 @@ export class CurrentUser {
         public readonly email: string,
         public readonly avatarUrl: string,
     ) {
+    }
+
+    hasPermission(permission: Permission): boolean {
+        return true; // TODO
     }
 }

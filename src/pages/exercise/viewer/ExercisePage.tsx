@@ -4,6 +4,9 @@ import {Suspense} from "react";
 import {ErrorComponent} from "../../../components/core/ErrorComponent.tsx";
 import {UserExerciseRecords} from "../../../model/record/user-exercise-records.tsx";
 import {ActivityTags} from "../../../components/core/exercise/ActivityTags.tsx";
+import {MAIN_CATEGORY_LABELS} from "../../../model/exercise/main-category.ts";
+import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
+import {MeasureUnitSelector} from "../../../components/activity/MeasureUnitSelector.tsx";
 
 export default function ExercisePage() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
@@ -14,10 +17,12 @@ export default function ExercisePage() {
                 {(exercise: Exercise) => (
                     <>
                         <div>{exercise.name}</div>
-                        <div>Unit: {exercise.unit}</div>
+                        <div>Unit: {exercise.unit} <MeasureUnitSelector originalValue={exercise.unit} id="measure-unit" /></div>
+                        <div>Location: {MAIN_CATEGORY_LABELS[exercise.category]} &gt; {SUB_CATEGORY_LABELS[exercise.subCategory]} </div>
                         <div>
                             <ActivityTags tags={exercise.tags} />
                         </div>
+                        <div>Comment: {exercise.comment}</div>
                     </>
                 )}
             </Await>

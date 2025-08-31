@@ -19,6 +19,62 @@ export default function Menu({children}: { children: React.ReactNode }) {
 
     /*
     TODO create an object with menu
+
+
+    // TypeScript
+import { createBrowserRouter } from 'react-router-dom';
+
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    handle: { title: 'Home' },
+    children: [
+      {
+        path: 'exercises',
+        handle: { title: 'Exercises' },
+        children: [
+          {
+            path: ':exerciseId',
+            // title can be dynamic with params or loader data
+            handle: {
+              title: ({ params }: { params: { exerciseId: string } }) =>
+                `Exercise ${params.exerciseId}`,
+            },
+          },
+        ],
+      },
+      { path: 'wods', handle: { title: 'WODs' } },
+      { path: 'settings', handle: { title: 'Settings' } },
+    ],
+  },
+]);
+
+
+
+// TypeScript React
+import { useMatches } from 'react-router-dom';
+
+function usePageTitle(defaultTitle = 'Xfit Training') {
+  const matches = useMatches();
+
+  for (let i = matches.length - 1; i >= 0; i--) {
+    const handle = matches[i]?.handle as
+      | { title?: string | ((ctx: any) => string) }
+      | undefined;
+
+    if (!handle?.title) continue;
+
+    if (typeof handle.title === 'function') {
+      return handle.title({
+        params: matches[i].params,
+        data: matches[i].data,
+        pathname: matches[i].pathname,
+      });
+    }
+    return handle.title;
+  }
+  return defaultTitle;
+}
      */
 
     const getActiveRoute = () => {
