@@ -1,6 +1,7 @@
 import {Activity} from "./activity/activity.ts";
 import {WodDto} from "../dto/wod/wod.dto.ts";
 import {mapActivityFromDto, mapActivityToDto} from "./activity/activity-utils.ts";
+import {WodTag} from "./wod-tag.tsx";
 
 export class Wod {
 
@@ -27,7 +28,7 @@ export class Wod {
         public id: string | null,
         public activity: Activity,
         public name: string,
-        public tags: string[],
+        public tags: WodTag[],
         public comment: string | null,
     ) {
     }

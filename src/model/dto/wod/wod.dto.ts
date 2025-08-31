@@ -1,4 +1,5 @@
 import {ActivityDto} from "./activity/activity-dto.ts";
+import {WodTag} from "../../wod/wod-tag.tsx";
 
 export interface WodDto {
 
@@ -6,7 +7,7 @@ export interface WodDto {
 
     get activity(): ActivityDto;
 
-    get tags(): string[];
+    get tags(): WodTag[];
 
     get comment(): string | null;
 }
