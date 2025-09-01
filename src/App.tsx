@@ -11,6 +11,7 @@ import {WOD_SERVICE} from "./services/wod-service.ts";
 import {EXERCISE_SERVICE} from "./services/exercise-service.ts";
 import {USER_RECORDS_SERVICE} from "./services/user-records-service.ts";
 import {Login} from "./components/core/authentication/Login.tsx";
+import {Exercise} from "./model/exercise/exercise.ts";
 
 export type Params<Key extends string = string> = {
     readonly [key in Key]: string | undefined;
@@ -46,11 +47,14 @@ export default function App() {
                                 {
                                     id: 'exercise-details',
                                     path: ':id',
-                                    loader: ({params}: { params: Params }) => {
-                                        return {
-                                            exercise: EXERCISE_SERVICE.findById(params.id as string),
-                                            records: USER_RECORDS_SERVICE.findForCurrentUserAndExercise(params.id as string),
-                                        }
+                                    loader: async ({params}: { params: Params }) => {
+                                        const exercise = await EXERCISE_SERVICE.findById(params.id!);
+                                        const records = USER_RECORDS_SERVICE.findForCurrentUserAndExercise(params.id!);
+
+                                        return {exercise, records };
+                                    },
+                                    handle: {
+                                        pageName: ({data}: { data: { exercise: Exercise } }) => data?.exercise?.name,
                                     },
                                     element: <ExercisePage/>
                                 },

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useRef} from 'react';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import GroupIcon from '@mui/icons-material/Group';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -8,73 +8,19 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
 import {ThemeProvider} from '@mui/material/styles';
-import {Link, useLocation, useMatches} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import {AppBar, Toolbar, Typography} from "@mui/material";
 import {UserAvatarMenu} from "./UserAvatarMenu.tsx";
 import {THEME_SERVICE} from "../../../services/theme-service.ts";
+import {usePageName} from "../../../hooks/use-page-name.tsx";
 
 export default function Menu({children}: { children: React.ReactNode }) {
-    const ref = React.useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
     const location = useLocation();
+    const pageNames = usePageName();
 
     /*
     TODO create an object with menu
-
-
-    // TypeScript
-import { createBrowserRouter } from 'react-router-dom';
-
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    handle: { title: 'Home' },
-    children: [
-      {
-        path: 'exercises',
-        handle: { title: 'Exercises' },
-        children: [
-          {
-            path: ':exerciseId',
-            // title can be dynamic with params or loader data
-            handle: {
-              title: ({ params }: { params: { exerciseId: string } }) =>
-                `Exercise ${params.exerciseId}`,
-            },
-          },
-        ],
-      },
-      { path: 'wods', handle: { title: 'WODs' } },
-      { path: 'settings', handle: { title: 'Settings' } },
-    ],
-  },
-]);
-
-
-
-// TypeScript React
-import { useMatches } from 'react-router-dom';
-
-function usePageTitle(defaultTitle = 'Xfit Training') {
-  const matches = useMatches();
-
-  for (let i = matches.length - 1; i >= 0; i--) {
-    const handle = matches[i]?.handle as
-      | { title?: string | ((ctx: any) => string) }
-      | undefined;
-
-    if (!handle?.title) continue;
-
-    if (typeof handle.title === 'function') {
-      return handle.title({
-        params: matches[i].params,
-        data: matches[i].data,
-        pathname: matches[i].pathname,
-      });
-    }
-    return handle.title;
-  }
-  return defaultTitle;
-}
      */
 
     const getActiveRoute = () => {
@@ -89,20 +35,6 @@ function usePageTitle(defaultTitle = 'Xfit Training') {
         }
     };
 
-    function usePageName(): string | undefined {
-        const matches = useMatches();
-
-        for (let i = matches.length - 1; i >= 0; i--) {
-            const pageName = (matches[i]?.handle as { pageName: string })?.pageName;
-
-            if (pageName) {
-                return pageName;
-            }
-        }
-
-        return 'Xfit Training';
-    }
-
     return (
         <ThemeProvider theme={THEME_SERVICE.theme}>
             <Box sx={{pb: 7}} ref={ref}>
@@ -110,7 +42,7 @@ function usePageTitle(defaultTitle = 'Xfit Training') {
                     <AppBar position="fixed">
                         <Toolbar>
                             <Typography variant="h6" component="div">
-                                {usePageName()}
+                                {pageNames.join(" > ")}
                             </Typography>
 
                             <Box sx={{ml: "auto"}}>
