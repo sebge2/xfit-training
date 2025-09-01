@@ -32,7 +32,8 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
                 tabs.push({
                     icon: undefined,
                     label: `${recordsToUse.groupKeys[i]} REP`,
-                    default: i == 0,
+                    defaultSelected: i == 0,
+                    content: <div></div>
                 })
             }
             break;
@@ -42,8 +43,8 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
             tabs.push({
                 icon: undefined,
                 label: `PERF`,
-                content: undefined, // TODO
-                default: true,
+                content: <div></div>, // TODO
+                defaultSelected: true,
             })
             break;
     }
@@ -73,6 +74,7 @@ function createAddTab(content: React.ReactElement): TabDescriptor {
         label: undefined,
         icon: <AddIcon/>,
         content: content,
+        defaultSelected: false,
     };
 }
 

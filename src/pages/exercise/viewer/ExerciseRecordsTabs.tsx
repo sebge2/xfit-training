@@ -13,7 +13,7 @@ type ExerciseRecordsTabsProps = {
 
 export function ExerciseRecordsTabs({tabs}: ExerciseRecordsTabsProps) {
     const [value, setValue] = React.useState(
-        tabs.map((tab,index) => tab.default ? index.toString() : undefined)
+        tabs.map((tab,index) => tab.defaultSelected ? index.toString() : undefined)
             .filter((value) => value !== undefined)
             .find(() => true) || 0,
     );

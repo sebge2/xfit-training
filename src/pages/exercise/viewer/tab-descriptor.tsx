@@ -6,7 +6,7 @@ import {ExerciseDetailsView} from "./ExerciseDetailsView.tsx";
 export type TabDescriptor = {
     label: React.ReactNode,
     icon: React.ReactElement | undefined,
-    default: boolean,
+    defaultSelected: boolean | undefined,
     content: React.ReactNode,
 };
 
@@ -15,5 +15,6 @@ export function createInfoTab(exercise: Exercise): TabDescriptor {
         label: undefined,
         icon: <InfoIcon/>,
         content: <ExerciseDetailsView exercise={exercise}/>,
+        defaultSelected: false,
     };
 }
