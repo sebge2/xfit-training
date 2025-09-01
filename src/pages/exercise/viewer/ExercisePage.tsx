@@ -9,7 +9,7 @@ import {ExerciseRecords} from "./ExerciseRecords.tsx";
 export default function ExercisePage() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
 
-    return <Suspense fallback={<ExerciseRecordsSkeleton exercise={routeData.exercise} records={undefined}/>}>
+    return <Suspense fallback={<ExerciseRecordsSkeleton exercise={routeData.exercise}/>}>
         <Await resolve={routeData.records} errorElement={<ErrorComponent/>}>
             {(records: UserExerciseRecords) => <ExerciseRecords exercise={routeData.exercise} records={records}/>}
         </Await>
