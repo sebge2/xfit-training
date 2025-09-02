@@ -1,5 +1,5 @@
 import {Exercise} from "../../../model/exercise/exercise.ts";
-import {ExerciseTags} from "../../../components/core/activity/ExerciseTags.tsx";
+import {ExerciseTags} from "../../../components/activity/ExerciseTags.tsx";
 import Box from "@mui/material/Box";
 
 type ExerciseDetailsViewProps = {

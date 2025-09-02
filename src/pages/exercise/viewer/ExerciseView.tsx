@@ -5,7 +5,7 @@ import {ExerciseRecordsTabs} from "./ExerciseRecordsTabs.tsx";
 import {MeasureUnit} from "../../../model/exercise/measure-unit.ts";
 import {createInfoTab, TabDescriptor} from "./tab-descriptor.tsx";
 import AddIcon from '@mui/icons-material/Add';
-import {ExerciseRecordsGroupView} from "./ExerciseRecordsGroupView.tsx";
+import {ExerciseRecordsGroupView} from "./group/ExerciseRecordsGroupView.tsx";
 
 type ExerciseRecordsProps = {
     exercise: Exercise,
@@ -34,7 +34,7 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
                     icon: undefined,
                     label: `${recordsToUse.groupKeys[i]} REP`,
                     defaultSelected: i == 0,
-                    content: <ExerciseRecordsGroupView />
+                    content: <ExerciseRecordsGroupView records={recordsToUse.group(recordsToUse.groupKeys[i])} />
                 })
             }
             break;

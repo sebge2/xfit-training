@@ -17,7 +17,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useMediaQuery} from '@mui/material';
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {ExerciseTags} from "../../../components/core/activity/ExerciseTags.tsx";
+import {ExerciseTags} from "../../../components/activity/ExerciseTags.tsx";
 
 export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubCategoryExercises }) {
     const [expanded, setExpanded] = useState(subCategory.exercises.length > 0);

@@ -42,4 +42,8 @@ export class UserExerciseRecords {
         return Array.from(this.groups.keys());
     }
 
+    group(group: number): UserExerciseGroupRecords {
+        return this.groups.get(group)!;
+    }
+
 }
