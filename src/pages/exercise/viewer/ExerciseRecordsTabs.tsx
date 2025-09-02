@@ -24,8 +24,7 @@ export function ExerciseRecordsTabs({tabs}: ExerciseRecordsTabsProps) {
                 <TabList onChange={(_: React.SyntheticEvent, newValue: string) => setValue(newValue)}
                          aria-label="My Records"
                          variant="scrollable"
-                         scrollButtons="auto"
-                         centered>
+                         scrollButtons="auto">
                     {tabs
                         .map((tab, index) => <Tab key={index.toString()} icon={tab.icon} label={tab.label} value={index.toString()}/>)
                     }

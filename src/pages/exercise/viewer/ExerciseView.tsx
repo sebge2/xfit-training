@@ -26,7 +26,7 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
     ];
 
     switch (exercise.unit) {
-        case MeasureUnit.REPS: {
+        case MeasureUnit.KILOGRAMS: {
             const recordsToUse = initRecords(records);
 
             for (let i = 0; i < recordsToUse.groupKeys.length; i++) {
@@ -34,12 +34,12 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
                     icon: undefined,
                     label: `${recordsToUse.groupKeys[i]} REP`,
                     defaultSelected: i == 0,
-                    content: <ExerciseRecordsGroupView records={recordsToUse.group(recordsToUse.groupKeys[i])} />
+                    content: <ExerciseRecordsGroupView unit={exercise.unit} records={recordsToUse.group(recordsToUse.groupKeys[i])} />
                 })
             }
             break;
         }
-        case MeasureUnit.KILOGRAMS:
+        case MeasureUnit.REPS:
         case MeasureUnit.TIME:
             tabs.push({
                 icon: undefined,
