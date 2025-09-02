@@ -6,7 +6,7 @@ type ExerciseRecordsSkeletonProps = {
     exercise: Exercise,
 };
 
-export function ExerciseRecordsSkeleton({exercise}: ExerciseRecordsSkeletonProps) {
+export function ExerciseSkeletonView({exercise}: ExerciseRecordsSkeletonProps) {
     const tabs: TabDescriptor[] = [
         createInfoTab(exercise),
         {

@@ -5,6 +5,7 @@ import {ExerciseRecordsTabs} from "./ExerciseRecordsTabs.tsx";
 import {MeasureUnit} from "../../../model/exercise/measure-unit.ts";
 import {createInfoTab, TabDescriptor} from "./tab-descriptor.tsx";
 import AddIcon from '@mui/icons-material/Add';
+import {ExerciseRecordsGroupView} from "./ExerciseRecordsGroupView.tsx";
 
 type ExerciseRecordsProps = {
     exercise: Exercise,
@@ -13,7 +14,7 @@ type ExerciseRecordsProps = {
 
 const MINIMUM_REPS_TAB = 5;
 
-export function ExerciseRecords({exercise, records}: ExerciseRecordsProps) {
+export function ExerciseView({exercise, records}: ExerciseRecordsProps) {
     const tabs: TabDescriptor[] = generateTabs(exercise, records);
 
     return <ExerciseRecordsTabs tabs={tabs}/>;
@@ -33,7 +34,7 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
                     icon: undefined,
                     label: `${recordsToUse.groupKeys[i]} REP`,
                     defaultSelected: i == 0,
-                    content: <div></div>
+                    content: <ExerciseRecordsGroupView />
                 })
             }
             break;

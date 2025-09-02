@@ -6,7 +6,7 @@ type ExerciseDetailsViewProps = {
     exercise: Exercise
 };
 
-export function ExerciseDetailsView({exercise}: ExerciseDetailsViewProps) {
+export function ExerciseMetadataView({exercise}: ExerciseDetailsViewProps) {
     return <>
         <Box component="section" sx={{m: 2}}>
             <p>{exercise.comment}</p>

@@ -3,7 +3,7 @@ import {MAIN_CATEGORY_LABELS, MainCategory} from "../../../model/exercise/main-c
 import TabPanel from '@mui/lab/TabPanel';
 import {ExercisesCategoryTabs} from "./ExercisesCategoryTabs.tsx";
 
-export function ExercisesPageSkeleton() {
+export function ExercisesSkeletonPage() {
     const numberSkeletons = 10;
 
     return <ExercisesCategoryTabs>
