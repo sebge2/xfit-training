@@ -20,7 +20,7 @@ export class UserExerciseGroupRecords {
     ) {
     }
 
-    last(): UserRecord | undefined {
+    lastRecord(): UserRecord | undefined {
         return (this.records.length > 0)
             ? this.records[this.records.length - 1]
             : undefined;

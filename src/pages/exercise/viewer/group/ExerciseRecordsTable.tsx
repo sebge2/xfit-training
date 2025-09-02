@@ -8,10 +8,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {MeasureUnit} from "../../../../model/exercise/measure-unit.ts";
 import {RecordValueViewer} from "../../../../components/activity/RecordValueViewer.tsx";
-import {Input, InputAdornment} from "@mui/material";
+import {IconButton, Input, InputAdornment} from "@mui/material";
 import {MobileDatePicker} from "@mui/x-date-pickers";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import SaveIcon from '@mui/icons-material/Save';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 type Props = {
     records: UserExerciseGroupRecords,
@@ -30,20 +32,6 @@ export function ExerciseRecordsTable({records, unit}: Props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {records.records.map((record, i) => (
-                        <TableRow
-                            key={i}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                        >
-                            <TableCell align="left">{record.date.toDateString()}</TableCell>
-                            <TableCell align="left">
-                                <RecordValueViewer value={record.value} unit={unit}/>
-                            </TableCell>
-                            <TableCell align="left">
-
-                            </TableCell>
-                        </TableRow>
-                    ))}
                     <TableRow
                         key="add"
                         sx={{
@@ -59,7 +47,7 @@ export function ExerciseRecordsTable({records, unit}: Props) {
                                             padding: 0,
                                             '> .MuiPickersInputBase-root': {
                                                 height: '2rem',
-                                                width: '8.7rem',
+                                                width: '8.8rem',
                                                 padding: '0.5rem',
                                                 marginLeft: '-0.5rem',
                                             }
@@ -92,8 +80,28 @@ export function ExerciseRecordsTable({records, unit}: Props) {
                             />
                         </TableCell>
                         <TableCell align="left">
+                            <IconButton aria-label="save" size="small">
+                                <SaveIcon />
+                            </IconButton>
                         </TableCell>
                     </TableRow>
+
+                    {records.records.map((record, i) => (
+                        <TableRow
+                            key={i}
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                        >
+                            <TableCell align="left">{record.date.toDateString()}</TableCell>
+                            <TableCell align="left">
+                                <RecordValueViewer value={record.value} unit={unit}/>
+                            </TableCell>
+                            <TableCell align="left">
+                                <IconButton aria-label="save" size="small">
+                                    <DeleteIcon />
+                                </IconButton>
+                            </TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         </TableContainer>

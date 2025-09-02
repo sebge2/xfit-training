@@ -5,7 +5,7 @@ type Props = {
 };
 
 export function ExerciseRecordsEvolution({records}: Props) {
-    return <>
+    return <div style={{display: 'none'}}>
         {records.records.length}
-    </>; // TODO
+    </div>; // TODO
 };
