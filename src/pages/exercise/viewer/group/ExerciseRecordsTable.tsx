@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {MeasureUnit} from "../../../../model/exercise/measure-unit.ts";
 import {RecordValueViewer} from "../../../../components/activity/RecordValueViewer.tsx";
+import {Input, InputAdornment} from "@mui/material";
 
 type Props = {
     records: UserExerciseGroupRecords,
@@ -16,7 +17,7 @@ type Props = {
 
 export function ExerciseRecordsTable({records, unit}: Props) {
     return <TableContainer component={Paper}>
-        <Table sx={{minWidth: 650}} size="small" aria-label="My records">
+        <Table size="small" aria-label="My records">
             <TableHead>
                 <TableRow>
                     <TableCell align="left">Date</TableCell>
@@ -31,10 +32,31 @@ export function ExerciseRecordsTable({records, unit}: Props) {
                     >
                         <TableCell align="left">{record.date.toDateString()}</TableCell>
                         <TableCell align="left">
-                            <RecordValueViewer value={record.value} unit={unit} />
+                            <RecordValueViewer value={record.value} unit={unit}/>
                         </TableCell>
                     </TableRow>
                 ))}
+                <TableRow
+                    key="add"
+                    sx={{
+                        backgroundColor: 'grey.100',
+                    }}
+                >
+                    <TableCell align="left">
+
+                    </TableCell>
+                    <TableCell align="left">
+                        <Input
+                            id="value"
+                            endAdornment={<InputAdornment position="end">kg</InputAdornment>}
+                            type="number"
+                            sx={{ width: '5rem' }}
+                            inputProps={{
+                                'aria-label': 'value',
+                            }}
+                        />
+                    </TableCell>
+                </TableRow>
             </TableBody>
         </Table>
     </TableContainer>;
