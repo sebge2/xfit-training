@@ -16,7 +16,7 @@ export function ExerciseRecordsGroupView({records, unit}: Props) {
         <div>
             <ExerciseRecordsTable records={records} unit={unit}/>
         </div>
-        {(records.lastRecord()) && <Box>
+        {(!!records.lastRecord()) && <Box>
             <h3>Compute % of KG</h3>
 
             <WeightCalculator weight={records.lastRecord()?.value || 0} />

@@ -14,6 +14,8 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
+import {ConfirmationDialog} from "../../../../components/core/interaction/ConfirmationDialog.tsx";
+import {useState} from "react";
 
 type Props = {
     records: UserExerciseGroupRecords,
@@ -21,7 +23,23 @@ type Props = {
 };
 
 export function ExerciseRecordsTable({records, unit}: Props) {
+    const [recordIdToDelete, setRecordIdToDelete] = useState<number>(-1);
+
+    function cancelDeleteRecord() {
+        setRecordIdToDelete(-1);
+    }
+
+    function deleteRecord() {
+        // TODO
+        setRecordIdToDelete(-1);
+    }
+
     return <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <ConfirmationDialog text={"Are you sure you want to delete this record?"}
+                            open={recordIdToDelete  >= 0}
+                            onOk={deleteRecord}
+                            onCancel={cancelDeleteRecord}/>
+
         <TableContainer component={Paper}>
             <Table size="small" aria-label="My records">
                 <TableHead>
@@ -81,7 +99,7 @@ export function ExerciseRecordsTable({records, unit}: Props) {
                         </TableCell>
                         <TableCell align="left">
                             <IconButton aria-label="save" size="small">
-                                <SaveIcon />
+                                <SaveIcon/>
                             </IconButton>
                         </TableCell>
                     </TableRow>
@@ -97,7 +115,7 @@ export function ExerciseRecordsTable({records, unit}: Props) {
                             </TableCell>
                             <TableCell align="left">
                                 <IconButton aria-label="save" size="small">
-                                    <DeleteIcon />
+                                    <DeleteIcon onClick={() => setRecordIdToDelete(i)}/>
                                 </IconButton>
                             </TableCell>
                         </TableRow>
