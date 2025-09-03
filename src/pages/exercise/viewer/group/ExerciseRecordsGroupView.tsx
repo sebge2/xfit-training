@@ -4,6 +4,7 @@ import {ExerciseRecordsEvolution} from "./ExerciseRecordsEvolution.tsx";
 import {WeightCalculator} from "../../../../components/activity/WeightCalculator.tsx";
 import {MeasureUnit} from "../../../../model/exercise/measure-unit.ts";
 import Stack from '@mui/material/Stack';
+import Box from "@mui/material/Box";
 
 type Props = {
     records: UserExerciseGroupRecords,
@@ -15,11 +16,15 @@ export function ExerciseRecordsGroupView({records, unit}: Props) {
         <div>
             <ExerciseRecordsTable records={records} unit={unit}/>
         </div>
-        <div>
-            <WeightCalculator weight={records.lastRecord()?.value} />
-        </div>
-        <div>
+        {(records.lastRecord()) && <Box>
+            <h3>Compute % of KG</h3>
+
+            <WeightCalculator weight={records.lastRecord()?.value || 0} />
+        </Box>}
+        {(records.records.length > 0) && <Box>
+            <h3>Evolution</h3>
+
             <ExerciseRecordsEvolution records={records}/>
-        </div>
+        </Box>}
     </Stack>;
 }

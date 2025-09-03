@@ -17,6 +17,7 @@
     "@mui/lab": "^7.0.0-beta.16",
     "@mui/material": "^7.1.1",
     "@mui/styled-engine-sc": "^7.1.1",
+    "@mui/x-charts": "^8.11.0",
     "@mui/x-date-pickers": "^8.11.0",
     "@toolpad/core": "^0.16.0",
     "firebase": "^11.8.1",
