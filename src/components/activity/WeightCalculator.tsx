@@ -16,8 +16,9 @@ export function WeightCalculator({weight}: Props) {
         aria-label="Kilograms"
         defaultValue={DEFAULT_VALUE}
         getAriaValueText={valueText}
+        sx={{width: '90%', marginLeft: '5%', marginRight: '5%'}}
         shiftStep={30}
-        step={10}
+        step={5}
         marks
         min={10}
         max={100}
