@@ -1,6 +1,9 @@
 import {Exercise} from "../../../model/exercise/exercise.ts";
 import {ExerciseTags} from "../../../components/activity/ExerciseTags.tsx";
 import Box from "@mui/material/Box";
+import {MAIN_CATEGORY_LABELS} from "../../../model/exercise/main-category.ts";
+import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
+import {MEASURE_UNIT_LABELS} from "../../../model/exercise/measure-unit.ts";
 
 type ExerciseDetailsViewProps = {
     exercise: Exercise
@@ -8,17 +11,32 @@ type ExerciseDetailsViewProps = {
 
 export function ExerciseMetadataView({exercise}: ExerciseDetailsViewProps) {
     return <>
-        <Box component="section" sx={{m: 2}}>
+        {exercise.comment && <Box component="section">
+            <h3>Comment</h3>
+
             <p>{exercise.comment}</p>
+        </Box>}
+
+        <Box component="section">
+            <h3>Unit</h3>
+
+            <p>{MEASURE_UNIT_LABELS[exercise.unit]}</p>
         </Box>
-        {/*<div>{exercise.name}</div>*/}
+
         {/*<div>Unit: {exercise.unit}*/}
         {/*    /!*<MeasureUnitSelector originalValue={exercise.unit} id="measure-unit" />*!/*/}
         {/*</div>*/}
-        {/*<div>Location: {MAIN_CATEGORY_LABELS[exercise.category]} &gt; {SUB_CATEGORY_LABELS[exercise.subCategory]}*/}
-        {/*    /!*<CategorySelector originalValue={exercise.subCategory} />*!/*/}
-        {/*</div>*/}
-        <Box component="section" sx={{m: 2}}>
+
+        <Box component="section">
+            <h3>Categorization</h3>
+
+            <p>{MAIN_CATEGORY_LABELS[exercise.category]} &gt; {SUB_CATEGORY_LABELS[exercise.subCategory]}</p>
+            {/*    /!*<CategorySelector originalValue={exercise.subCategory} />*!/*/}
+            {/*</div>*/}
+        </Box>
+        <Box component="section">
+            <h3>Characteristics</h3>
+
             <ExerciseTags tags={exercise.tags}/>
 
             {/*<TagSelector<ExerciseTag> id="tags"*/}
