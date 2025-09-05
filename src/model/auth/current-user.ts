@@ -18,7 +18,7 @@ export class CurrentUser {
     ) {
     }
 
-    hasPermission(_: Permission): boolean {
+    hasPermission(..._:Permission[]): boolean {
         return true; // TODO
     }
 }

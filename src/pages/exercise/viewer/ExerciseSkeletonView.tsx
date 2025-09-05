@@ -1,14 +1,9 @@
-import {Exercise} from "../../../model/exercise/exercise.ts";
 import {ExerciseRecordsTabs} from "./ExerciseRecordsTabs.tsx";
 import {createInfoTab, TabDescriptor} from "./tab-descriptor.tsx";
 
-type ExerciseRecordsSkeletonProps = {
-    exercise: Exercise,
-};
-
-export function ExerciseSkeletonView({exercise}: ExerciseRecordsSkeletonProps) {
+export function ExerciseSkeletonView() {
     const tabs: TabDescriptor[] = [
-        createInfoTab(exercise),
+        createInfoTab(),
         {
             icon: undefined,
             label: `Loading`,

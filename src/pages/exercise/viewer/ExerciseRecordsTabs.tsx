@@ -6,27 +6,35 @@ import {TabContext} from '@mui/lab';
 import TabList from '@mui/lab/TabList';
 import {TabDescriptor} from "./tab-descriptor.tsx";
 import TabPanel from "@mui/lab/TabPanel";
+import {useSearchParams} from "react-router-dom";
 
 type ExerciseRecordsTabsProps = {
     tabs: TabDescriptor[],
 };
 
 export function ExerciseRecordsTabs({tabs}: ExerciseRecordsTabsProps) {
-    const [value, setValue] = React.useState(
-        tabs.map((tab,index) => tab.defaultSelected ? index.toString() : undefined)
+    const [searchParams] = useSearchParams();
+
+    const selectedTabFromParam = searchParams.get('tabIndex');
+
+    const [selectedTab, setSelectedTab] = React.useState(
+        selectedTabFromParam || tabs.map((tab, index) => (tab.defaultSelected) ? index.toString() : undefined)
             .filter((value) => value !== undefined)
             .find(() => true) || 0,
     );
 
+    // TODO handle change in tab
+
     return <Box sx={{width: '100%', typography: 'body1'}}>
-        <TabContext value={value}>
+        <TabContext value={selectedTab}>
             <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                <TabList onChange={(_: React.SyntheticEvent, newValue: string) => setValue(newValue)}
+                <TabList onChange={(_: React.SyntheticEvent, newValue: string) => setSelectedTab(newValue)}
                          aria-label="My Records"
                          variant="scrollable"
                          scrollButtons="auto">
                     {tabs
-                        .map((tab, index) => <Tab key={index.toString()} icon={tab.icon} label={tab.label} value={index.toString()}/>)
+                        .map((tab, index) => <Tab key={index.toString()} icon={tab.icon} label={tab.label}
+                                                  value={index.toString()}/>)
                     }
                 </TabList>
             </Box>

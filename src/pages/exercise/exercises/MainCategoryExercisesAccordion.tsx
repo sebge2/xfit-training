@@ -9,7 +9,7 @@ export function MainCategoryExercisesAccordion({category}: { category: MainCateg
             .map(subCategory => subCategory as SubCategory)
             .map(subCategory => category.getSubCategory(subCategory))
             .map(subCategory =>
-                <SubCategoryExercisesAccordion subCategory={subCategory}/>
+                <SubCategoryExercisesAccordion key={subCategory.subCategory} subCategory={subCategory}/>
             )
     }</>;
 }

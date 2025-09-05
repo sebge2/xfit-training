@@ -1,7 +1,6 @@
 import * as React from "react";
 import InfoIcon from '@mui/icons-material/Info';
-import {Exercise} from "../../../model/exercise/exercise.ts";
-import {ExerciseMetadataView} from "./ExerciseMetadataView.tsx";
+import {Outlet} from "react-router-dom";
 
 export type TabDescriptor = {
     label: React.ReactNode,
@@ -10,11 +9,11 @@ export type TabDescriptor = {
     content: React.ReactNode,
 };
 
-export function createInfoTab(exercise: Exercise): TabDescriptor {
+export function createInfoTab(): TabDescriptor {
     return {
         label: undefined,
         icon: <InfoIcon/>,
-        content: <ExerciseMetadataView exercise={exercise}/>,
+        content: <Outlet/>,
         defaultSelected: false,
     };
 }

@@ -22,7 +22,7 @@ export function ExerciseView({exercise, records}: ExerciseRecordsProps) {
 
 function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefined): TabDescriptor[] {
     const tabs = [
-        createInfoTab(exercise),
+        createInfoTab(),
     ];
 
     switch (exercise.unit) {
@@ -34,7 +34,8 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
                     icon: undefined,
                     label: `${recordsToUse.groupKeys[i]} REP`,
                     defaultSelected: i == 0,
-                    content: <ExerciseRecordsGroupView unit={exercise.unit} records={recordsToUse.group(recordsToUse.groupKeys[i])} />
+                    content: <ExerciseRecordsGroupView unit={exercise.unit}
+                                                       records={recordsToUse.group(recordsToUse.groupKeys[i])}/>
                 })
             }
             break;

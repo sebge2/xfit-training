@@ -2,4 +2,8 @@ export enum Permission {
 
     ADD_EXERCISE = 'ADD_EXERCISE',
 
+    MODIFY_EXERCISE = 'MODIFY_EXERCISE',
+
+    DELETE_EXERCISE = 'DELETE_EXERCISE',
+
 }

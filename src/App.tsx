@@ -12,6 +12,8 @@ import {EXERCISE_SERVICE} from "./services/exercise-service.ts";
 import {USER_RECORDS_SERVICE} from "./services/user-records-service.ts";
 import {Login} from "./components/core/authentication/Login.tsx";
 import {Exercise} from "./model/exercise/exercise.ts";
+import {ExerciseMetadataView} from "./pages/exercise/viewer/ExerciseMetadataView.tsx";
+import {ExerciseMetadataEditor} from "./pages/exercise/viewer/ExerciseMetadataEditor.tsx";
 
 export type Params<Key extends string = string> = {
     readonly [key in Key]: string | undefined;
@@ -51,12 +53,22 @@ export default function App() {
                                         const exercise = await EXERCISE_SERVICE.findById(params.id!);
                                         const records = USER_RECORDS_SERVICE.findForCurrentUserAndExercise(params.id!);
 
-                                        return {exercise, records };
+                                        return {exercise, records};
                                     },
                                     handle: {
                                         pageName: ({data}: { data: { exercise: Exercise } }) => data?.exercise?.name,
                                     },
-                                    element: <ExercisePage/>
+                                    element: <ExercisePage/>,
+                                    children: [
+                                        {
+                                            index: true,
+                                            element: <ExerciseMetadataView/>
+                                        },
+                                        {
+                                            path: 'edit',
+                                            element: <ExerciseMetadataEditor/>
+                                        }
+                                    ]
                                 },
                             ]
                         },
