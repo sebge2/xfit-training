@@ -10,7 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import {FormField} from "../../model/core/form/form-field.ts";
 
 type TagSelectorProps<T extends string> = {
-    formField: FormField,
+    formField: FormField<T[]>,
     availableTags: T[],
     labelMaker: (tag: T) => string,
 };

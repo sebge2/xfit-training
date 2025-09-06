@@ -4,13 +4,13 @@ import FormControl from "@mui/material/FormControl";
 import {FormField} from "../../../model/core/form/form-field.ts";
 import {FormHelperText} from "@mui/material";
 
+export type InputTextFormField = FormField<string | unknown>;
+
 type Props = {
-    formField: FormField,
+    formField: InputTextFormField,
 };
 
-export function InputText({
-                              formField,
-                          }: Props): ReactElement {
+export function InputText({formField,}: Props): ReactElement {
     return <FormControl fullWidth>
         <TextField
             id={formField.id}

@@ -1,4 +1,11 @@
 import {FormState} from "../model/core/form/form-state.ts";
+import {InputTextFormField} from "../components/core/form/InputText.tsx";
+import {MeasureUnitField} from "../components/activity/MeasureUnitSelector.tsx";
+import {SubCategory} from "../model/exercise/sub-category.ts";
+import {CategoryFormField} from "../components/activity/CategorySelector.tsx";
+import {MeasureUnit} from "../model/exercise/measure-unit.ts";
+import {ExerciseTagFormField} from "../components/activity/ExerciseTagSelector.tsx";
+import {ExerciseTag} from "../model/exercise/exercise-tag.ts";
 
 export function validateRequiredFields(state: FormState, formData: FormData) {
     state.fields
@@ -10,4 +17,20 @@ export function validateRequiredFields(state: FormState, formData: FormData) {
                 field.addError('Please enter a value.');
             }
         })
+}
+
+export function getTextValue(formField: InputTextFormField, formData: FormData): string | undefined {
+    return formData.get(formField.id) as string | undefined;
+}
+
+export function getMeasureUnitValue(formField: MeasureUnitField, formData: FormData): MeasureUnit {
+    return formData.get(formField.id) as MeasureUnit;
+}
+
+export function getSubCategoryValue(formField: CategoryFormField, formData: FormData): SubCategory {
+    return formData.get(formField.id) as SubCategory;
+}
+
+export function getExerciseTagsValue(formField: ExerciseTagFormField, formData: FormData): ExerciseTag[] {
+    return ((formData.get(formField.id) || '') as string).split(',') as ExerciseTag[];
 }

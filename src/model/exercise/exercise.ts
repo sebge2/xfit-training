@@ -7,7 +7,7 @@ import {ExerciseTag} from "./exercise-tag.ts";
 export class Exercise {
 
     static fromDto(id: string, dto: ExerciseDto): Exercise {
-        return new Exercise(id, dto.name, findMainCategory(dto.subCategory), dto.subCategory, dto.tags, dto.unit, dto.comment);
+        return new Exercise(id, dto.name, dto.subCategory, dto.tags, dto.unit, dto.comment);
     }
 
     static toDto(exercise: Exercise): ExerciseDto {
@@ -22,12 +22,15 @@ export class Exercise {
 
     constructor(
         public readonly id: string,
-        public readonly name: string,
-        public readonly category: MainCategory,
-        public readonly subCategory: SubCategory,
-        public readonly tags: ExerciseTag[],
-        public readonly unit: MeasureUnit,
-        public readonly comment: string | undefined,
+        public name: string,
+        public subCategory: SubCategory,
+        public tags: ExerciseTag[],
+        public unit: MeasureUnit,
+        public comment: string | undefined,
     ) {
+    }
+
+    get category(): MainCategory {
+        return findMainCategory(this.subCategory);
     }
 }

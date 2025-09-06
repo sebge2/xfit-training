@@ -8,8 +8,10 @@ import {MEASURE_UNIT_LABELS, MeasureUnit} from "../../model/exercise/measure-uni
 import {FormHelperText} from "@mui/material";
 import {FormField} from "../../model/core/form/form-field.ts";
 
+export type MeasureUnitField = FormField<MeasureUnit>;
+
 type Props = {
-    formField: FormField,
+    formField: MeasureUnitField,
 };
 
 export function MeasureUnitSelector({formField}: Props): ReactElement {

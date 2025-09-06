@@ -1,5 +1,5 @@
 import {ReactElement} from "react";
-import {SUB_CATEGORY_LABELS} from "../../model/exercise/sub-category.ts";
+import {SUB_CATEGORY_LABELS, SubCategory} from "../../model/exercise/sub-category.ts";
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
@@ -9,8 +9,10 @@ import {FormHelperText, ListSubheader} from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 import {FormField} from "../../model/core/form/form-field.ts";
 
+export type CategoryFormField = FormField<SubCategory>;
+
 type Props = {
-    formField: FormField,
+    formField: CategoryFormField,
 };
 
 export function CategorySelector({formField}: Props): ReactElement {
