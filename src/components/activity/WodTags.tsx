@@ -1,5 +1,5 @@
 import {ActivityTags} from "./ActivityTags.tsx";
-import {WOD_TAG_LABELS, WodTag} from "../../model/wod/wod-tag.tsx";
+import {WOD_TAG_LABELS, WodTag} from "../../model/wod/wod-tag.ts";
 
 type WodTagsProps = {
     tags: WodTag[]

@@ -31,6 +31,7 @@ export function MeasureUnitSelector({id, originalValue, onChange}: MeasureUnitSe
             <Select
                 labelId={id + 'label'}
                 id={id}
+                name={id}
                 value={unit}
                 label={label}
                 onChange={handleChange}

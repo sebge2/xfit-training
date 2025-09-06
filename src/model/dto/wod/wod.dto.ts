@@ -1,5 +1,5 @@
 import {ActivityDto} from "./activity/activity-dto.ts";
-import {WodTag} from "../../wod/wod-tag.tsx";
+import {WodTag} from "../../wod/wod-tag.ts";
 
 export interface WodDto {
 

@@ -2,7 +2,7 @@ import {ExerciseDto} from "../dto/exercise/exercise.dto.ts";
 import {MeasureUnit} from "./measure-unit.ts";
 import {findMainCategory, MainCategory} from "./main-category.ts";
 import {SubCategory} from "./sub-category.ts";
-import {ExerciseTag} from "./exercise-tag.tsx";
+import {ExerciseTag} from "./exercise-tag.ts";
 
 export class Exercise {
 

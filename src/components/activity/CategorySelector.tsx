@@ -33,6 +33,7 @@ export function CategorySelector({id, originalValue, onChange}: CategorySelector
             <Select
                 labelId={id + 'label'}
                 id={id}
+                name={id}
                 value={subCategory}
                 label={label}
                 onChange={handleChange}

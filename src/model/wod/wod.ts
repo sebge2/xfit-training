@@ -1,7 +1,7 @@
 import {Activity} from "./activity/activity.ts";
 import {WodDto} from "../dto/wod/wod.dto.ts";
 import {mapActivityFromDto, mapActivityToDto} from "./activity/activity-utils.ts";
-import {WodTag} from "./wod-tag.tsx";
+import {WodTag} from "./wod-tag.ts";
 
 export class Wod {
 

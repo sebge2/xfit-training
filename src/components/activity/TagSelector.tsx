@@ -5,21 +5,23 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import {Checkbox} from "@mui/material";
+import {Checkbox, FormHelperText} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 
 type TagSelectorProps<T extends string> = {
     id: string,
     originalValues: T[],
     availableTags: T[],
+    required?: boolean,
     labelMaker: (tag: T) => string,
-    onChange?: (tags: T[]) => void
+    onChange?: (tags: T[]) => void,
 };
 
 export function TagSelector<T extends string>({
                                                   id,
                                                   originalValues,
                                                   availableTags,
+                                                  required,
                                                   labelMaker,
                                                   onChange
                                               }: TagSelectorProps<T>): ReactElement {
@@ -53,9 +55,11 @@ export function TagSelector<T extends string>({
             <Select<T[]>
                 labelId={id + 'label'}
                 id={id}
+                name={id}
                 multiple
                 value={tags}
                 label={label}
+                required={required}
                 onChange={handleChange}
                 input={<OutlinedInput label="Tag"/>}
                 renderValue={(selected) => selected.map(tag => labelMaker(tag)).join(', ')}
@@ -70,6 +74,7 @@ export function TagSelector<T extends string>({
                     )
                 }
             </Select>
+            {required && <FormHelperText>Required</FormHelperText>}
         </FormControl>
     </Box>;
 }

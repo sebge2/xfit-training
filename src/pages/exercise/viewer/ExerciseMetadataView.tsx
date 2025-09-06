@@ -50,9 +50,7 @@ export function ExerciseMetadataView() {
             </Box>
             {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_EXERCISE, Permission.DELETE_EXERCISE) &&
                 <Box component="section">
-                    <h3>Admin</h3>
-
-                    <Box sx={{display: 'flex', gap: 2}}>
+                    <Box sx={{display: 'flex', gap: '2rem', marginTop: '2rem'}}>
                         {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.DELETE_EXERCISE) &&
                             <Button variant="outlined" color="error" startIcon={<DeleteIcon/>} onClick={onDelete}>
                                 Delete

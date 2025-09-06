@@ -1,7 +1,7 @@
 import {DocumentData} from "firebase/firestore";
 import {MeasureUnit} from "../../exercise/measure-unit.ts";
 import {SubCategory} from "../../exercise/sub-category.ts";
-import {ExerciseTag} from "../../exercise/exercise-tag.tsx";
+import {ExerciseTag} from "../../exercise/exercise-tag.ts";
 
 export interface ExerciseDto extends DocumentData {
 

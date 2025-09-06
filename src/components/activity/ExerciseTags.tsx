@@ -1,4 +1,4 @@
-import {EXERCISE_TAG_LABELS, ExerciseTag} from "../../model/exercise/exercise-tag.tsx";
+import {EXERCISE_TAG_LABELS, ExerciseTag} from "../../model/exercise/exercise-tag.ts";
 import {ActivityTags} from "./ActivityTags.tsx";
 import {SxProps} from "@mui/system";
 import {Theme} from "@mui/material/styles";
