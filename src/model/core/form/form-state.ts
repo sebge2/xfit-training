@@ -6,14 +6,14 @@ export class FormState {
         return new FormState(fields);
     }
 
-    readonly hasFailed: boolean;
+    readonly isSuccessful: boolean;
     readonly fieldById: { [key: string]: FormField };
 
     constructor(
         public readonly fields: FormField[],
         public readonly globalErrors: string[] = [],
     ) {
-        this.hasFailed = (globalErrors.length > 0) || fields.some(field => field.errors.length > 0);
+        this.isSuccessful = (globalErrors.length === 0) && fields.some(field => field.errors.length === 0);
         this.fieldById = Object.fromEntries(fields.map((field) => [field.id, field])) as Record<string, FormField>;
     }
 
