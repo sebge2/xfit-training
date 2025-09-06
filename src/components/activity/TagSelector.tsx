@@ -70,9 +70,9 @@ TagSelector.tsx:60 MUI: A component is changing the default value state of an un
             >
                 {availableTags
                     .map(availableTag =>
-                        <MenuItem key={availableTag} value={availableTag}>
-                            <Checkbox checked={tags.includes(availableTag)}/>
-                            <ListItemText primary={labelMaker(availableTag)}/>
+                        <MenuItem key={availableTag + '_ITEM'} value={availableTag}>
+                            <Checkbox key={availableTag + '_CHECK'} checked={tags.includes(availableTag)}/>
+                            <ListItemText key={availableTag + '_ITEM'} primary={labelMaker(availableTag)}/>
                         </MenuItem>
                     )
                 }
