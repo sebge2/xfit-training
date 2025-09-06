@@ -1,37 +1,28 @@
-import {TextField} from "@mui/material";
-import {ChangeEvent, ReactElement} from "react";
+import TextField from '@mui/material/TextField';
+import {ReactElement} from "react";
 import FormControl from "@mui/material/FormControl";
+import {FormField} from "../../../model/core/form/form-field.ts";
+import {FormHelperText} from "@mui/material";
 
 type Props = {
-    id: string,
-    originalValue?: string,
-    label?: string,
-    required?: boolean,
-    onChange?: (value: string) => void,
+    formField: FormField,
 };
 
 export function InputText({
-                              id,
-                              originalValue,
-                              label,
-                              required,
-                              onChange
+                              formField,
                           }: Props): ReactElement {
-    function onChangeField(input: ChangeEvent<HTMLInputElement>): void {
-        if (onChange) {
-            onChange(input.target.value);
-        }
-    }
-
-    // TODO label around box
-
     return <FormControl fullWidth>
         <TextField
-            id={id}
-            name={id}
-            label={label}
-            value={originalValue}
-            required={required}
-            onChange={onChangeField}/>
+            id={formField.id}
+            name={formField.id}
+            label={formField.label}
+            defaultValue={formField.defaultValue}
+            error={formField.hasErrors}
+            slotProps={{
+                inputLabel: {
+                    shrink: true
+                }
+            }}/>
+        {formField.required && <FormHelperText>{formField.joinedError || 'Required'}</FormHelperText>}
     </FormControl>;
 }

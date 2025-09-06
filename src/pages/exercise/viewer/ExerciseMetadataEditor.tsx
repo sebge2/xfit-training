@@ -12,8 +12,11 @@ import {CategorySelector} from "../../../components/activity/CategorySelector.ts
 import {TagSelector} from "../../../components/activity/TagSelector.tsx";
 import {EXERCISE_TAG_LABELS, ExerciseTag} from "../../../model/exercise/exercise-tag.ts";
 import {useActionState} from "react";
-import {FormValidationState} from "../../../model/core/form/form-validation-state.ts";
+import {FormState} from "../../../model/core/form/form-state.ts";
 import {InputText} from "../../../components/core/form/InputText.tsx";
+import Stack from '@mui/material/Stack';
+import {FormField} from "../../../model/core/form/form-field.ts";
+import {validateRequiredFields} from "../../../utils/form-utils.ts";
 
 enum ExerciseFormFields {
 
@@ -32,20 +35,22 @@ export function ExerciseMetadataEditor() {
 
     const navigate = useNavigate();
 
-    function onSave(prev: FormValidationState, formData: FormData): FormValidationState {
-        console.log(prev);
-        console.log((formData as FormData).get('comment'));
-        console.log((formData as FormData).get('measure-unit'));
-        console.log((formData as FormData).get('category'));
-        console.log((formData as FormData).get('tags'));
+    const defaultState = FormState.create([
+        new FormField(ExerciseFormFields.COMMENT, 'Comment', exercise.comment),
+        new FormField(ExerciseFormFields.MEASURE_UNIT, 'Unit', exercise.unit, true),
+        new FormField(ExerciseFormFields.CATEGORY, 'Category', exercise.subCategory, true),
+        new FormField(ExerciseFormFields.TAGS, 'Tags', exercise.tags, true),
+    ]);
 
-        return FormValidationState.empty();
+    function onSave(prev: FormState, formData: FormData): FormState {
+        const newState = prev.reset();
+
+        validateRequiredFields(newState, formData);
+
+        return newState;
     }
 
-    const [formState, formAction, saving] = useActionState<FormValidationState, FormData>(onSave, FormValidationState.empty());
-
-    console.log(formState);
-
+    const [formState, formAction, saving] = useActionState<FormState, FormData>(onSave, defaultState);
 
     function onCancel() {
         navigate("..?tabIndex=0", {replace: true});
@@ -53,38 +58,17 @@ export function ExerciseMetadataEditor() {
 
     return <>
         <form action={formAction}>
-            <Box component="section">
-                <h3>Comment</h3>
+            <Stack spacing={4}>
+                <InputText formField={formState.fieldById[ExerciseFormFields.COMMENT]}/>
 
-                <InputText id={ExerciseFormFields.COMMENT} originalValue={exercise.comment} onChange={(_) => {}} />
-            </Box>
+                <MeasureUnitSelector formField={formState.fieldById[ExerciseFormFields.MEASURE_UNIT]}/>
 
-            <Box component="section">
-                <h3>Unit</h3>
+                <CategorySelector formField={formState.fieldById[ExerciseFormFields.CATEGORY]}/>
 
-                <div>
-                    <MeasureUnitSelector id={ExerciseFormFields.MEASURE_UNIT} originalValue={exercise.unit} onChange={(_) => {
-                    }}/>
-                </div>
-            </Box>
-
-            <Box component="section">
-                <h3>Categorization</h3>
-
-                <div>
-                    <CategorySelector id={ExerciseFormFields.CATEGORY} originalValue={exercise.subCategory} onChange={(_) => {
-                    }}/>
-                </div>
-            </Box>
-            <Box component="section">
-                <h3>Characteristics</h3>
-
-                <TagSelector<ExerciseTag> id={ExerciseFormFields.TAGS}
-                                          originalValues={exercise.tags}
+                <TagSelector<ExerciseTag> formField={formState.fieldById[ExerciseFormFields.TAGS]}
                                           availableTags={Object.keys(ExerciseTag).map(tag => tag as ExerciseTag)}
-                                          required={true}
                                           labelMaker={(tag) => EXERCISE_TAG_LABELS[tag]}/>
-            </Box>
+            </Stack>
 
             {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_EXERCISE) &&
                 <Box component="section">

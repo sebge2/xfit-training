@@ -1,42 +1,28 @@
-import {ReactElement, useState} from "react";
-import {SUB_CATEGORY_LABELS, SubCategory} from "../../model/exercise/sub-category.ts";
+import {ReactElement} from "react";
+import {SUB_CATEGORY_LABELS} from "../../model/exercise/sub-category.ts";
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
-import Select, {SelectChangeEvent} from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import {MAIN_CATEGORY_LABELS, MAIN_SUB_CATEGORY_STRUCTURE, MainCategory} from "../../model/exercise/main-category.ts";
-import {ListSubheader} from "@mui/material";
+import {FormHelperText, ListSubheader} from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
+import {FormField} from "../../model/core/form/form-field.ts";
 
-type CategorySelectorProps = {
-    id: string,
-    originalValue: SubCategory,
-    onChange: (subCategory: SubCategory) => void
+type Props = {
+    formField: FormField,
 };
 
-export function CategorySelector({id, originalValue, onChange}: CategorySelectorProps): ReactElement {
-    const [subCategory, setSubCategory] = useState(originalValue);
-
-    const handleChange = (event: SelectChangeEvent) => {
-        setSubCategory(event.target.value as SubCategory);
-
-        if (onChange) {
-            onChange(event.target.value as SubCategory);
-        }
-    };
-
-    const label = 'Category';
-
+export function CategorySelector({formField}: Props): ReactElement {
     return <Box sx={{minWidth: 120}}>
         <FormControl fullWidth>
-            <InputLabel id={id + 'label'}>{label}</InputLabel>
+            <InputLabel id={formField.id + 'label'}>{formField.label}</InputLabel>
             <Select
-                labelId={id + 'label'}
-                id={id}
-                name={id}
-                value={subCategory}
-                label={label}
-                onChange={handleChange}
+                labelId={formField.id + 'label'}
+                id={formField.id}
+                name={formField.id}
+                defaultValue={formField.defaultValue}
+                label={formField.label}
             >
                 {Object.keys(MainCategory)
                     .map(mainCategory => mainCategory as MainCategory)
@@ -52,6 +38,7 @@ export function CategorySelector({id, originalValue, onChange}: CategorySelector
                     )
                 }
             </Select>
+            {formField.required && <FormHelperText>{formField.joinedError || 'Required'}</FormHelperText>}
         </FormControl>
     </Box>;
 }

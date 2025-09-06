@@ -7,37 +7,27 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import {Checkbox, FormHelperText} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
+import {FormField} from "../../model/core/form/form-field.ts";
 
 type TagSelectorProps<T extends string> = {
-    id: string,
-    originalValues: T[],
+    formField: FormField,
     availableTags: T[],
-    required?: boolean,
     labelMaker: (tag: T) => string,
-    onChange?: (tags: T[]) => void,
 };
 
 export function TagSelector<T extends string>({
-                                                  id,
-                                                  originalValues,
+                                                  formField,
                                                   availableTags,
-                                                  required,
                                                   labelMaker,
-                                                  onChange
                                               }: TagSelectorProps<T>): ReactElement {
-    const [tags, setTags] = useState<T[]>(originalValues);
+    const [tags, setTags] = useState<T[]>(formField.defaultValue as T[] || []);
 
     const handleChange = (event: SelectChangeEvent<T[]>) => {
         const tags = event.target.value as T[];
 
         setTags(tags);
-
-        if (onChange) {
-            onChange(tags);
-        }
     };
 
-    const label = 'Tags';
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -49,20 +39,33 @@ export function TagSelector<T extends string>({
         },
     };
 
+    function renderValue(selected: T[]): string | undefined {
+        if (!selected || (selected.length === 0)) {
+            return undefined;
+        }
+
+        return selected.map(tag => labelMaker(tag)).join(', ');
+    }
+
+    /*
+TODO
+TagSelector.tsx:60 MUI: A component is changing the default value state of an uncontrolled Select after being initialized. To suppress this warning opt to use a controlled Select.
+*/
+
     return <Box sx={{minWidth: 120}}>
         <FormControl fullWidth>
-            <InputLabel id={id + 'label'}>{label}</InputLabel>
+            <InputLabel id={formField.id + 'label'}>{formField.label}</InputLabel>
             <Select<T[]>
-                labelId={id + 'label'}
-                id={id}
-                name={id}
+                labelId={formField.id + 'label'}
+                id={formField.id}
+                name={formField.id}
                 multiple
-                value={tags}
-                label={label}
-                required={required}
+                defaultValue={tags}
+                label={formField.label}
                 onChange={handleChange}
-                input={<OutlinedInput label="Tag"/>}
-                renderValue={(selected) => selected.map(tag => labelMaker(tag)).join(', ')}
+                input={<OutlinedInput label={formField.label}/>}
+                renderValue={renderValue}
+                error={formField.hasErrors}
                 MenuProps={MenuProps}
             >
                 {availableTags
@@ -74,7 +77,7 @@ export function TagSelector<T extends string>({
                     )
                 }
             </Select>
-            {required && <FormHelperText>Required</FormHelperText>}
+            {formField.required && <FormHelperText>{formField.joinedError || 'Required'}</FormHelperText>}
         </FormControl>
     </Box>;
 }
