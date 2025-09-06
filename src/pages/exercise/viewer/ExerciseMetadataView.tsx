@@ -48,6 +48,7 @@ export function ExerciseMetadataView() {
 
                 <ExerciseTags tags={exercise.tags}/>
             </Box>
+
             {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_EXERCISE, Permission.DELETE_EXERCISE) &&
                 <Box component="section">
                     <Box sx={{display: 'flex', gap: '2rem', marginTop: '2rem'}}>
