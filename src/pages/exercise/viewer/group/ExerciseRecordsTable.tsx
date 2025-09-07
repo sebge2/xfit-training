@@ -17,6 +17,7 @@ import {FormField} from "../../../../model/core/form/form-field.ts";
 import {getDateValue, getNumberValue, validateRequiredFields} from "../../../../utils/form-utils.ts";
 import {UserRecord} from "../../../../model/record/user-record.tsx";
 import {USER_RECORDS_SERVICE} from "../../../../services/user-records-service.ts";
+import { useRevalidator } from "react-router-dom";
 
 type Props = {
     groupRecords: UserExerciseGroupRecords,
@@ -24,6 +25,8 @@ type Props = {
 };
 
 export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
+    const revalidator = useRevalidator();
+
     const dateField = new FormField<Date | undefined>('date', undefined, undefined, true);
     const valueField = new FormField<number | undefined>('value', 'Value', undefined, true);
     const originalSaveState = FormState.create([dateField, valueField]);
@@ -38,7 +41,8 @@ export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
 
             await USER_RECORDS_SERVICE.addUserRecord(exercise.id, groupRecords, newRecord);
 
-            // TODO handle refresh
+            await revalidator.revalidate();
+
             // TODO handle not successful
         }
 
@@ -48,7 +52,8 @@ export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
     async function onDelete(record: UserRecord): Promise<void> {
         await USER_RECORDS_SERVICE.deleteUserRecord(exercise.id, groupRecords, record);
 
-        // TODO handle refresh
+        await revalidator.revalidate();
+
         // TODO handle not successful
     }
 

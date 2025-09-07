@@ -38,7 +38,7 @@ export class UserExerciseGroupRecords {
         this.records.splice(this._findIndexOfRecord(record), 1);
     }
 
-    private _findIndexOfRecord(record: UserRecord): number {
+    private _findIndexOfRecord(record: UserRecord): number{
         return this.records.findIndex(actualRecord => (actualRecord.value === record.value) && (actualRecord.date.getTime() == record.date.getTime()));
     }
 }
