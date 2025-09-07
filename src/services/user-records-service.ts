@@ -22,14 +22,26 @@ export class UserRecordsService {
 
         userRecords.group(group.id).addRecord(newRecord);
 
-        await updateDoc(
-            this._getRef(exerciseId),
-            UserExerciseRecords.toDto(userRecords) as UpdateData<ExerciseDto>
-        );
+        await this._updateRecords(exerciseId, userRecords);
+    }
+
+    async deleteUserRecord(exerciseId: string, group: UserExerciseGroupRecords, record: UserRecord): Promise<void> {
+        const userRecords: UserExerciseRecords = await this.findForCurrentUserAndExercise(exerciseId);
+
+        userRecords.group(group.id).deleteRecord(record);
+
+        await this._updateRecords(exerciseId, userRecords);
     }
 
     private _getRef(exerciseId: string) {
         return doc(db, RECORDS_COLLECTION, AUTHENTICATION_SERVICE.currentUserOrFail.email, 'exercises', exerciseId);
+    }
+
+    private async _updateRecords(exerciseId: string, userRecords: UserExerciseRecords) {
+        await updateDoc(
+            this._getRef(exerciseId),
+            UserExerciseRecords.toDto(userRecords) as UpdateData<ExerciseDto>
+        );
     }
 }
 

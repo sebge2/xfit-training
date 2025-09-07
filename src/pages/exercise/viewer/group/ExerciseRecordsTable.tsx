@@ -24,8 +24,8 @@ type Props = {
 };
 
 export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
-    const dateField = new FormField<Date | undefined>('date', undefined, undefined);
-    const valueField = new FormField<number | undefined>('value', 'Value', undefined);
+    const dateField = new FormField<Date | undefined>('date', undefined, undefined, true);
+    const valueField = new FormField<number | undefined>('value', 'Value', undefined, true);
     const originalSaveState = FormState.create([dateField, valueField]);
 
     async function onSave(prev: FormState, formData: FormData): Promise<FormState> {
@@ -39,9 +39,17 @@ export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
             await USER_RECORDS_SERVICE.addUserRecord(exercise.id, groupRecords, newRecord);
 
             // TODO handle refresh
+            // TODO handle not successful
         }
 
         return newState;
+    }
+
+    async function onDelete(record: UserRecord): Promise<void> {
+        await USER_RECORDS_SERVICE.deleteUserRecord(exercise.id, groupRecords, record);
+
+        // TODO handle refresh
+        // TODO handle not successful
     }
 
     const [, saveAction] = useActionState<FormState, FormData>(onSave, originalSaveState);
@@ -61,7 +69,7 @@ export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
                         <NewRecordRow dateField={dateField} valueField={valueField}/>
 
                         {groupRecords.records
-                            .map((record, i) => <ExistingRecordRow key={i} record={record} exercise={exercise}/>)}
+                            .map((record, i) => <ExistingRecordRow key={i} record={record} exercise={exercise} onDelete={() => onDelete(record)}/>)}
                     </TableBody>
                 </Table>
             </TableContainer>

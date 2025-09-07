@@ -4,15 +4,23 @@ import {RecordValueViewer} from "../../../../components/activity/RecordValueView
 import {UserRecord} from "../../../../model/record/user-record.tsx";
 import {Exercise} from "../../../../model/exercise/exercise.ts";
 import {DeleteButton} from "../../../../components/core/buttton/DeleteButton.tsx";
+import {useState} from "react";
 
 type Props = {
     record: UserRecord,
     exercise: Exercise,
+    onDelete: () => Promise<void> | void,
 }
 
-export function ExistingRecordRow({record, exercise}: Props) {
-    function deleteRecord() {
-        // TODO
+export function ExistingRecordRow({record, exercise, onDelete: onDeleteDelegation}: Props) {
+    const [deleting, setDeleting] = useState(false);
+
+    async function deleteRecord() {
+        setDeleting(true);
+
+        await onDeleteDelegation();
+
+        setDeleting(false);
     }
 
     return <>
@@ -22,8 +30,9 @@ export function ExistingRecordRow({record, exercise}: Props) {
                 <RecordValueViewer value={record.value} unit={exercise.unit}/>
             </TableCell>
             <TableCell align="left">
-                <DeleteButton confirmationText="Are you sure you want to delete this record?"
+                <DeleteButton confirmationText={`Are you sure to delete record of ${record.date.toDateString()}?`}
                               iconButton={true}
+                              deleting={deleting}
                               onDelete={deleteRecord}
                               size="small"/>
             </TableCell>

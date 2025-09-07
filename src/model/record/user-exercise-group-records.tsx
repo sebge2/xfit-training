@@ -33,4 +33,12 @@ export class UserExerciseGroupRecords {
 
         this.records.sort((a, b) => (a.date.getTime() - b.date.getTime()) * -1);
     }
+
+    deleteRecord(record: UserRecord) {
+        this.records.splice(this._findIndexOfRecord(record), 1);
+    }
+
+    private _findIndexOfRecord(record: UserRecord): number {
+        return this.records.findIndex(actualRecord => (actualRecord.value === record.value) && (actualRecord.date.getTime() == record.date.getTime()));
+    }
 }

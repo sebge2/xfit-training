@@ -7,6 +7,7 @@ type Props = {
     confirmationText: string,
     iconButton?: boolean,
     size?: 'small' | 'medium' | 'large',
+    deleting?: boolean,
     onDelete: () => Promise<void> | void,
 };
 
@@ -14,6 +15,7 @@ export function DeleteButton({
                                  confirmationText,
                                  iconButton = false,
                                  size,
+                                 deleting = false,
                                  onDelete: onDeleteDelegation
                              }: Props) {
     const [showDialog, setShowDialog] = useState<boolean>(false);
@@ -41,6 +43,8 @@ export function DeleteButton({
             <Button aria-label="Delete"
                     variant="outlined"
                     color="error"
+                    disabled={deleting}
+                    loading={deleting}
                     startIcon={<DeleteIcon/>} onClick={onDeleteRequested}>
                 Delete
             </Button>}
@@ -48,7 +52,9 @@ export function DeleteButton({
         {iconButton &&
             <IconButton aria-label="Delete"
                         size={size}
-                        color="error">
+                        color="error"
+                        disabled={deleting}
+                        loading={deleting}>
                 <DeleteIcon onClick={onDeleteRequested}/>
             </IconButton>}
     </>;
