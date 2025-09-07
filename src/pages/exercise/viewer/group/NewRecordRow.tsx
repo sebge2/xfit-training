@@ -1,12 +1,12 @@
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import {InputAdornment} from "@mui/material";
-import {DateFormField, DatePicker} from "../../../../components/core/form/DatePicker.tsx";
+import {InputDateFormField, DatePicker} from "../../../../components/core/form/DatePicker.tsx";
 import {SaveFormButton} from "../../../../components/core/form/SaveFormButton.tsx";
 import {InputNumber} from "../../../../components/core/form/InputNumber.tsx";
 
 type Props = {
-    dateField: DateFormField,
+    dateField: InputDateFormField,
     valueField: any,
 }
 

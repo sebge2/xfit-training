@@ -1,5 +1,7 @@
 import {FormState} from "../model/core/form/form-state.ts";
 import {InputTextFormField} from "../components/core/form/InputText.tsx";
+import {InputNumberFormField} from "../components/core/form/InputNumber.tsx";
+import {InputDateFormField} from "../components/core/form/DatePicker.tsx";
 import {MeasureUnitField} from "../components/activity/MeasureUnitSelector.tsx";
 import {SubCategory} from "../model/exercise/sub-category.ts";
 import {CategoryFormField} from "../components/activity/CategorySelector.tsx";
@@ -13,7 +15,7 @@ export function validateRequiredFields(state: FormState, formData: FormData) {
         .forEach(field => {
             const fieldValue = formData.get(field.id);
 
-            if (!fieldValue || fieldValue.toString().trim() === '') {
+            if (_isEmpty(fieldValue)) {
                 field.addError('Please enter a value.');
             }
         })
@@ -21,6 +23,26 @@ export function validateRequiredFields(state: FormState, formData: FormData) {
 
 export function getTextValue(formField: InputTextFormField, formData: FormData): string | undefined {
     return formData.get(formField.id) as string | undefined;
+}
+
+export function getNumberValue(formField: InputNumberFormField, formData: FormData): number | undefined {
+    const fieldValue = formData.get(formField.id) as string | undefined;
+
+    if (_isEmpty(fieldValue)) {
+        return undefined;
+    }
+
+    return Number(fieldValue);
+}
+
+export function getDateValue(formField: InputDateFormField, formData: FormData): Date | undefined {
+    const fieldValue = formData.get(formField.id) as string | undefined;
+
+    if (_isEmpty(fieldValue)) {
+        return undefined;
+    }
+
+    return new Date(fieldValue as string);
 }
 
 export function getMeasureUnitValue(formField: MeasureUnitField, formData: FormData): MeasureUnit {
@@ -33,4 +55,8 @@ export function getSubCategoryValue(formField: CategoryFormField, formData: Form
 
 export function getExerciseTagsValue(formField: ExerciseTagFormField, formData: FormData): ExerciseTag[] {
     return ((formData.get(formField.id) || '') as string).split(',') as ExerciseTag[];
+}
+
+function _isEmpty(fieldValue: File | string | null | undefined) {
+    return !fieldValue || fieldValue.toString().trim() === '';
 }

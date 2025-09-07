@@ -14,7 +14,7 @@ type Props = {
 export function ExerciseRecordsGroupView({records, exercise}: Props) {
     return <Stack spacing={2}>
         <div>
-            <ExerciseRecordsTable records={records} exercise={exercise}/>
+            <ExerciseRecordsTable groupRecords={records} exercise={exercise}/>
         </div>
         {(!!records.lastRecord()) && <Box>
             <h3>Compute % of KG</h3>

@@ -8,7 +8,7 @@ export class UserExerciseRecords {
 
         Object.keys(dto || {})
             .map(group => Number(group))
-            .forEach((group) => groups.set(group, UserExerciseGroupRecords.fromDto(dto[group])));
+            .forEach((group) => groups.set(group, UserExerciseGroupRecords.fromDto(group, dto[group])));
 
         return new UserExerciseRecords(groups);
     }
@@ -27,7 +27,7 @@ export class UserExerciseRecords {
         const records = new Map();
 
         for (let i = 0; i < groups.length; i++) {
-            records.set(groups[i], new UserExerciseGroupRecords([]));
+            records.set(groups[i], new UserExerciseGroupRecords(groups[i], []));
         }
 
         return new UserExerciseRecords(records);

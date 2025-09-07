@@ -4,10 +4,10 @@ import FormControl from "@mui/material/FormControl";
 import {MobileDatePicker} from "@mui/x-date-pickers";
 import {FormHelperText} from "@mui/material";
 
-export type DateFormField = FormField<Date | undefined>;
+export type InputDateFormField = FormField<Date | undefined>;
 
 type Props = {
-    formField: DateFormField,
+    formField: InputDateFormField,
 };
 
 export function DatePicker({formField}: Props): ReactElement {

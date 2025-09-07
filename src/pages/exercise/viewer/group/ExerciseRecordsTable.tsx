@@ -14,14 +14,16 @@ import {Exercise} from "../../../../model/exercise/exercise.ts";
 import {useActionState} from "react";
 import {FormState} from "../../../../model/core/form/form-state.ts";
 import {FormField} from "../../../../model/core/form/form-field.ts";
-import {validateRequiredFields} from "../../../../utils/form-utils.ts";
+import {getDateValue, getNumberValue, validateRequiredFields} from "../../../../utils/form-utils.ts";
+import {UserRecord} from "../../../../model/record/user-record.tsx";
+import {USER_RECORDS_SERVICE} from "../../../../services/user-records-service.ts";
 
 type Props = {
-    records: UserExerciseGroupRecords,
+    groupRecords: UserExerciseGroupRecords,
     exercise: Exercise,
 };
 
-export function ExerciseRecordsTable({records, exercise}: Props) {
+export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
     const dateField = new FormField<Date | undefined>('date', undefined, undefined);
     const valueField = new FormField<number | undefined>('value', 'Value', undefined);
     const originalSaveState = FormState.create([dateField, valueField]);
@@ -32,15 +34,11 @@ export function ExerciseRecordsTable({records, exercise}: Props) {
         validateRequiredFields(newState, formData);
 
         if (newState.isSuccessful) {
-            console.log(formData.get('date'), formData.get('value'));
+            const newRecord = new UserRecord(getNumberValue(valueField, formData) as number, getDateValue(dateField, formData) as Date);
 
-            // exercise.comment = getTextValue(commentField, formData);
-            // exercise.unit = getMeasureUnitValue(measureUnitField, formData);
-            // exercise.subCategory = getSubCategoryValue(categoryField, formData);
-            // exercise.tags = getExerciseTagsValue(tagsField, formData);
+            await USER_RECORDS_SERVICE.addUserRecord(exercise.id, groupRecords, newRecord);
 
-
-            // TODO handle
+            // TODO handle refresh
         }
 
         return newState;
@@ -62,7 +60,7 @@ export function ExerciseRecordsTable({records, exercise}: Props) {
                     <TableBody>
                         <NewRecordRow dateField={dateField} valueField={valueField}/>
 
-                        {records.records
+                        {groupRecords.records
                             .map((record, i) => <ExistingRecordRow key={i} record={record} exercise={exercise}/>)}
                     </TableBody>
                 </Table>

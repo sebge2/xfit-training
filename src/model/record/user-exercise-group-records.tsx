@@ -3,9 +3,10 @@ import {UserRecord} from "./user-record.tsx";
 
 export class UserExerciseGroupRecords {
 
-    static fromDto(dto: UserExerciseGroupRecordsDto): UserExerciseGroupRecords {
+    static fromDto(id: number, dto: UserExerciseGroupRecordsDto): UserExerciseGroupRecords {
         return new UserExerciseGroupRecords(
-            (dto.records || []).map(record => UserRecord.fromDto(record))
+            id,
+            (dto?.records || []).map(record => UserRecord.fromDto(record))
         );
     }
 
@@ -16,6 +17,7 @@ export class UserExerciseGroupRecords {
     }
 
     constructor(
+        public readonly id: number,
         public readonly records: UserRecord[],
     ) {
     }
@@ -24,5 +26,11 @@ export class UserExerciseGroupRecords {
         return (this.records.length > 0)
             ? this.records[this.records.length - 1]
             : undefined;
+    }
+
+    addRecord(record: UserRecord) {
+        this.records.push(record);
+
+        this.records.sort((a, b) => (a.date.getTime() - b.date.getTime()) * -1);
     }
 }
