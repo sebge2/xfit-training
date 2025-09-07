@@ -57,11 +57,11 @@ export function ExerciseMetadataEditor() {
         return newState;
     }
 
-    const [, formAction] = useActionState<FormState, FormData>(onSave, originalFormState);
-
     function onCancel() {
         navigate("..?tabIndex=0", {replace: true}); // TODO move to route utils
     }
+
+    const [, formAction] = useActionState<FormState, FormData>(onSave, originalFormState);
 
     return <form action={formAction}>
         <Stack spacing={4}>

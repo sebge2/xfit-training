@@ -4,7 +4,7 @@ export class FormField<T> {
 
     constructor(
         public readonly id: string,
-        public readonly label: string,
+        public readonly label: string | undefined,
         public readonly defaultValue: T,
         public readonly required: boolean = false,
     ) {

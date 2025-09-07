@@ -3,7 +3,7 @@ import TableRow from '@mui/material/TableRow';
 import {RecordValueViewer} from "../../../../components/activity/RecordValueViewer.tsx";
 import {UserRecord} from "../../../../model/record/user-record.tsx";
 import {Exercise} from "../../../../model/exercise/exercise.ts";
-import {DeleteRowButton} from "../../../../components/core/table/DeleteRowButton.tsx";
+import {DeleteButton} from "../../../../components/core/buttton/DeleteButton.tsx";
 
 type Props = {
     record: UserRecord,
@@ -22,7 +22,10 @@ export function ExistingRecordRow({record, exercise}: Props) {
                 <RecordValueViewer value={record.value} unit={exercise.unit}/>
             </TableCell>
             <TableCell align="left">
-                <DeleteRowButton confirmationText="Are you sure you want to delete this record?" onDelete={deleteRecord}/>
+                <DeleteButton confirmationText="Are you sure you want to delete this record?"
+                              iconButton={true}
+                              onDelete={deleteRecord}
+                              size="small"/>
             </TableCell>
         </TableRow>
     </>;
