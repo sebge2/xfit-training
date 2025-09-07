@@ -6,40 +6,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {MeasureUnit} from "../../../../model/exercise/measure-unit.ts";
-import {RecordValueViewer} from "../../../../components/activity/RecordValueViewer.tsx";
-import {IconButton, Input, InputAdornment} from "@mui/material";
-import {MobileDatePicker} from "@mui/x-date-pickers";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import SaveIcon from '@mui/icons-material/Save';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {ConfirmationDialog} from "../../../../components/core/interaction/ConfirmationDialog.tsx";
-import {useState} from "react";
+import {NewRecordRow} from "./NewRecordRow.tsx";
+import {ExistingRecordRow} from "./ExistingRecordRow.tsx";
+import {Exercise} from "../../../../model/exercise/exercise.ts";
 
 type Props = {
     records: UserExerciseGroupRecords,
-    unit: MeasureUnit,
+    exercise: Exercise,
 };
 
-export function ExerciseRecordsTable({records, unit}: Props) {
-    const [recordIdToDelete, setRecordIdToDelete] = useState<number>(-1);
-
-    function cancelDeleteRecord() {
-        setRecordIdToDelete(-1);
-    }
-
-    function deleteRecord() {
-        // TODO
-        setRecordIdToDelete(-1);
-    }
-
+export function ExerciseRecordsTable({records, exercise}: Props) {
     return <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <ConfirmationDialog text={"Are you sure you want to delete this record?"}
-                            open={recordIdToDelete  >= 0}
-                            onOk={deleteRecord}
-                            onCancel={cancelDeleteRecord}/>
-
         <TableContainer component={Paper}>
             <Table size="small" aria-label="My records">
                 <TableHead>
@@ -50,76 +29,9 @@ export function ExerciseRecordsTable({records, unit}: Props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow
-                        key="add"
-                        sx={{
-                            backgroundColor: 'grey.100',
-                        }}
-                    >
-                        <TableCell align="left">
-                            <MobileDatePicker
-                                format="YYYY-MM-DD"
-                                slotProps={{
-                                    textField: {
-                                        sx: {
-                                            padding: 0,
-                                            '> .MuiPickersInputBase-root': {
-                                                height: '2rem',
-                                                width: '8.8rem',
-                                                padding: '0.5rem',
-                                                marginLeft: '-0.5rem',
-                                            }
-                                        }
-                                    },
+                    <NewRecordRow/>
 
-                                    openPickerButton: {
-                                        sx: {
-                                            '& .MuiSvgIcon-root': {
-                                                fontSize: '1rem'
-                                            },
-                                            '& .MuiInputAdornment-outlined': {
-                                                margin: 0,
-                                            }
-                                        },
-                                    }
-                                }}
-                            />
-                        </TableCell>
-                        <TableCell align="left">
-                            <Input
-                                id="value"
-                                endAdornment={<InputAdornment position="end">kg</InputAdornment>}
-                                type="number"
-                                size="small"
-                                sx={{minWidth: '4rem'}}
-                                inputProps={{
-                                    'aria-label': 'value',
-                                }}
-                            />
-                        </TableCell>
-                        <TableCell align="left">
-                            <IconButton aria-label="save" size="small">
-                                <SaveIcon/>
-                            </IconButton>
-                        </TableCell>
-                    </TableRow>
-
-                    {records.records.map((record, i) => (
-                        <TableRow
-                            key={i}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                        >
-                            <TableCell align="left">{record.date.toDateString()}</TableCell>
-                            <TableCell align="left">
-                                <RecordValueViewer value={record.value} unit={unit}/>
-                            </TableCell>
-                            <TableCell align="left">
-                                <IconButton aria-label="save" size="small">
-                                    <DeleteIcon onClick={() => setRecordIdToDelete(i)}/>
-                                </IconButton>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {records.records.map((record, i) => <ExistingRecordRow key={i} record={record} exercise={exercise}/>)}
                 </TableBody>
             </Table>
         </TableContainer>

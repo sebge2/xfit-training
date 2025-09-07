@@ -12,10 +12,12 @@ type ExerciseRecordsTabsProps = {
     tabs: TabDescriptor[],
 };
 
-export function ExerciseRecordsTabs({tabs}: ExerciseRecordsTabsProps) {
-    const [searchParams] = useSearchParams();
+const TAB_QUERY_PARAM = 'tabIndex';
 
-    const selectedTabFromParam = searchParams.get('tabIndex');
+export function ExerciseRecordsTabs({tabs}: ExerciseRecordsTabsProps) {
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const selectedTabFromParam = searchParams.get(TAB_QUERY_PARAM);
 
     const [selectedTab, setSelectedTab] = React.useState(
         selectedTabFromParam || tabs.map((tab, index) => (tab.defaultSelected) ? index.toString() : undefined)
@@ -23,12 +25,15 @@ export function ExerciseRecordsTabs({tabs}: ExerciseRecordsTabsProps) {
             .find(() => true) || 0,
     );
 
-    // TODO handle change in tab
+    function onTabChange(_: React.SyntheticEvent, newValue: string) {
+        setSelectedTab(newValue);
+        setSearchParams({[TAB_QUERY_PARAM]: newValue});
+    }
 
     return <Box sx={{width: '100%', typography: 'body1'}}>
         <TabContext value={selectedTab}>
             <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                <TabList onChange={(_: React.SyntheticEvent, newValue: string) => setSelectedTab(newValue)}
+                <TabList onChange={onTabChange}
                          aria-label="My Records"
                          variant="scrollable"
                          scrollButtons="auto">

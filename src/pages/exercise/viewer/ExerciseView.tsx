@@ -34,7 +34,7 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
                     icon: undefined,
                     label: `${recordsToUse.groupKeys[i]} REP`,
                     defaultSelected: i == 0,
-                    content: <ExerciseRecordsGroupView unit={exercise.unit}
+                    content: <ExerciseRecordsGroupView exercise={exercise}
                                                        records={recordsToUse.group(recordsToUse.groupKeys[i])}/>
                 })
             }

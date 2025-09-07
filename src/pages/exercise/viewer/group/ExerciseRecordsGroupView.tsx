@@ -2,24 +2,24 @@ import {UserExerciseGroupRecords} from "../../../../model/record/user-exercise-g
 import {ExerciseRecordsTable} from "./ExerciseRecordsTable.tsx";
 import {ExerciseRecordsEvolution} from "./ExerciseRecordsEvolution.tsx";
 import {WeightCalculator} from "../../../../components/activity/WeightCalculator.tsx";
-import {MeasureUnit} from "../../../../model/exercise/measure-unit.ts";
 import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
+import {Exercise} from "../../../../model/exercise/exercise.ts";
 
 type Props = {
     records: UserExerciseGroupRecords,
-    unit: MeasureUnit,
+    exercise: Exercise,
 };
 
-export function ExerciseRecordsGroupView({records, unit}: Props) {
+export function ExerciseRecordsGroupView({records, exercise}: Props) {
     return <Stack spacing={2}>
         <div>
-            <ExerciseRecordsTable records={records} unit={unit}/>
+            <ExerciseRecordsTable records={records} exercise={exercise}/>
         </div>
         {(!!records.lastRecord()) && <Box>
             <h3>Compute % of KG</h3>
 
-            <WeightCalculator weight={records.lastRecord()?.value || 0} />
+            <WeightCalculator weight={records.lastRecord()?.value || 0}/>
         </Box>}
         {(records.records.length > 0) && <Box>
             <h3>Evolution</h3>
