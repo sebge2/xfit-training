@@ -1,5 +1,5 @@
-import {ExerciseRecordsTabs} from "./ExerciseRecordsTabs.tsx";
-import {createInfoTab, TabDescriptor} from "./tab-descriptor.tsx";
+import {createInfoTab, TabDescriptor} from "../../../model/core/structure/tab-descriptor.tsx";
+import {Tabs} from "../../../components/core/structure/Tabs.tsx";
 
 export function ExerciseSkeletonPage() {
     const tabs: TabDescriptor[] = [
@@ -12,5 +12,5 @@ export function ExerciseSkeletonPage() {
         }
     ];
 
-    return <ExerciseRecordsTabs tabs={tabs}/>;
+    return <Tabs tabs={tabs}/>;
 }

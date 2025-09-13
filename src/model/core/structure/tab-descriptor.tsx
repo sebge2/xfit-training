@@ -9,11 +9,11 @@ export type TabDescriptor = {
     content: React.ReactNode,
 };
 
-export function createInfoTab(): TabDescriptor {
+export function createInfoTab(selected?: boolean): TabDescriptor {
     return {
         label: undefined,
         icon: <InfoIcon/>,
         content: <Outlet/>,
-        defaultSelected: false,
+        defaultSelected: selected,
     };
 }

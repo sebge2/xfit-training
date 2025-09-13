@@ -3,7 +3,7 @@ import ExercisesPage from "./pages/exercise/exercises/ExercisesPage.tsx";
 import RootLayout from "./pages/RootLayout.tsx";
 import WodSearchPage from "./pages/wod/wods/WodSearchPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
-import WodPage, {sendWod} from "./pages/wod/viewer/WodPage.tsx";
+import WodPage from "./pages/wod/viewer/WodPage.tsx";
 import ExercisePage from "./pages/exercise/viewer/ExercisePage.tsx";
 import WodRunnerPage from "./pages/wod/runner/WodRunnerPage.tsx";
 import SettingsPage from "./pages/settings/SettingsPage.tsx";
@@ -15,6 +15,7 @@ import {Exercise} from "./model/exercise/exercise.ts";
 import {ExerciseMetadataView} from "./pages/exercise/viewer/ExerciseMetadataView.tsx";
 import {ExerciseMetadataEditor} from "./pages/exercise/viewer/ExerciseMetadataEditor.tsx";
 import {Wod} from "./model/wod/wod.ts";
+import {WodMetadataView} from "./pages/wod/viewer/WodMetadataView.tsx";
 
 export type Params<Key extends string = string> = {
     readonly [key in Key]: string | undefined;
@@ -97,14 +98,15 @@ export default function App() {
                                     handle: {
                                         pageName: ({data}: { data: { wod: Wod } }) => data?.wod?.name,
                                     },
+                                    element: <WodPage/>,
                                     children: [
                                         {
                                             index: true,
-                                            element: <WodPage/>,
-                                            action: sendWod
+                                            element: <WodMetadataView/>,
                                         },
                                         {
                                             path: 'run',
+                                            // TODO
                                             element: <WodRunnerPage/>,
                                         }
                                     ]

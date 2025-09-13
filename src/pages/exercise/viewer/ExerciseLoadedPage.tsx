@@ -1,11 +1,11 @@
 import * as React from "react";
 import {Exercise} from "../../../model/exercise/exercise.ts";
 import {UserExerciseRecords} from "../../../model/record/user-exercise-records.tsx";
-import {ExerciseRecordsTabs} from "./ExerciseRecordsTabs.tsx";
 import {MeasureUnit} from "../../../model/exercise/measure-unit.ts";
-import {createInfoTab, TabDescriptor} from "./tab-descriptor.tsx";
+import {createInfoTab, TabDescriptor} from "../../../model/core/structure/tab-descriptor.tsx";
 import AddIcon from '@mui/icons-material/Add';
 import {ExerciseRecordsGroupView} from "./group/ExerciseRecordsGroupView.tsx";
+import {Tabs} from "../../../components/core/structure/Tabs.tsx";
 
 type ExerciseRecordsProps = {
     exercise: Exercise,
@@ -17,7 +17,7 @@ const MINIMUM_REPS_TAB = 5;
 export function ExerciseLoadedPage({exercise, records}: ExerciseRecordsProps) {
     const tabs: TabDescriptor[] = generateTabs(exercise, records);
 
-    return <ExerciseRecordsTabs tabs={tabs}/>;
+    return <Tabs tabs={tabs}/>;
 }
 
 function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefined): TabDescriptor[] {
