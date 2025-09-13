@@ -1,7 +1,7 @@
 import {ExerciseRecordsTabs} from "./ExerciseRecordsTabs.tsx";
 import {createInfoTab, TabDescriptor} from "./tab-descriptor.tsx";
 
-export function ExerciseSkeletonView() {
+export function ExerciseSkeletonPage() {
     const tabs: TabDescriptor[] = [
         createInfoTab(),
         {

@@ -14,7 +14,7 @@ type ExerciseRecordsProps = {
 
 const MINIMUM_REPS_TAB = 5;
 
-export function ExerciseView({exercise, records}: ExerciseRecordsProps) {
+export function ExerciseLoadedPage({exercise, records}: ExerciseRecordsProps) {
     const tabs: TabDescriptor[] = generateTabs(exercise, records);
 
     return <ExerciseRecordsTabs tabs={tabs}/>;

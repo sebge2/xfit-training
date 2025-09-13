@@ -14,6 +14,7 @@ import {Login} from "./components/core/authentication/Login.tsx";
 import {Exercise} from "./model/exercise/exercise.ts";
 import {ExerciseMetadataView} from "./pages/exercise/viewer/ExerciseMetadataView.tsx";
 import {ExerciseMetadataEditor} from "./pages/exercise/viewer/ExerciseMetadataEditor.tsx";
+import {Wod} from "./model/wod/wod.ts";
 
 export type Params<Key extends string = string> = {
     readonly [key in Key]: string | undefined;
@@ -88,10 +89,13 @@ export default function App() {
                                 {
                                     id: 'wod-details',
                                     path: ':id',
-                                    loader: ({params}: { params: Params }) => {
+                                    loader: async ({params}: { params: Params }) => {
                                         return {
-                                            wod: WOD_SERVICE.findById(params.id as string)
+                                            wod: await WOD_SERVICE.findById(params.id as string)
                                         }
+                                    },
+                                    handle: {
+                                        pageName: ({data}: { data: { wod: Wod } }) => data?.wod?.name,
                                     },
                                     children: [
                                         {
