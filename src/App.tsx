@@ -5,7 +5,6 @@ import WodSearchPage from "./pages/wod/wods/WodSearchPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import WodPage from "./pages/wod/viewer/WodPage.tsx";
 import ExercisePage from "./pages/exercise/viewer/ExercisePage.tsx";
-import WodRunnerPage from "./pages/wod/runner/WodRunnerPage.tsx";
 import SettingsPage from "./pages/settings/SettingsPage.tsx";
 import {WOD_SERVICE} from "./services/wod-service.ts";
 import {EXERCISE_SERVICE} from "./services/exercise-service.ts";
@@ -16,6 +15,7 @@ import {ExerciseMetadataView} from "./pages/exercise/viewer/ExerciseMetadataView
 import {ExerciseMetadataEditor} from "./pages/exercise/viewer/ExerciseMetadataEditor.tsx";
 import {Wod} from "./model/wod/wod.ts";
 import {WodMetadataView} from "./pages/wod/viewer/WodMetadataView.tsx";
+import {WodMetadataEditor} from "./pages/wod/viewer/WodMetadataEditor.tsx";
 
 export type Params<Key extends string = string> = {
     readonly [key in Key]: string | undefined;
@@ -105,9 +105,8 @@ export default function App() {
                                             element: <WodMetadataView/>,
                                         },
                                         {
-                                            path: 'run',
-                                            // TODO
-                                            element: <WodRunnerPage/>,
+                                            path: 'edit',
+                                            element: <WodMetadataEditor/>,
                                         }
                                     ]
                                 },

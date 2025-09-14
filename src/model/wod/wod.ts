@@ -2,6 +2,7 @@ import {Activity} from "./activity/activity.ts";
 import {WodDto} from "../dto/wod/wod.dto.ts";
 import {mapActivityFromDto, mapActivityToDto} from "./activity/activity-utils.ts";
 import {WodTag} from "./wod-tag.ts";
+import {MeasureUnit} from "../exercise/measure-unit.ts";
 
 export class Wod {
 
@@ -10,6 +11,7 @@ export class Wod {
             id,
             mapActivityFromDto(dto.activity),
             dto.name,
+            dto.unit,
             dto.tags || [],
             dto.comment,
         );
@@ -18,6 +20,7 @@ export class Wod {
     static toDto(wod: Wod): WodDto {
         return {
             name: wod.name,
+            unit: wod.unit,
             activity: mapActivityToDto(wod.activity),
             tags: wod.tags,
             comment: wod.comment,
@@ -28,6 +31,7 @@ export class Wod {
         public id: string | null,
         public activity: Activity,
         public name: string,
+        public unit: MeasureUnit,
         public tags: WodTag[],
         public comment: string | null,
     ) {

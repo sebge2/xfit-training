@@ -6,4 +6,10 @@ export enum Permission {
 
     DELETE_EXERCISE = 'DELETE_EXERCISE',
 
+    ADD_WOD = 'ADD_WOD',
+
+    MODIFY_WOD = 'MODIFY_WOD',
+
+    DELETE_WOD = 'DELETE_WOD',
+
 }
