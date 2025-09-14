@@ -7,6 +7,7 @@ import {Permission} from "../../../model/auth/permission.ts";
 import {EditButton} from "../../../components/core/buttton/EditButton.tsx";
 import {DeleteButton} from "../../../components/core/buttton/DeleteButton.tsx";
 import {WodTags} from "../../../components/activity/WodTags.tsx";
+import {ActionsContainer} from "../../../components/core/interaction/ActionsContainer.tsx";
 
 export function WodMetadataView() {
     const routeData = useRouteLoaderData('wod-details') as { wod: Wod };
@@ -44,15 +45,12 @@ export function WodMetadataView() {
             <WodTags tags={wod.tags}/>
         </Box>
 
-        {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_WOD, Permission.DELETE_WOD) &&
-            <Box component="section">
-                <Box sx={{display: 'flex', gap: '2rem', marginTop: '2rem'}}>
-                    {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.DELETE_WOD) &&
-                        <DeleteButton confirmationText="Are you sure you want to delete this wod?"
-                                      onDelete={onDelete}/>}
-                    {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_WOD) &&
-                        <EditButton onEdit={onEdit}/>}
-                </Box>
-            </Box>}
+        <ActionsContainer>
+            {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.DELETE_WOD) &&
+                <DeleteButton confirmationText="Are you sure you want to delete this wod?"
+                              onDelete={onDelete}/>}
+            {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_WOD) &&
+                <EditButton onEdit={onEdit}/>}
+        </ActionsContainer>
     </>;
 }

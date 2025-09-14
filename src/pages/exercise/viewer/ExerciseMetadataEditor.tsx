@@ -1,16 +1,12 @@
 import {useNavigate, useRouteLoaderData} from "react-router-dom";
-import Box from "@mui/material/Box";
 import {Exercise} from "../../../model/exercise/exercise.ts";
 import {UserExerciseRecords} from "../../../model/record/user-exercise-records.tsx";
-import {AUTHENTICATION_SERVICE} from "../../../services/authentication-service.ts";
-import {Permission} from "../../../model/auth/permission.ts";
 import {MeasureUnitSelector} from "../../../components/activity/MeasureUnitSelector.tsx";
 import {CategorySelector} from "../../../components/activity/CategorySelector.tsx";
 import {ExerciseTag} from "../../../model/exercise/exercise-tag.ts";
 import {useActionState} from "react";
 import {FormState} from "../../../model/core/form/form-state.ts";
 import {InputText} from "../../../components/core/form/InputText.tsx";
-import Stack from '@mui/material/Stack';
 import {
     getExerciseTagsValue,
     getMeasureUnitValue,
@@ -25,6 +21,8 @@ import {FormField} from "../../../model/core/form/form-field.ts";
 import {MeasureUnit} from "../../../model/exercise/measure-unit.ts";
 import {SubCategory} from "../../../model/exercise/sub-category.ts";
 import {ExerciseTagSelector} from "../../../components/activity/ExerciseTagSelector.tsx";
+import {ActionsContainer} from "../../../components/core/interaction/ActionsContainer.tsx";
+import {FormStack} from "../../../components/core/form/FormStack.tsx";
 
 export function ExerciseMetadataEditor() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
@@ -64,7 +62,7 @@ export function ExerciseMetadataEditor() {
     const [, formAction] = useActionState<FormState, FormData>(onSave, originalFormState);
 
     return <form action={formAction}>
-        <Stack spacing={4}>
+        <FormStack>
             <InputText formField={commentField}/>
 
             <MeasureUnitSelector formField={measureUnitField}/>
@@ -72,14 +70,11 @@ export function ExerciseMetadataEditor() {
             <CategorySelector formField={categoryField}/>
 
             <ExerciseTagSelector formField={tagsField}/>
-        </Stack>
+        </FormStack>
 
-        {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_EXERCISE) &&
-            <Box component="section">
-                <Box sx={{display: 'flex', gap: '2rem', marginTop: '2rem'}}>
-                    <CancelFormButton onCancel={onCancel}/>
-                    <SaveFormButton/>
-                </Box>
-            </Box>}
+        <ActionsContainer>
+            <CancelFormButton onCancel={onCancel}/>
+            <SaveFormButton/>
+        </ActionsContainer>
     </form>;
 }

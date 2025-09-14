@@ -10,6 +10,7 @@ import {useNavigate, useRouteLoaderData} from "react-router-dom";
 import {UserExerciseRecords} from "../../../model/record/user-exercise-records.tsx";
 import {EditButton} from "../../../components/core/buttton/EditButton.tsx";
 import {DeleteButton} from "../../../components/core/buttton/DeleteButton.tsx";
+import {ActionsContainer} from "../../../components/core/interaction/ActionsContainer.tsx";
 
 export function ExerciseMetadataView() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
@@ -26,6 +27,11 @@ export function ExerciseMetadataView() {
     }
 
     return <>
+        {exercise.name && <Box component="section">
+            <h3>Name</h3>
+
+            <p>{exercise.name}</p>
+        </Box>}
         {exercise.comment && <Box component="section">
             <h3>Comment</h3>
 
@@ -48,15 +54,12 @@ export function ExerciseMetadataView() {
             <ExerciseTags tags={exercise.tags}/>
         </Box>
 
-        {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_EXERCISE, Permission.DELETE_EXERCISE) &&
-            <Box component="section">
-                <Box sx={{display: 'flex', gap: '2rem', marginTop: '2rem'}}>
-                    {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.DELETE_EXERCISE) &&
-                        <DeleteButton confirmationText="Are you sure you want to delete this exercise?"
-                                      onDelete={onDelete}/>}
-                    {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_EXERCISE) &&
-                        <EditButton onEdit={onEdit}/>}
-                </Box>
-            </Box>}
+        <ActionsContainer>
+            {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.DELETE_EXERCISE) &&
+                <DeleteButton confirmationText="Are you sure you want to delete this exercise?"
+                              onDelete={onDelete}/>}
+            {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.MODIFY_EXERCISE) &&
+                <EditButton onEdit={onEdit}/>}
+        </ActionsContainer>
     </>;
 }
