@@ -52,7 +52,7 @@ export class WodService {
 
     async update(wod: Wod): Promise<Wod | null> {
         await updateDoc(
-            doc(db, WODS_COLLECTION, wod.id as string),
+            this._getWodReference(wod),
             Wod.toDto(wod) as UpdateData<WodDto>
         );
 
@@ -61,6 +61,10 @@ export class WodService {
 
     async delete(id: string): Promise<void> {
         return await deleteDoc(doc(db, WODS_COLLECTION, id));
+    }
+
+    private _getWodReference(wod: Wod) {
+        return doc(db, WODS_COLLECTION, wod.id as string);
     }
 
     private _mapWodFromDto(snapshot: DocumentSnapshot<WodDto>): Wod | null {

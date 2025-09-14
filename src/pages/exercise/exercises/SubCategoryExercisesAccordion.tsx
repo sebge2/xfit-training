@@ -1,17 +1,13 @@
 import {SubCategoryExercises} from "../../../model/exercise/sub-category-exercises.ts";
 import {SUB_CATEGORY_LABELS} from "../../../model/exercise/sub-category.ts";
-import {AUTHENTICATION_SERVICE} from "../../../services/authentication-service.ts";
-import {Permission} from "../../../model/auth/permission.ts";
 import {ActivityIcon} from "../../../components/activity/ActivityIcon.tsx";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionActions from '@mui/material/AccordionActions';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useMediaQuery} from '@mui/material';
@@ -50,8 +46,5 @@ export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubC
                 )}
             </List>
         </AccordionDetails>
-        <AccordionActions>
-            {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.ADD_EXERCISE) && <Button>Add</Button>}
-        </AccordionActions>
     </Accordion>;
 }

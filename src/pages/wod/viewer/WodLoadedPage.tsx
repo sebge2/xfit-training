@@ -1,7 +1,7 @@
 import {createInfoTab, TabDescriptor} from "../../../model/core/structure/tab-descriptor.tsx";
 import {Tabs} from "../../../components/core/structure/Tabs.tsx";
-import {Outlet} from "react-router-dom";
 import WodRunnerPage from "../runner/WodRunnerPage.tsx";
+import {WodRecords} from "./WodRecords.tsx";
 
 export function WodLoadedPage() {
     const tabs: TabDescriptor[] = generateTabs();
@@ -11,7 +11,7 @@ export function WodLoadedPage() {
 
 function generateTabs(): TabDescriptor[] {
     return [
-        createInfoTab( true),
+        createInfoTab(true),
         {
             label: 'Activity',
             icon: undefined,
@@ -21,7 +21,7 @@ function generateTabs(): TabDescriptor[] {
         {
             label: 'Records',
             icon: undefined,
-            content: <Outlet/>,
+            content: <WodRecords/>,
             defaultSelected: false,
         },
     ];

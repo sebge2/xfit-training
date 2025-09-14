@@ -13,6 +13,7 @@ import {CancelFormButton} from "../../../components/core/form/CancelFormButton.t
 import {SaveFormButton} from "../../../components/core/form/SaveFormButton.tsx";
 import {WodTag} from "../../../model/wod/wod-tag.ts";
 import {WodTagSelector} from "../../../components/activity/WodTagSelector.tsx";
+import {WOD_SERVICE} from "../../../services/wod-service.ts";
 
 export function WodMetadataEditor() {
     const routeData = useRouteLoaderData('wod-details') as { wod: Wod };
@@ -37,7 +38,7 @@ export function WodMetadataEditor() {
             wod.unit = getMeasureUnitValue(measureUnitField, formData);
             wod.tags = getWodTagsValue(tagsField, formData);
 
-            //await EXERCISE_SERVICE.update(exercise); // TODO handle error
+            await WOD_SERVICE.update(wod); // TODO handle error
 
             navigate("..?tabIndex=0", {replace: true}); // TODO move to route utils
         }
