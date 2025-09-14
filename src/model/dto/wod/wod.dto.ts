@@ -12,5 +12,5 @@ export interface WodDto {
 
     get tags(): WodTag[];
 
-    get comment(): string | null;
+    get comment(): string | undefined;
 }

@@ -8,6 +8,8 @@ import {CategoryFormField} from "../components/activity/CategorySelector.tsx";
 import {MeasureUnit} from "../model/exercise/measure-unit.ts";
 import {ExerciseTagFormField} from "../components/activity/ExerciseTagSelector.tsx";
 import {ExerciseTag} from "../model/exercise/exercise-tag.ts";
+import {WodTag} from "../model/wod/wod-tag.ts";
+import {WodTagFormField} from "../components/activity/WodTagSelector.tsx";
 
 export function validateRequiredFields(state: FormState, formData: FormData) {
     state.fields
@@ -55,6 +57,10 @@ export function getSubCategoryValue(formField: CategoryFormField, formData: Form
 
 export function getExerciseTagsValue(formField: ExerciseTagFormField, formData: FormData): ExerciseTag[] {
     return ((formData.get(formField.id) || '') as string).split(',') as ExerciseTag[];
+}
+
+export function getWodTagsValue(formField: WodTagFormField, formData: FormData): WodTag[] {
+    return ((formData.get(formField.id) || '') as string).split(',') as WodTag[];
 }
 
 function _isEmpty(fieldValue: File | string | null | undefined) {

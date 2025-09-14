@@ -33,7 +33,7 @@ export class Wod {
         public name: string,
         public unit: MeasureUnit,
         public tags: WodTag[],
-        public comment: string | null,
+        public comment: string | undefined,
     ) {
     }
 }

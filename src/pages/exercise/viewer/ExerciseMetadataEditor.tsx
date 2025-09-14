@@ -30,11 +30,12 @@ export function ExerciseMetadataEditor() {
 
     const navigate = useNavigate();
 
+    const nameField = new FormField<string | undefined>('name', 'Name', exercise.name, true);
     const commentField = new FormField<string | undefined>('comment', 'Comment', exercise.comment);
     const measureUnitField = new FormField<MeasureUnit>('measure-unit', 'Unit', exercise.unit, true);
     const categoryField = new FormField<SubCategory>('category', 'Category', exercise.subCategory, true);
     const tagsField = new FormField<ExerciseTag[]>('tags', 'Tags', exercise.tags, true);
-    const originalFormState = FormState.create([commentField, measureUnitField, categoryField, tagsField]);
+    const originalFormState = FormState.create([nameField, commentField, measureUnitField, categoryField, tagsField]);
 
     async function onSave(prev: FormState, formData: FormData): Promise<FormState> {
         const newState = prev.reset();
@@ -42,6 +43,7 @@ export function ExerciseMetadataEditor() {
         validateRequiredFields(newState, formData);
 
         if (newState.isSuccessful) {
+            exercise.name = getTextValue(nameField, formData) as string;
             exercise.comment = getTextValue(commentField, formData);
             exercise.unit = getMeasureUnitValue(measureUnitField, formData);
             exercise.subCategory = getSubCategoryValue(categoryField, formData);
@@ -63,6 +65,8 @@ export function ExerciseMetadataEditor() {
 
     return <form action={formAction}>
         <FormStack>
+            <InputText formField={nameField}/>
+
             <InputText formField={commentField}/>
 
             <MeasureUnitSelector formField={measureUnitField}/>
