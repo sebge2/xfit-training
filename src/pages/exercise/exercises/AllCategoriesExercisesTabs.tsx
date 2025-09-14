@@ -3,6 +3,10 @@ import {AllCategoriesExercises} from "../../../model/exercise/all-categories-exe
 import TabPanel from '@mui/lab/TabPanel';
 import {MainCategoryExercisesAccordion} from "./MainCategoryExercisesAccordion.tsx";
 import {ExercisesCategoryTabs} from "./ExercisesCategoryTabs.tsx";
+import {ActionsContainer} from "../../../components/core/interaction/ActionsContainer.tsx";
+import {AddButton} from "../../../components/core/buttton/AddButton.tsx";
+import {Permission} from "../../../model/auth/permission.ts";
+import {AUTHENTICATION_SERVICE} from "../../../services/authentication-service.ts";
 
 export function AllCategoriesExercisesTabs({exercises}: { exercises: AllCategoriesExercises }) {
     return <ExercisesCategoryTabs>
@@ -11,6 +15,11 @@ export function AllCategoriesExercisesTabs({exercises}: { exercises: AllCategori
             .map(category =>
                 <TabPanel value={category}>
                     <MainCategoryExercisesAccordion category={exercises.getCategory(category)}/>
+
+                    <ActionsContainer>
+                        {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.ADD_EXERCISE) && <AddButton onAdd={() => {
+                        }}/>}
+                    </ActionsContainer>
                 </TabPanel>
             )}
     </ExercisesCategoryTabs>;
