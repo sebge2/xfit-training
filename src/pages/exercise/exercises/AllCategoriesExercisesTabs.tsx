@@ -7,8 +7,15 @@ import {ActionsContainer} from "../../../components/core/interaction/ActionsCont
 import {AddButton} from "../../../components/core/buttton/AddButton.tsx";
 import {Permission} from "../../../model/auth/permission.ts";
 import {AUTHENTICATION_SERVICE} from "../../../services/authentication-service.ts";
+import {useNavigate} from "react-router-dom";
 
 export function AllCategoriesExercisesTabs({exercises}: { exercises: AllCategoriesExercises }) {
+    const navigate = useNavigate();
+
+    function onNewExercise() {
+        navigate("./new");
+    }
+
     return <ExercisesCategoryTabs>
         {Object.keys(MAIN_CATEGORY_LABELS)
             .map(category => category as MainCategory)
@@ -17,8 +24,8 @@ export function AllCategoriesExercisesTabs({exercises}: { exercises: AllCategori
                     <MainCategoryExercisesAccordion category={exercises.getCategory(category)}/>
 
                     <ActionsContainer>
-                        {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.ADD_EXERCISE) && <AddButton onAdd={() => {
-                        }}/>}
+                        {AUTHENTICATION_SERVICE.currentUserOrFail.hasPermission(Permission.ADD_EXERCISE) &&
+                            <AddButton onAdd={onNewExercise}/>}
                     </ActionsContainer>
                 </TabPanel>
             )}

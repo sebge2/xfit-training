@@ -7,6 +7,7 @@ import ExercisePage from "./viewer/ExercisePage.tsx";
 import {ExerciseMetadataView} from "./viewer/ExerciseMetadataView.tsx";
 import {ExerciseMetadataEditor} from "./viewer/ExerciseMetadataEditor.tsx";
 import {Params} from "../../App.tsx";
+import {ExerciseMetadataCreator} from "./viewer/ExerciseMetadataCreator.tsx";
 
 export const EXERCISES_PATH = '/exercises';;
 
@@ -47,5 +48,13 @@ export const EXERCISE_ROUTE: RouteObject = {
                 }
             ]
         },
+        {
+            id: 'exercise-new',
+            path: 'new',
+            handle: {
+                pageName: 'New',
+            },
+            element: <ExerciseMetadataCreator />,
+        }
     ]
 };

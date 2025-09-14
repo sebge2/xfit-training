@@ -20,6 +20,17 @@ export class Exercise {
         };
     }
 
+    static empty(): Exercise {
+        return new Exercise(
+            "",
+            "",
+            SubCategory.OTHER,
+            [],
+            MeasureUnit.TIME,
+            undefined,
+        );
+    }
+
     constructor(
         public readonly id: string,
         public name: string,
