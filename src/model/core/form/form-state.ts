@@ -15,7 +15,7 @@ export class FormState {
     }
 
     get isSuccessful(): boolean {
-        return this.fields.some(field => field.errors.length === 0);
+        return this.fields.every(field => field.errors.length === 0);
     }
 
     reset(): FormState {

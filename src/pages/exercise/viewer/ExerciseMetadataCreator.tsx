@@ -8,6 +8,7 @@ import {
     getTextValue
 } from "../../../utils/form-utils.ts";
 import {EXERCISE_SERVICE} from "../../../services/exercise-service.ts";
+import Box from "@mui/material/Box";
 
 export function ExerciseMetadataCreator() {
     const navigate = useNavigate();
@@ -38,5 +39,7 @@ export function ExerciseMetadataCreator() {
         navigate("..", {replace: true}); // TODO move to route utils
     }
 
-    return <ExerciseMetadataForm exercise={exercise} onCancel={onCancel} onSave={onSave}/>;
+    return <Box sx={{m: '1rem'}}>
+        <ExerciseMetadataForm exercise={exercise} onCancel={onCancel} onSave={onSave}/>
+    </Box>;
 }
