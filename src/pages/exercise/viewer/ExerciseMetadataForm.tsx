@@ -69,19 +69,19 @@ export function ExerciseMetadataForm({exercise, onSave: onSaveDelegate, onCancel
         onCancelDelegate();
     }
 
-    const [, formAction] = useActionState<FormState, FormData>(onSave, originalFormState);
+    const [state, formAction] = useActionState<FormState, FormData>(onSave, originalFormState);
 
     return <form action={formAction}>
         <FormStack>
-            <InputText formField={nameField}/>
+            <InputText formField={state.fieldById[nameField.id] as FormField<string | undefined>}/>
 
-            <InputText formField={commentField}/>
+            <InputText formField={state.fieldById[commentField.id] as FormField<string | undefined>}/>
 
-            <MeasureUnitSelector formField={measureUnitField}/>
+            <MeasureUnitSelector formField={state.fieldById[measureUnitField.id] as MeasureUnitField}/>
 
-            <CategorySelector formField={categoryField}/>
+            <CategorySelector formField={state.fieldById[categoryField.id] as CategoryFormField}/>
 
-            <ExerciseTagSelector formField={tagsField}/>
+            <ExerciseTagSelector formField={state.fieldById[tagsField.id] as FormField<ExerciseTag[]>}/>
         </FormStack>
 
         <ActionsContainer>
