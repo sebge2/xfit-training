@@ -39,7 +39,7 @@ export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
         if (newState.isSuccessful) {
             const newRecord = new UserRecord(getNumberValue(valueField, formData) as number, getDateValue(dateField, formData) as Date);
 
-            await USER_RECORDS_SERVICE.addUserRecord(exercise.id, groupRecords, newRecord);
+            await USER_RECORDS_SERVICE.addUserRecord(exercise.id as string, groupRecords, newRecord);
 
             await revalidator.revalidate();
 
@@ -50,7 +50,7 @@ export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
     }
 
     async function onDelete(record: UserRecord): Promise<void> {
-        await USER_RECORDS_SERVICE.deleteUserRecord(exercise.id, groupRecords, record);
+        await USER_RECORDS_SERVICE.deleteUserRecord(exercise.id as string, groupRecords, record);
 
         await revalidator.revalidate();
 
