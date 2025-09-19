@@ -1,8 +1,7 @@
-import {Exercise} from "../../../model/exercise/exercise.ts";
 import {FormStack} from "../../../components/core/form/FormStack.tsx";
 import {InputText} from "../../../components/core/form/InputText.tsx";
-import {MeasureUnitSelector} from "../../../components/activity/MeasureUnitSelector.tsx";
-import {CategorySelector} from "../../../components/activity/CategorySelector.tsx";
+import {MeasureUnitField, MeasureUnitSelector} from "../../../components/activity/MeasureUnitSelector.tsx";
+import {CategoryFormField, CategorySelector} from "../../../components/activity/CategorySelector.tsx";
 import {ExerciseTagSelector} from "../../../components/activity/ExerciseTagSelector.tsx";
 import {ActionsContainer} from "../../../components/core/interaction/ActionsContainer.tsx";
 import {CancelFormButton} from "../../../components/core/form/CancelFormButton.tsx";
@@ -18,13 +17,21 @@ import {useActionState} from "react";
 export type ExerciseFormType = {
     nameField: FormField<string | undefined>,
     commentField: FormField<string | undefined>,
-    measureUnitField: FormField<MeasureUnit>,
-    categoryField: FormField<SubCategory>,
+    measureUnitField: MeasureUnitField,
+    categoryField: CategoryFormField,
     tagsField: FormField<ExerciseTag[]>,
 }
 
+export type ExerciseFormInitialValues = {
+    name: string | undefined,
+    comment: string | undefined,
+    unit: MeasureUnit | undefined,
+    subCategory: SubCategory | undefined,
+    tags: ExerciseTag[],
+}
+
 type Props = {
-    exercise: Exercise,
+    exercise: ExerciseFormInitialValues,
     onSave: (formData: FormData, form: ExerciseFormType) => Promise<void>,
     onCancel: () => void,
 };
@@ -32,8 +39,8 @@ type Props = {
 export function ExerciseMetadataForm({exercise, onSave: onSaveDelegate, onCancel: onCancelDelegate}: Props) {
     const nameField = new FormField<string | undefined>('name', 'Name', exercise.name, true);
     const commentField = new FormField<string | undefined>('comment', 'Comment', exercise.comment);
-    const measureUnitField = new FormField<MeasureUnit>('measure-unit', 'Unit', exercise.unit, true);
-    const categoryField = new FormField<SubCategory>('category', 'Category', exercise.subCategory, true);
+    const measureUnitField = new FormField<MeasureUnit | undefined>('measure-unit', 'Unit', exercise.unit, true);
+    const categoryField = new FormField<SubCategory | undefined>('category', 'Category', exercise.subCategory, true);
     const tagsField = new FormField<ExerciseTag[]>('tags', 'Tags', exercise.tags, true);
     const originalFormState = FormState.create([nameField, commentField, measureUnitField, categoryField, tagsField]);
 

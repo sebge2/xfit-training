@@ -20,19 +20,8 @@ export class Exercise {
         };
     }
 
-    static empty(): Exercise {
-        return new Exercise(
-            "",
-            "",
-            SubCategory.OTHER,
-            [],
-            MeasureUnit.TIME,
-            undefined,
-        );
-    }
-
     constructor(
-        public readonly id: string,
+        public id: string | null,
         public name: string,
         public subCategory: SubCategory,
         public tags: ExerciseTag[],

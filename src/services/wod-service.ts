@@ -48,7 +48,7 @@ export class WodService {
         wod.id = docRef.id;
 
         return wod;
-    };
+    }
 
     async update(wod: Wod): Promise<Wod | null> {
         await updateDoc(

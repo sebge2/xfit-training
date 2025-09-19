@@ -9,7 +9,7 @@ import {FormHelperText, ListSubheader} from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 import {FormField} from "../../model/core/form/form-field.ts";
 
-export type CategoryFormField = FormField<SubCategory>;
+export type CategoryFormField = FormField<SubCategory | undefined>;
 
 type Props = {
     formField: CategoryFormField,

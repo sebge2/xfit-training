@@ -1,4 +1,14 @@
-import {collection, doc, DocumentSnapshot, getDoc, getDocs, updateDoc, serverTimestamp, UpdateData} from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    doc,
+    DocumentSnapshot,
+    getDoc,
+    getDocs,
+    serverTimestamp,
+    UpdateData,
+    updateDoc
+} from "firebase/firestore";
 import {db} from "../firebase";
 import {Exercise} from "../model/exercise/exercise.ts";
 import {ExerciseDto} from "../model/dto/exercise/exercise.dto.ts";
@@ -30,10 +40,10 @@ export class ExerciseService {
 
         exercises
             .forEach(exercise => allCategories
-            .getCategory(exercise.category)
-            .getSubCategory(exercise.subCategory)
-            .addExercise(exercise)
-        );
+                .getCategory(exercise.category)
+                .getSubCategory(exercise.subCategory)
+                .addExercise(exercise)
+            );
 
         return allCategories;
     }
@@ -48,9 +58,17 @@ export class ExerciseService {
         return this._mapFromDto(snapshot as DocumentSnapshot<ExerciseDto>);
     }
 
-    async update(exercise: Exercise): Promise<Exercise>{
+    async create(exercise: Exercise): Promise<Exercise | null> {
+        const docRef = await addDoc(collection(db, EXERCISES_COLLECTION), Exercise.toDto(exercise));
+
+        exercise.id = docRef.id;
+
+        return exercise;
+    }
+
+    async update(exercise: Exercise): Promise<Exercise> {
         await updateDoc(
-            this._getExerciseRef(exercise.id),
+            this._getExerciseRef(exercise.id as string),
             {
                 ...Exercise.toDto(exercise),
                 updatedAt: serverTimestamp()
