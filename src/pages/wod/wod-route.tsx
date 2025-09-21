@@ -6,6 +6,7 @@ import WodPage from "./viewer/WodPage.tsx";
 import {WodMetadataView} from "./viewer/WodMetadataView.tsx";
 import {WodMetadataEditor} from "./viewer/WodMetadataEditor.tsx";
 import {Params} from "../../App.tsx";
+import {WodMetadataCreator} from "./viewer/WodMetadataCreator.tsx";
 
 export const WOD_ROUTE: RouteObject = {
     path: 'wods',
@@ -43,5 +44,13 @@ export const WOD_ROUTE: RouteObject = {
                 }
             ]
         },
+        {
+            id: 'wod-new',
+            path: 'new',
+            handle: {
+                pageName: 'New',
+            },
+            element: <WodMetadataCreator />,
+        }
     ]
 };
