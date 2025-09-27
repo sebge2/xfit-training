@@ -43,6 +43,10 @@ export class UserExerciseRecords {
     }
 
     group(group: number): UserExerciseGroupRecords {
+        if(!this.groups.has(group)){
+            this.groups.set(group, new UserExerciseGroupRecords(group, []));
+        }
+
         return this.groups.get(group)!;
     }
 

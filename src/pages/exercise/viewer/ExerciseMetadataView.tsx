@@ -11,6 +11,7 @@ import {UserExerciseRecords} from "../../../model/record/user-exercise-records.t
 import {EditButton} from "../../../components/core/buttton/EditButton.tsx";
 import {DeleteButton} from "../../../components/core/buttton/DeleteButton.tsx";
 import {ActionsContainer} from "../../../components/core/interaction/ActionsContainer.tsx";
+import {EXERCISE_SERVICE} from "../../../services/exercise-service.ts";
 
 export function ExerciseMetadataView() {
     const routeData = useRouteLoaderData('exercise-details') as { exercise: Exercise, records: UserExerciseRecords };
@@ -18,8 +19,9 @@ export function ExerciseMetadataView() {
 
     const navigate = useNavigate();
 
-    function onDelete() {
-        // TODO
+    async function onDelete() {
+        await EXERCISE_SERVICE.delete(exercise.id as string);
+        navigate("../"); // TODO move to route utils
     }
 
     function onEdit() {

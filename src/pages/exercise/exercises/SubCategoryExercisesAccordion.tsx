@@ -14,6 +14,7 @@ import {useMediaQuery} from '@mui/material';
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {ExerciseTags} from "../../../components/activity/ExerciseTags.tsx";
+import {Exercise} from "../../../model/exercise/exercise.ts";
 
 export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubCategoryExercises }) {
     const [expanded, setExpanded] = useState(subCategory.exercises.length > 0);
@@ -31,7 +32,9 @@ export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubC
 
         <AccordionDetails>
             <List>
-                {subCategory.exercises.map((exercise) =>
+                {subCategory.exercises
+                    .sort((first: Exercise, second: Exercise) => first.name.localeCompare(second.name))
+                    .map((exercise) =>
                     <ListItemButton key={exercise.id} onClick={() => navigate(exercise.id as string, {})}>
                         <ListItemIcon>
                             <ActivityIcon category={subCategory.category}/>

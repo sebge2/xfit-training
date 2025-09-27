@@ -1,4 +1,4 @@
-import {doc, getDoc, UpdateData, updateDoc} from "firebase/firestore";
+import {setDoc, doc, getDoc, UpdateData, updateDoc} from "firebase/firestore";
 import {db} from "../firebase.ts";
 import {UserExerciseRecordsDto} from "../model/dto/record/user-exercise-records.dto.ts";
 import {UserExerciseRecords} from "../model/record/user-exercise-records.tsx";
@@ -18,11 +18,17 @@ export class UserRecordsService {
     }
 
     async addUserRecord(exerciseId: string, group: UserExerciseGroupRecords, newRecord: UserRecord): Promise<void> {
+        const exists = await this._isRecordExist(exerciseId);
+
         const userRecords: UserExerciseRecords = await this.findForCurrentUserAndExercise(exerciseId);
 
         userRecords.group(group.id).addRecord(newRecord);
 
-        await this._updateRecords(exerciseId, userRecords);
+        if(exists) {
+            await this._updateRecords(exerciseId, userRecords);
+        } else {
+            await this._saveRecords(exerciseId, userRecords);
+        }
     }
 
     async deleteUserRecord(exerciseId: string, group: UserExerciseGroupRecords, record: UserRecord): Promise<void> {
@@ -37,11 +43,22 @@ export class UserRecordsService {
         return doc(db, RECORDS_COLLECTION, AUTHENTICATION_SERVICE.currentUserOrFail.email, 'exercises', exerciseId);
     }
 
+    private async _saveRecords(exerciseId: string, userRecords: UserExerciseRecords) {
+        await setDoc(
+            this._getRef(exerciseId),
+            UserExerciseRecords.toDto(userRecords) as UpdateData<ExerciseDto>
+        );
+    }
+
     private async _updateRecords(exerciseId: string, userRecords: UserExerciseRecords) {
         await updateDoc(
             this._getRef(exerciseId),
             UserExerciseRecords.toDto(userRecords) as UpdateData<ExerciseDto>
         );
+    }
+
+    private async _isRecordExist(exerciseId: string): Promise<boolean> {
+        return (await getDoc(this._getRef(exerciseId))).exists();
     }
 }
 

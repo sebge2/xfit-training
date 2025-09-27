@@ -1,6 +1,6 @@
 import {
     addDoc,
-    collection,
+    collection, deleteDoc,
     doc,
     DocumentSnapshot,
     getDoc,
@@ -76,6 +76,10 @@ export class ExerciseService {
         );
 
         return exercise;
+    }
+
+    async delete(id: string): Promise<void> {
+        return await deleteDoc(this._getExerciseRef(id));
     }
 
     private _mapFromDto(snapshot: DocumentSnapshot<ExerciseDto>): Exercise | null {
