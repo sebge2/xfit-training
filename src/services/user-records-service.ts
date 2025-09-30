@@ -22,7 +22,7 @@ export class UserRecordsService {
 
         const userRecords: UserExerciseRecords = await this.findForCurrentUserAndExercise(exerciseId);
 
-        userRecords.group(group.id).addRecord(newRecord);
+        userRecords.addRecord(group.id, newRecord);
 
         if(exists) {
             await this._updateRecords(exerciseId, userRecords);
@@ -34,7 +34,7 @@ export class UserRecordsService {
     async deleteUserRecord(exerciseId: string, group: UserExerciseGroupRecords, record: UserRecord): Promise<void> {
         const userRecords: UserExerciseRecords = await this.findForCurrentUserAndExercise(exerciseId);
 
-        userRecords.group(group.id).deleteRecord(record);
+        userRecords.deleteRecord(group.id, record);
 
         await this._updateRecords(exerciseId, userRecords);
     }

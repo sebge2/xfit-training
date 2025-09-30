@@ -1,5 +1,6 @@
 import {UserExerciseRecordsDto} from "../dto/record/user-exercise-records.dto.ts";
 import {UserExerciseGroupRecords} from "./user-exercise-group-records.tsx";
+import {UserRecord} from "./user-record.tsx";
 
 export class UserExerciseRecords {
 
@@ -48,6 +49,20 @@ export class UserExerciseRecords {
         }
 
         return this.groups.get(group)!;
+    }
+
+    addRecord(group: number, newRecord: UserRecord): void {
+        this.group(group).addRecord(newRecord);
+    }
+
+    deleteRecord(group: number, record: UserRecord): void {
+        this.group(group).deleteRecord(record);
+    }
+
+    merge(other: UserExerciseRecords): void {
+        for (const groupKey of other.groupKeys) {
+            this.group(groupKey).merge(other.group(groupKey));
+        }
     }
 
 }

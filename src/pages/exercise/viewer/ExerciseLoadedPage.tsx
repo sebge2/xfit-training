@@ -64,11 +64,13 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
 }
 
 function initRecords(records: UserExerciseRecords | undefined): UserExerciseRecords {
-    if (records && (records.groupKeys.length > 0)) {
-        return records;
+    const filledRecords = UserExerciseRecords.empty([...Array(MINIMUM_REPS_TAB)].map((_, i) => i + 1));
+
+    if (records) {
+        filledRecords.merge(records);
     }
 
-    return UserExerciseRecords.empty([...Array(MINIMUM_REPS_TAB)].map((_, i) => i + 1));
+    return filledRecords;
 }
 
 function createAddTab(content: React.ReactElement): TabDescriptor {
