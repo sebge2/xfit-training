@@ -42,8 +42,7 @@ export function Tabs({tabs, onTabChange: onTabChangeDelegate}: Props) {
                          variant="scrollable"
                          scrollButtons="auto">
                     {tabs
-                        .map((tab, index) => <Tab key={index.toString()} icon={tab.icon} label={tab.label}
-                                                  value={index.toString()}/>)
+                        .map((tab, index) => <Tab key={index.toString()} label={tab.header} value={index.toString()}/>)
                     }
                 </TabList>
             </Box>

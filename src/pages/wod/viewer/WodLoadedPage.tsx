@@ -13,14 +13,12 @@ function generateTabs(): TabDescriptor[] {
     return [
         createInfoTab(true),
         {
-            label: 'Activity',
-            icon: undefined,
+            header: 'Activity',
             content: <WodRunnerPage/>,
             defaultSelected: false,
         },
         {
-            label: 'Records',
-            icon: undefined,
+            header: 'Records',
             content: <WodRecords/>,
             defaultSelected: false,
         },

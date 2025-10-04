@@ -31,8 +31,7 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
 
             for (let i = 0; i < recordsToUse.groupKeys.length; i++) {
                 tabs.push({
-                    icon: undefined,
-                    label: `${recordsToUse.groupKeys[i]} REP`,
+                    header: `${recordsToUse.groupKeys[i]} REP`,
                     defaultSelected: i == 0,
                     content: <ExerciseRecordsGroupView exercise={exercise}
                                                        records={recordsToUse.group(recordsToUse.groupKeys[i])}/>
@@ -43,15 +42,14 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
         case MeasureUnit.REPS:
         case MeasureUnit.TIME:
             tabs.push({
-                icon: undefined,
-                label: `PERF`,
+                header: `PERF`,
                 content: <div></div>, // TODO
                 defaultSelected: true,
             })
             break;
     }
 
-    if (exercise.unit === MeasureUnit.REPS) {
+    if (exercise.unit === MeasureUnit.KILOGRAMS) {
         // TODO
         tabs.push(
             createAddTab(
@@ -75,8 +73,7 @@ function initRecords(records: UserExerciseRecords | undefined): UserExerciseReco
 
 function createAddTab(content: React.ReactElement): TabDescriptor {
     return {
-        label: undefined,
-        icon: <AddIcon/>,
+        header: <AddIcon/>,
         content: content,
         defaultSelected: false,
     };
