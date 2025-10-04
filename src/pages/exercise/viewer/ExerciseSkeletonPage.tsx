@@ -5,8 +5,7 @@ export function ExerciseSkeletonPage() {
     const tabs: TabDescriptor[] = [
         createInfoTab(),
         {
-            icon: undefined,
-            label: `Loading`,
+            header: `Loading`,
             content: undefined, // TODO
             defaultSelected: true,
         }

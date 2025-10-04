@@ -3,9 +3,9 @@ import {Exercise} from "../../../model/exercise/exercise.ts";
 import {UserExerciseRecords} from "../../../model/record/user-exercise-records.tsx";
 import {MeasureUnit} from "../../../model/exercise/measure-unit.ts";
 import {createInfoTab, TabDescriptor} from "../../../model/core/structure/tab-descriptor.tsx";
-import AddIcon from '@mui/icons-material/Add';
 import {ExerciseRecordsGroupView} from "./group/ExerciseRecordsGroupView.tsx";
 import {Tabs} from "../../../components/core/structure/Tabs.tsx";
+import {NewRecordGroupInput} from "../../../components/activity/NewRecordGroupInput.tsx";
 
 type ExerciseRecordsProps = {
     exercise: Exercise,
@@ -73,7 +73,7 @@ function initRecords(records: UserExerciseRecords | undefined): UserExerciseReco
 
 function createAddTab(content: React.ReactElement): TabDescriptor {
     return {
-        header: <AddIcon/>,
+        header: <NewRecordGroupInput/>,
         content: content,
         defaultSelected: false,
     };
