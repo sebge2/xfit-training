@@ -44,11 +44,19 @@ export class UserExerciseRecords {
     }
 
     group(group: number): UserExerciseGroupRecords {
-        if(!this.groups.has(group)){
+        if (!this.groups.has(group)) {
             this.groups.set(group, new UserExerciseGroupRecords(group, []));
         }
 
         return this.groups.get(group)!;
+    }
+
+    addGroup(group: number): void {
+        if (this.groups.has(group)) {
+            return;
+        }
+
+        this.groups.set(group, new UserExerciseGroupRecords(group, []));
     }
 
     addRecord(group: number, newRecord: UserRecord): void {

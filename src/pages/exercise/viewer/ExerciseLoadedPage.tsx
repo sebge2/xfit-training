@@ -1,11 +1,12 @@
-import * as React from "react";
 import {Exercise} from "../../../model/exercise/exercise.ts";
 import {UserExerciseRecords} from "../../../model/record/user-exercise-records.tsx";
 import {MeasureUnit} from "../../../model/exercise/measure-unit.ts";
 import {createInfoTab, TabDescriptor} from "../../../model/core/structure/tab-descriptor.tsx";
 import {ExerciseRecordsGroupView} from "./group/ExerciseRecordsGroupView.tsx";
 import {Tabs} from "../../../components/core/structure/Tabs.tsx";
-import {NewRecordGroupInput} from "../../../components/activity/NewRecordGroupInput.tsx";
+import AddIcon from "@mui/icons-material/Add";
+import {ExerciseNewGroupEditor} from "./ExerciseNewGroupEditor.tsx";
+import {useState} from "react";
 
 type ExerciseRecordsProps = {
     exercise: Exercise,
@@ -15,12 +16,21 @@ type ExerciseRecordsProps = {
 const MINIMUM_REPS_TAB = 5;
 
 export function ExerciseLoadedPage({exercise, records}: ExerciseRecordsProps) {
-    const tabs: TabDescriptor[] = generateTabs(exercise, records);
+    const [tabs, setTabs] = useState<TabDescriptor[]>([]);
+
+    function onAddGroup(group: number) {
+        records?.addGroup(group);
+        setTabs(generateTabs(exercise, records, onAddGroup));
+    }
+
+    useState(() => {
+        setTabs(generateTabs(exercise, records, onAddGroup));
+    });
 
     return <Tabs tabs={tabs}/>;
 }
 
-function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefined): TabDescriptor[] {
+function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefined,  onAddGroup: (group: number) => void): TabDescriptor[] {
     const tabs = [
         createInfoTab(),
     ];
@@ -52,9 +62,11 @@ function generateTabs(exercise: Exercise, records: UserExerciseRecords | undefin
     if (exercise.unit === MeasureUnit.KILOGRAMS) {
         // TODO
         tabs.push(
-            createAddTab(
-                <div>Add a new value</div>
-            )
+            {
+                header: <AddIcon/>,
+                content: <ExerciseNewGroupEditor onCreate={onAddGroup} unit={exercise.unit}/>,
+                defaultSelected: false,
+            }
         );
     }
 
@@ -69,13 +81,5 @@ function initRecords(records: UserExerciseRecords | undefined): UserExerciseReco
     }
 
     return filledRecords;
-}
-
-function createAddTab(content: React.ReactElement): TabDescriptor {
-    return {
-        header: <NewRecordGroupInput/>,
-        content: content,
-        defaultSelected: false,
-    };
 }
 
