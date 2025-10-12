@@ -24,6 +24,12 @@ export enum ExerciseTag {
 
     BOX = 'BOX',
 
+    SLED = 'SLED',
+
+    SKI = 'SKI',
+
+    ROW = 'ROW',
+
 }
 
 export const EXERCISE_TAG_LABELS: { [key in ExerciseTag]: string } = {
@@ -39,4 +45,8 @@ export const EXERCISE_TAG_LABELS: { [key in ExerciseTag]: string } = {
     [ExerciseTag.DOUBLE_DB]: '2 DB',
     [ExerciseTag.BODY_WEIGHT]: 'Body Weight',
     [ExerciseTag.BOX]: 'Box',
+    [ExerciseTag.SLED]: 'Sled',
+
+    [ExerciseTag.SKI]: 'Ski',
+    [ExerciseTag.ROW]: 'Row',
 }

@@ -28,7 +28,7 @@ export function AddButton({iconButton, size, onAdd, disabled}: Props) {
                        aria-label="Add"
                        onClick={onAdd}
                        disabled={disabled}>
-            Save
+            Add
         </Button>;
     }
 }

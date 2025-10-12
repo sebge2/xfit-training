@@ -20,6 +20,10 @@ export enum SubCategory {
 
     OTHER = 'OTHER',
 
+    SKI = 'SKI',
+
+    RUN = 'RUN',
+
 }
 
 export const SUB_CATEGORY_LABELS: { [key in SubCategory]: string } = {
@@ -33,4 +37,7 @@ export const SUB_CATEGORY_LABELS: { [key in SubCategory]: string } = {
     [SubCategory.DEADLIFT]: 'Deadlift',
     [SubCategory.CLEAN]: 'Clean',
     [SubCategory.OTHER]: 'Other',
+
+    [SubCategory.SKI]: 'Ski',
+    [SubCategory.RUN]: 'Run',
 }

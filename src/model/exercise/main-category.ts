@@ -33,12 +33,16 @@ export const MAIN_SUB_CATEGORY_STRUCTURE: { [key in MainCategory]: SubCategory[]
 
     [MainCategory.GYM]: [],
 
-    [MainCategory.CARDIO]: [],
+    [MainCategory.CARDIO]: [
+        SubCategory.SKI,
+        SubCategory.RUN,
+        SubCategory.ROW,
+    ],
 
 }
 
 export function findMainCategory(subCategory: SubCategory): MainCategory {
-    let category = Object
+    const category = Object
         .keys(MAIN_SUB_CATEGORY_STRUCTURE)
         .map((key) => key as MainCategory)
         .find((mainCategory) => MAIN_SUB_CATEGORY_STRUCTURE[mainCategory].includes(subCategory));

@@ -11,7 +11,7 @@ type Props = {
 
 export function ExerciseNewGroupEditor({unit, onCreate}: Props) {
     console.log(unit);
-    const [groups, setGroups] = useState<number | undefined>();
+    const [groups, setGroups] = useState<number | ''>('');
 
     function onAdd() {
         onCreate(groups as number);
