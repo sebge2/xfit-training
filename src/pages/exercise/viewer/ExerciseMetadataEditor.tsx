@@ -20,7 +20,8 @@ export function ExerciseMetadataEditor() {
         exercise.name = getTextValue(form.nameField, formData) as string;
         exercise.comment = getTextValue(form.commentField, formData);
         exercise.unit = getMeasureUnitValue(form.measureUnitField, formData);
-        exercise.subCategory = getSubCategoryValue(form.categoryField, formData);
+        exercise.category = getSubCategoryValue(form.categoryField, formData).mainCategory;
+        exercise.subCategory = getSubCategoryValue(form.categoryField, formData).subCategory;
         exercise.tags = getExerciseTagsValue(form.tagsField, formData);
 
         await EXERCISE_SERVICE.update(exercise); // TODO handle error

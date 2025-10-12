@@ -4,12 +4,13 @@ import {InputNumberFormField} from "../components/core/form/InputNumber.tsx";
 import {InputDateFormField} from "../components/core/form/DatePicker.tsx";
 import {MeasureUnitField} from "../components/activity/MeasureUnitSelector.tsx";
 import {SubCategory} from "../model/exercise/sub-category.ts";
-import {CategoryFormField} from "../components/activity/CategorySelector.tsx";
+import {CategoryFormField, fromCategorySelector} from "../components/activity/CategorySelector.tsx";
 import {MeasureUnit} from "../model/exercise/measure-unit.ts";
 import {ExerciseTagFormField} from "../components/activity/ExerciseTagSelector.tsx";
 import {ExerciseTag} from "../model/exercise/exercise-tag.ts";
 import {WodTag} from "../model/wod/wod-tag.ts";
 import {WodTagFormField} from "../components/activity/WodTagSelector.tsx";
+import {MainCategory} from "../model/exercise/main-category.ts";
 
 export function validateRequiredFields(state: FormState, formData: FormData) {
     state.fields
@@ -51,8 +52,11 @@ export function getMeasureUnitValue(formField: MeasureUnitField, formData: FormD
     return formData.get(formField.id) as MeasureUnit;
 }
 
-export function getSubCategoryValue(formField: CategoryFormField, formData: FormData): SubCategory {
-    return formData.get(formField.id) as SubCategory;
+export function getSubCategoryValue(formField: CategoryFormField, formData: FormData): {
+    mainCategory: MainCategory,
+    subCategory: SubCategory
+} {
+    return fromCategorySelector(formData.get(formField.id) as string);
 }
 
 export function getExerciseTagsValue(formField: ExerciseTagFormField, formData: FormData): ExerciseTag[] {

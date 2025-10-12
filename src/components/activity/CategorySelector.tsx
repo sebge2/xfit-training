@@ -9,11 +9,23 @@ import {FormHelperText, ListSubheader} from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 import {FormField} from "../../model/core/form/form-field.ts";
 
-export type CategoryFormField = FormField<SubCategory | undefined>;
+export type CategoryFormField = FormField<string | undefined>;
 
 type Props = {
     formField: CategoryFormField,
 };
+
+export function toCategorySelectorValue(mainCategory: MainCategory, subCategory: SubCategory): string {
+    return mainCategory + '-' + subCategory;
+}
+
+export function fromCategorySelector(value: string): {mainCategory: MainCategory, subCategory: SubCategory} {
+    const categories = value.split("-");
+    return {
+        mainCategory: categories[0] as MainCategory,
+        subCategory: categories[1] as SubCategory,
+    };
+}
 
 export function CategorySelector({formField}: Props): ReactElement {
     return <Box sx={{minWidth: 120}}>
@@ -34,7 +46,7 @@ export function CategorySelector({formField}: Props): ReactElement {
 
                             ...MAIN_SUB_CATEGORY_STRUCTURE[mainCategory]
                                 .map((subCategory) =>
-                                    <MenuItem value={subCategory}>{SUB_CATEGORY_LABELS[subCategory]}</MenuItem>
+                                    <MenuItem value={toCategorySelectorValue(mainCategory, subCategory)}>{SUB_CATEGORY_LABELS[subCategory]}</MenuItem>
                                 )
                         ]
                     )

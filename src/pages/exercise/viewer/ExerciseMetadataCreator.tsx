@@ -15,6 +15,7 @@ export function ExerciseMetadataCreator() {
     const exercise: ExerciseFormInitialValues = {
         name: undefined,
         comment: undefined,
+        category: undefined,
         subCategory: undefined,
         unit: undefined,
         tags: [],
@@ -24,7 +25,8 @@ export function ExerciseMetadataCreator() {
         const exercise = new Exercise(
             null,
             getTextValue(form.nameField, formData) as string,
-            getSubCategoryValue(form.categoryField, formData),
+            getSubCategoryValue(form.categoryField, formData).mainCategory,
+            getSubCategoryValue(form.categoryField, formData).subCategory,
             getExerciseTagsValue(form.tagsField, formData),
             getMeasureUnitValue(form.measureUnitField, formData),
             getTextValue(form.commentField, formData),

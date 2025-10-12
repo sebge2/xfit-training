@@ -13,6 +13,7 @@ import {ExerciseTag} from "../../../model/exercise/exercise-tag.ts";
 import {FormState} from "../../../model/core/form/form-state.ts";
 import {validateRequiredFields} from "../../../utils/form-utils.ts";
 import {useActionState} from "react";
+import {MainCategory} from "../../../model/exercise/main-category.ts";
 
 export type ExerciseFormType = {
     nameField: FormField<string | undefined>,
@@ -26,6 +27,7 @@ export type ExerciseFormInitialValues = {
     name: string | undefined,
     comment: string | undefined,
     unit: MeasureUnit | undefined,
+    category: MainCategory | undefined,
     subCategory: SubCategory | undefined,
     tags: ExerciseTag[],
 }
@@ -40,7 +42,7 @@ export function ExerciseMetadataForm({exercise, onSave: onSaveDelegate, onCancel
     const nameField = new FormField<string | undefined>('name', 'Name', exercise.name, true);
     const commentField = new FormField<string | undefined>('comment', 'Comment', exercise.comment);
     const measureUnitField = new FormField<MeasureUnit | undefined>('measure-unit', 'Unit', exercise.unit, true);
-    const categoryField = new FormField<SubCategory | undefined>('category', 'Category', exercise.subCategory, true);
+    const categoryField = new FormField<string | undefined>('category', 'Category', exercise.category + '-' + exercise.subCategory, true);
     const tagsField = new FormField<ExerciseTag[]>('tags', 'Tags', exercise.tags, true);
     const originalFormState = FormState.create([nameField, commentField, measureUnitField, categoryField, tagsField]);
 
