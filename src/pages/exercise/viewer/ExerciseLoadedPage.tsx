@@ -2,12 +2,12 @@ import {Exercise} from "../../../model/exercise/exercise.ts";
 import {UserExerciseRecords} from "../../../model/record/user-exercise-records.tsx";
 import {MeasureUnit} from "../../../model/exercise/measure-unit.ts";
 import {ExerciseKilogramsLoadedPage} from "./ExerciseKilogramsLoadedPage.tsx";
+import {ExerciseTimeLoadedPage} from "./ExerciseTimeLoadedPage.tsx";
 
 type Props = {
     exercise: Exercise,
     records: UserExerciseRecords | undefined,
 };
-
 
 export function ExerciseLoadedPage({exercise, records}: Props) {
     switch (exercise.unit) {
@@ -15,7 +15,8 @@ export function ExerciseLoadedPage({exercise, records}: Props) {
             return <ExerciseKilogramsLoadedPage exercise={exercise} records={records}/>;
         }
         case MeasureUnit.REPS:
+            return <></>;
         case MeasureUnit.TIME:
-            return <></>
+            return <ExerciseTimeLoadedPage exercise={exercise} records={records}/>;
     }
 }
