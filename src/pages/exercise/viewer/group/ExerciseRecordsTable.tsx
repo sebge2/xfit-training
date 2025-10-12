@@ -11,73 +11,51 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {NewRecordRow} from "./NewRecordRow.tsx";
 import {ExistingRecordRow} from "./ExistingRecordRow.tsx";
 import {Exercise} from "../../../../model/exercise/exercise.ts";
-import {useActionState} from "react";
-import {FormState} from "../../../../model/core/form/form-state.ts";
-import {FormField} from "../../../../model/core/form/form-field.ts";
-import {getDateValue, getNumberValue, validateRequiredFields} from "../../../../utils/form-utils.ts";
 import {UserRecord} from "../../../../model/record/user-record.tsx";
 import {USER_RECORDS_SERVICE} from "../../../../services/user-records-service.ts";
-import { useRevalidator } from "react-router-dom";
+import {useState} from "react";
 
 type Props = {
     groupRecords: UserExerciseGroupRecords,
     exercise: Exercise,
 };
 
-export function ExerciseRecordsTable({groupRecords, exercise}: Props) {
-    const revalidator = useRevalidator();
+export function ExerciseRecordsTable({groupRecords: originalGroupRecords, exercise}: Props) {
+    const [groupRecords, setGroupRecords] = useState(originalGroupRecords);
 
-    const dateField = new FormField<Date | undefined>('date', undefined, undefined, true);
-    const valueField = new FormField<number | undefined>('value', 'Value', undefined, true);
-    const originalSaveState = FormState.create([dateField, valueField]);
+    async function onAdd(newRecord: UserRecord) {
+        const userRecords = await USER_RECORDS_SERVICE.addUserRecord(exercise.id as string, groupRecords, newRecord);
 
-    async function onSave(prev: FormState, formData: FormData): Promise<FormState> {
-        const newState = prev.reset();
+        // TODO handle not successful
 
-        validateRequiredFields(newState, formData);
-
-        if (newState.isSuccessful) {
-            const newRecord = new UserRecord(getNumberValue(valueField, formData) as number, getDateValue(dateField, formData) as Date);
-
-            await USER_RECORDS_SERVICE.addUserRecord(exercise.id as string, groupRecords, newRecord);
-
-            await revalidator.revalidate();
-
-            // TODO handle not successful
-        }
-
-        return newState;
+        setGroupRecords(userRecords.group(groupRecords.id));
     }
 
     async function onDelete(record: UserRecord): Promise<void> {
-        await USER_RECORDS_SERVICE.deleteUserRecord(exercise.id as string, groupRecords, record);
-
-        await revalidator.revalidate();
-
+        const userRecords =await USER_RECORDS_SERVICE.deleteUserRecord(exercise.id as string, groupRecords, record);
         // TODO handle not successful
+
+        setGroupRecords(userRecords.group(groupRecords.id));
     }
 
-    const [, saveAction] = useActionState<FormState, FormData>(onSave, originalSaveState);
-
     return <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <form action={saveAction}>
-            <TableContainer component={Paper}>
-                <Table size="small" aria-label="My records">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="left">Date</TableCell>
-                            <TableCell align="left">Value</TableCell>
-                            <TableCell align="left">Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <NewRecordRow dateField={dateField} valueField={valueField}/>
+        <TableContainer component={Paper}>
+            <Table size="small" aria-label="My records">
+                <TableHead>
+                    <TableRow>
+                        <TableCell align="left">Date</TableCell>
+                        <TableCell align="left">Value</TableCell>
+                        <TableCell align="left">Action</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    <NewRecordRow onAdd={onAdd}/>
 
-                        {groupRecords.records
-                            .map((record, i) => <ExistingRecordRow key={i} record={record} exercise={exercise} onDelete={() => onDelete(record)}/>)}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </form>
+                    {groupRecords.records
+                        .map((record, i) => <ExistingRecordRow key={i} record={record} exercise={exercise}
+                                                               onDelete={() => onDelete(record)}/>)}
+                </TableBody>
+            </Table>
+        </TableContainer>
     </LocalizationProvider>;
 }

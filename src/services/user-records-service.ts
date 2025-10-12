@@ -17,7 +17,7 @@ export class UserRecordsService {
         return UserExerciseRecords.fromDto(userRecords.data() as UserExerciseRecordsDto);
     }
 
-    async addUserRecord(exerciseId: string, group: UserExerciseGroupRecords, newRecord: UserRecord): Promise<void> {
+    async addUserRecord(exerciseId: string, group: UserExerciseGroupRecords, newRecord: UserRecord): Promise<UserExerciseRecords> {
         const exists = await this._isRecordExist(exerciseId);
 
         const userRecords: UserExerciseRecords = await this.findForCurrentUserAndExercise(exerciseId);
@@ -29,14 +29,18 @@ export class UserRecordsService {
         } else {
             await this._saveRecords(exerciseId, userRecords);
         }
+
+        return userRecords;
     }
 
-    async deleteUserRecord(exerciseId: string, group: UserExerciseGroupRecords, record: UserRecord): Promise<void> {
+    async deleteUserRecord(exerciseId: string, group: UserExerciseGroupRecords, record: UserRecord): Promise<UserExerciseRecords> {
         const userRecords: UserExerciseRecords = await this.findForCurrentUserAndExercise(exerciseId);
 
         userRecords.deleteRecord(group.id, record);
 
         await this._updateRecords(exerciseId, userRecords);
+
+        return userRecords;
     }
 
     private _getRef(exerciseId: string) {

@@ -3,24 +3,50 @@ import {ReactElement} from "react";
 import FormControl from "@mui/material/FormControl";
 import {MobileDatePicker} from "@mui/x-date-pickers";
 import {FormHelperText} from "@mui/material";
+import dayjs from "dayjs";
+import {PickerValue} from "@mui/x-date-pickers/internals";
 
 export type InputDateFormField = FormField<Date | undefined>;
 
 type Props = {
     formField: InputDateFormField,
+    onChange?: (value: Date | undefined) => Promise<void> | void,
 };
 
-export function DatePicker({formField}: Props): ReactElement {
+export function DatePicker({formField, onChange: onChangeDelegate}: Props): ReactElement {
+    function dateToDayJs(date?: Date): PickerValue {
+        if (!date) {
+            return null;
+        }
+
+        return dayjs(date);
+    }
+
+    function dayJsToDate(dayJs: PickerValue): Date | undefined {
+        if (!dayJs) {
+            return undefined;
+        }
+
+        return dayJs.toDate();
+    }
+
+    async function onChange(value: PickerValue): Promise<void> {
+        if (onChangeDelegate) {
+            await onChangeDelegate(dayJsToDate(value));
+        }
+    }
+
     return <FormControl fullWidth>
         {/*
         TODO
-        defaultValue={formField.defaultValue}
         error={formField.hasErrors}
         */}
         <MobileDatePicker
             name={formField.id}
             label={formField.label}
             format="YYYY-MM-DD"
+            defaultValue={dateToDayJs(formField.defaultValue)}
+            onChange={onChange}
             slotProps={{
                 textField: {
                     sx: {
