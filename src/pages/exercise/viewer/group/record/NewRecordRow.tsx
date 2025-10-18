@@ -1,24 +1,27 @@
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import {InputAdornment} from "@mui/material";
-import {DatePicker} from "../../../../components/core/form/DatePicker.tsx";
-import {InputNumber} from "../../../../components/core/form/InputNumber.tsx";
-import {FormField} from "../../../../model/core/form/form-field.ts";
-import {UserRecord} from "../../../../model/record/user-record.tsx";
-import {AddButton} from "../../../../components/core/buttton/AddButton.tsx";
+import {DatePicker} from "../../../../../components/core/form/DatePicker.tsx";
+import {FormField} from "../../../../../model/core/form/form-field.ts";
+import {UserRecord} from "../../../../../model/record/user-record.tsx";
+import {AddButton} from "../../../../../components/core/buttton/AddButton.tsx";
 import {useState} from "react";
+import {InputMinuteSecond} from "../../../../../components/core/form/InputMinuteSecond.tsx";
+import {MeasureUnit} from "../../../../../model/exercise/measure-unit.ts";
+import {InputNumber} from "../../../../../components/core/form/InputNumber.tsx";
+import {InputAdornment} from "@mui/material";
 
 type Props = {
+    unit: MeasureUnit,
     onAdd: (record: UserRecord) => Promise<void> | void,
 }
 
-export function NewRecordRow({onAdd: onAddDelegate}: Props) {
+export function NewRecordRow({unit, onAdd: onAddDelegate}: Props) {
     function initDateField(date?: Date) {
         return new FormField<Date | undefined>('date', undefined, date, true);
     }
 
     function initValueField(value?: number) {
-        return new FormField<number | undefined>('value', 'Value', value, true);
+        return new FormField<number | undefined>('value', undefined, value, true);
     }
 
     const [dateField, setDateField] = useState(initDateField());
@@ -52,13 +55,20 @@ export function NewRecordRow({onAdd: onAddDelegate}: Props) {
             />
         </TableCell>
         <TableCell align="left">
-            <InputNumber key={`value-${resetKey}`}
-                         formField={valueField}
-                         endAdornment={<InputAdornment position="end">kg</InputAdornment>}
-                         onChange={(value) => {
-                             setValueField(initValueField(value))
-                         }}
-            />
+            {unit === MeasureUnit.KILOGRAMS &&
+                <InputNumber key={`value-${resetKey}`}
+                             formField={valueField}
+                             endAdornment={<InputAdornment position="end">kg</InputAdornment>}
+                             onChange={(value) => {
+                                 setValueField(initValueField(value))
+                             }}
+                />}
+            {unit === MeasureUnit.TIME &&
+                <InputMinuteSecond key={`value-${resetKey}`} formField={valueField}
+                                   onChange={(value) => {
+                                       setValueField(initValueField(value))
+                                   }}
+                />}
         </TableCell>
         <TableCell align="left">
             <AddButton iconButton={true} size="small" onAdd={onAdd} disabled={disabled}/>

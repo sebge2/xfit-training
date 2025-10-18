@@ -8,8 +8,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {NewRecordRow} from "./NewRecordRow.tsx";
-import {ExistingRecordRow} from "./ExistingRecordRow.tsx";
+import {NewRecordRow} from "./record/NewRecordRow.tsx";
+import {ExistingRecordRow} from "./record/ExistingRecordRow.tsx";
 import {Exercise} from "../../../../model/exercise/exercise.ts";
 import {UserRecord} from "../../../../model/record/user-record.tsx";
 import {USER_RECORDS_SERVICE} from "../../../../services/user-records-service.ts";
@@ -49,7 +49,7 @@ export function ExerciseRecordsTable({groupRecords: originalGroupRecords, exerci
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <NewRecordRow onAdd={onAdd}/>
+                    <NewRecordRow onAdd={onAdd} unit={exercise.unit}/>
 
                     {groupRecords.records
                         .map((record, i) => <ExistingRecordRow key={i} record={record} exercise={exercise}

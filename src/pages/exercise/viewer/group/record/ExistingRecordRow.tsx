@@ -1,9 +1,9 @@
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import {RecordValueViewer} from "../../../../components/activity/RecordValueViewer.tsx";
-import {UserRecord} from "../../../../model/record/user-record.tsx";
-import {Exercise} from "../../../../model/exercise/exercise.ts";
-import {DeleteButton} from "../../../../components/core/buttton/DeleteButton.tsx";
+import {RecordValueViewer} from "../../../../../components/activity/RecordValueViewer.tsx";
+import {UserRecord} from "../../../../../model/record/user-record.tsx";
+import {Exercise} from "../../../../../model/exercise/exercise.ts";
+import {DeleteButton} from "../../../../../components/core/buttton/DeleteButton.tsx";
 import {useState} from "react";
 
 type Props = {
