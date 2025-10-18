@@ -37,10 +37,6 @@ export function DatePicker({formField, onChange: onChangeDelegate}: Props): Reac
     }
 
     return <FormControl fullWidth>
-        {/*
-        TODO
-        error={formField.hasErrors}
-        */}
         <MobileDatePicker
             name={formField.id}
             label={formField.label}
@@ -49,6 +45,7 @@ export function DatePicker({formField, onChange: onChangeDelegate}: Props): Reac
             onChange={onChange}
             slotProps={{
                 textField: {
+                    error: formField.hasErrors,
                     sx: {
                         padding: 0,
                         '> .MuiPickersInputBase-root': {
