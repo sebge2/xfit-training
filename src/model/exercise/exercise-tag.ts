@@ -30,6 +30,8 @@ export enum ExerciseTag {
 
     ROW = 'ROW',
 
+    RUN = 'RUN',
+
 }
 
 export const EXERCISE_TAG_LABELS: { [key in ExerciseTag]: string } = {
@@ -49,4 +51,5 @@ export const EXERCISE_TAG_LABELS: { [key in ExerciseTag]: string } = {
 
     [ExerciseTag.SKI]: 'Ski',
     [ExerciseTag.ROW]: 'Row',
+    [ExerciseTag.RUN]: 'Run',
 }
