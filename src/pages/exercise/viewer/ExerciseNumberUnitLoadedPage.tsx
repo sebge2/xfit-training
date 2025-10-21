@@ -9,7 +9,7 @@ type Props = {
     records: UserExerciseRecords | undefined,
 };
 
-export function ExerciseTimeLoadedPage({exercise, records}: Props) {
+export function ExerciseNumberUnitLoadedPage({exercise, records}: Props) {
     const tabs = generateTabs(exercise, records);
 
     return <Tabs tabs={tabs}/>;

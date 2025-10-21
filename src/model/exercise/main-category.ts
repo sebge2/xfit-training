@@ -19,24 +19,26 @@ export const MAIN_CATEGORY_LABELS : {[key in MainCategory]: string} = {
 export const MAIN_SUB_CATEGORY_STRUCTURE: { [key in MainCategory]: SubCategory[] } = {
 
     [MainCategory.STRENGTH]: [
-        SubCategory.SQUAT,
         SubCategory.SNATCH,
+        SubCategory.PRESS,
+        SubCategory.JERK,
+        SubCategory.OLYMPIC_LIFT,
+        SubCategory.CLEAN,
+        SubCategory.DEADLIFT,
+        SubCategory.SQUAT,
         SubCategory.SLED,
         SubCategory.ROW,
-        SubCategory.PRESS,
-        SubCategory.OLYMPIC_LIFT,
-        SubCategory.JERK,
-        SubCategory.DEADLIFT,
-        SubCategory.CLEAN,
         SubCategory.OTHER,
     ],
 
-    [MainCategory.GYM]: [],
+    [MainCategory.GYM]: [
+        SubCategory.OTHER,
+    ],
 
     [MainCategory.CARDIO]: [
         SubCategory.SKI,
-        SubCategory.RUN,
         SubCategory.ROW,
+        SubCategory.RUN,
     ],
 
 }

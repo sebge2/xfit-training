@@ -17,7 +17,7 @@ import {ExerciseTags} from "../../../components/activity/ExerciseTags.tsx";
 import {Exercise} from "../../../model/exercise/exercise.ts";
 
 export function SubCategoryExercisesAccordion({subCategory}: { subCategory: SubCategoryExercises }) {
-    const [expanded, setExpanded] = useState(subCategory.exercises.length > 0);
+    const [expanded, setExpanded] = useState(false);
     const showTags = useMediaQuery('(min-width:800px)');
     const navigate = useNavigate();
 

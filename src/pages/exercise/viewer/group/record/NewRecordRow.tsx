@@ -63,6 +63,14 @@ export function NewRecordRow({unit, onAdd: onAddDelegate}: Props) {
                                  setValueField(initValueField(value))
                              }}
                 />}
+            {unit === MeasureUnit.REPS &&
+                <InputNumber key={`value-${resetKey}`}
+                             formField={valueField}
+                             endAdornment={<InputAdornment position="end">REPS</InputAdornment>}
+                             onChange={(value) => {
+                                 setValueField(initValueField(value))
+                             }}
+                />}
             {unit === MeasureUnit.TIME &&
                 <InputMinuteSecond key={`value-${resetKey}`} formField={valueField}
                                    onChange={(value) => {
