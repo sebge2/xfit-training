@@ -18,9 +18,10 @@ import {useState} from "react";
 type Props = {
     groupRecords: UserExerciseGroupRecords,
     exercise: Exercise,
+    onChange?: (records: UserExerciseGroupRecords) => Promise<void> | void,
 };
 
-export function ExerciseRecordsTable({groupRecords: originalGroupRecords, exercise}: Props) {
+export function ExerciseRecordsTable({groupRecords: originalGroupRecords, exercise, onChange}: Props) {
     const [groupRecords, setGroupRecords] = useState(originalGroupRecords);
 
     async function onAdd(newRecord: UserRecord) {
@@ -28,14 +29,22 @@ export function ExerciseRecordsTable({groupRecords: originalGroupRecords, exerci
 
         // TODO handle not successful
 
-        setGroupRecords(userRecords.group(groupRecords.id));
+        const newGroupRecords = userRecords.group(groupRecords.id);
+        setGroupRecords(newGroupRecords);
+        if (onChange) {
+            await onChange(newGroupRecords);
+        }
     }
 
     async function onDelete(record: UserRecord): Promise<void> {
-        const userRecords =await USER_RECORDS_SERVICE.deleteUserRecord(exercise.id as string, groupRecords, record);
+        const userRecords = await USER_RECORDS_SERVICE.deleteUserRecord(exercise.id as string, groupRecords, record);
         // TODO handle not successful
 
-        setGroupRecords(userRecords.group(groupRecords.id));
+        const newGroupRecords = userRecords.group(groupRecords.id);
+        setGroupRecords(newGroupRecords);
+        if (onChange) {
+            await onChange(newGroupRecords);
+        }
     }
 
     return <LocalizationProvider dateAdapter={AdapterDayjs}>

@@ -6,26 +6,31 @@ import Stack from '@mui/material/Stack';
 import Box from "@mui/material/Box";
 import {Exercise} from "../../../../model/exercise/exercise.ts";
 import {MeasureUnit} from "../../../../model/exercise/measure-unit.ts";
+import {useState} from "react";
 
 type Props = {
     records: UserExerciseGroupRecords,
     exercise: Exercise,
 };
 
-export function ExerciseRecordsGroupView({records, exercise}: Props) {
+export function ExerciseRecordsGroupView({records: originalGroupRecords, exercise}: Props) {
+    const [groupRecords, setGroupRecords] = useState(originalGroupRecords);
+
     return <Stack spacing={2}>
         <div>
-            <ExerciseRecordsTable groupRecords={records} exercise={exercise}/>
+            <ExerciseRecordsTable groupRecords={groupRecords}
+                                  exercise={exercise}
+                                  onChange={(records) => setGroupRecords(records)}/>
         </div>
-        {(!!records.lastRecord()) && (exercise.unit === MeasureUnit.KILOGRAMS) && <Box>
+        {(!!groupRecords.lastRecord()) && (exercise.unit === MeasureUnit.KILOGRAMS) && <Box>
             <h3>Compute % of KG</h3>
 
-            <WeightCalculator weight={records.lastRecord()?.value || 0}/>
+            <WeightCalculator weight={groupRecords.lastRecord()?.value || 0}/>
         </Box>}
-        {(records.records.length > 0) && <Box>
+        {(groupRecords.records.length > 0) && <Box>
             <h3>Evolution</h3>
 
-            <ExerciseRecordsEvolution records={records} unit={exercise.unit}/>
+            <ExerciseRecordsEvolution records={groupRecords} unit={exercise.unit}/>
         </Box>}
     </Stack>;
 }
