@@ -4,6 +4,7 @@ import {DatePicker} from "../../../../../components/core/form/DatePicker.tsx";
 import {FormField} from "../../../../../model/core/form/form-field.ts";
 import {UserRecord} from "../../../../../model/record/user-record.tsx";
 import {AddButton} from "../../../../../components/core/buttton/AddButton.tsx";
+import * as React from "react";
 import {useState} from "react";
 import {InputMinuteSecond} from "../../../../../components/core/form/InputMinuteSecond.tsx";
 import {MeasureUnit} from "../../../../../model/exercise/measure-unit.ts";
@@ -40,6 +41,16 @@ export function NewRecordRow({unit, onAdd: onAddDelegate}: Props) {
         setResetKey(prev => prev + 1);
     }
 
+    function createInputNumber(unit: string): React.ReactElement {
+        return <InputNumber key={`value-${resetKey}`}
+                            formField={valueField}
+                            endAdornment={<InputAdornment position="end">{unit}</InputAdornment>}
+                            onChange={(value) => {
+                                setValueField(initValueField(value))
+                            }}
+        />;
+    }
+
     return <TableRow
         key="add"
         sx={{
@@ -55,22 +66,8 @@ export function NewRecordRow({unit, onAdd: onAddDelegate}: Props) {
             />
         </TableCell>
         <TableCell align="left">
-            {unit === MeasureUnit.KILOGRAMS &&
-                <InputNumber key={`value-${resetKey}`}
-                             formField={valueField}
-                             endAdornment={<InputAdornment position="end">kg</InputAdornment>}
-                             onChange={(value) => {
-                                 setValueField(initValueField(value))
-                             }}
-                />}
-            {unit === MeasureUnit.REPS &&
-                <InputNumber key={`value-${resetKey}`}
-                             formField={valueField}
-                             endAdornment={<InputAdornment position="end">REPS</InputAdornment>}
-                             onChange={(value) => {
-                                 setValueField(initValueField(value))
-                             }}
-                />}
+            {unit === MeasureUnit.KILOGRAMS && createInputNumber('kg')}
+            {unit === MeasureUnit.REPS && createInputNumber('REPS')}
             {unit === MeasureUnit.TIME &&
                 <InputMinuteSecond key={`value-${resetKey}`} formField={valueField}
                                    onChange={(value) => {
