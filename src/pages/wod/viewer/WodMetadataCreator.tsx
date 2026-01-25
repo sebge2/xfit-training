@@ -8,7 +8,7 @@ import {
     getTextValue
 } from "../../../utils/form-utils.ts";
 import Box from "@mui/material/Box";
-import {Rest} from "../../../model/wod/rest.ts";
+import {Rest} from "../../../model/wod/activity/rest.ts";
 import {Duration} from "../../../model/wod/activity/duration.ts";
 
 export function WodMetadataCreator() {

@@ -9,7 +9,7 @@ import {Sequence} from "../../../model/wod/activity/sequence.ts";
 import {AmrapDisplay} from "./amrap-display.tsx";
 import {Amrap} from "../../../model/wod/activity/amrap.ts";
 import {RestDisplay} from "./rest-display.tsx";
-import {Rest} from "../../../model/wod/rest.ts";
+import {Rest} from "../../../model/wod/activity/rest.ts";
 import {EnomDisplay} from "./enom-display.tsx";
 import {Enom} from "../../../model/wod/activity/enom.ts";
 import {RepetitionsDisplay} from "./repetitions-display.tsx";

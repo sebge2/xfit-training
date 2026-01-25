@@ -6,7 +6,7 @@ import {Sequence} from "./sequence.ts";
 import {SequenceDto} from "../../dto/wod/activity/sequence.dto.ts";
 import {Repetitions} from "./repetitions.ts";
 import {RepetitionsDto} from "../../dto/wod/activity/repetitions.dto.ts";
-import {Rest} from "../rest.ts";
+import {Rest} from "./rest.ts";
 import {RestDto} from "../../dto/wod/activity/rest.dto.ts";
 import {Amrap} from "./amrap.ts";
 import {AmrapDto} from "../../dto/wod/activity/amrap.dto.ts";
