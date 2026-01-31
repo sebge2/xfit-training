@@ -8,8 +8,7 @@ import {
     getTextValue
 } from "../../../utils/form-utils.ts";
 import Box from "@mui/material/Box";
-import {Rest} from "../../../model/wod/activity/rest.ts";
-import {Duration} from "../../../model/wod/activity/duration.ts";
+import {Sequence} from "../../../model/wod/activity/sequence.ts";
 
 export function WodMetadataCreator() {
     const navigate = useNavigate();
@@ -23,7 +22,7 @@ export function WodMetadataCreator() {
     async function onSave(formData: FormData, form: WodFormType): Promise<void> {
         const wod = new Wod(
             null,
-            new Rest(new Duration(1), null),
+            new Sequence([], null),
             getTextValue(form.nameField, formData) as string,
             getMeasureUnitValue(form.measureUnitField, formData),
             getWodTagsValue(form.tagsField, formData),

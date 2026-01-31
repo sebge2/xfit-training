@@ -1,9 +1,9 @@
 import {TabDescriptor} from "../../../model/core/structure/tab-descriptor.tsx";
 import {Tabs} from "../../../components/core/structure/Tabs.tsx";
-import WodRunnerPage from "../runner/WodRunnerPage.tsx";
 import {WodRecords} from "./WodRecords.tsx";
 import InfoIcon from "@mui/icons-material/Info";
 import {WodMetadataEditor} from "./WodMetadataEditor.tsx";
+import {WodActivityViewPage} from "./WodActivityEditPage.tsx";
 
 export function WodEditPage() {
     const tabs: TabDescriptor[] = generateTabs();
@@ -20,7 +20,7 @@ function generateTabs(): TabDescriptor[] {
         },
         {
             header: 'Activity',
-            content: <WodRunnerPage/>,
+            content: <WodActivityViewPage/>,
             defaultSelected: false,
         },
         {
