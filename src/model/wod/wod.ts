@@ -1,15 +1,14 @@
-import {Activity} from "./activity/activity.ts";
 import {WodDto} from "../dto/wod/wod.dto.ts";
-import {mapActivityFromDto, mapActivityToDto} from "./activity/activity-utils.ts";
 import {WodTag} from "./wod-tag.ts";
 import {MeasureUnit} from "../exercise/measure-unit.ts";
+import {Sequence} from "./activity/sequence.ts";
 
 export class Wod {
 
     static fromDto(id: string, dto: WodDto): Wod {
         return new Wod(
             id,
-            mapActivityFromDto(dto.activity),
+            Sequence.fromDto(dto.activity),
             dto.name,
             dto.unit,
             dto.tags || [],
@@ -21,7 +20,7 @@ export class Wod {
         return {
             name: wod.name,
             unit: wod.unit,
-            activity: mapActivityToDto(wod.activity),
+            activity: Sequence.toDto(wod.activity),
             tags: wod.tags,
             comment: wod.comment,
         };
@@ -29,7 +28,7 @@ export class Wod {
 
     constructor(
         public id: string | null,
-        public activity: Activity,
+        public activity: Sequence,
         public name: string,
         public unit: MeasureUnit,
         public tags: WodTag[],

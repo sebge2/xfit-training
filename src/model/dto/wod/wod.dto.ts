@@ -1,6 +1,6 @@
-import {ActivityDto} from "./activity/activity-dto.ts";
 import {WodTag} from "../../wod/wod-tag.ts";
 import {MeasureUnit} from "../../exercise/measure-unit.ts";
+import {SequenceDto} from "./activity/sequence.dto.ts";
 
 export interface WodDto {
 
@@ -8,7 +8,7 @@ export interface WodDto {
 
     get unit(): MeasureUnit;
 
-    get activity(): ActivityDto;
+    get activity(): SequenceDto;
 
     get tags(): WodTag[];
 

@@ -1,12 +1,17 @@
 import {useRouteLoaderData} from "react-router-dom";
 import {Wod} from "../../../model/wod/wod.ts";
-import {ActivityDisplay} from "../../../components/wod/activity/activity-display.tsx";
+import {ActivityContext, ActivityDisplay} from "../../../components/wod/activity/activity-display.tsx";
 
 export const WodActivityViewPage = () => {
     const routeData = useRouteLoaderData('wod-details') as { wod: Wod };
     const wod = routeData.wod;
 
+    const parentActivityContext: ActivityContext = {
+        editing: true,
+        activity: undefined,
+    };
+
     return <>
-        <ActivityDisplay activity={wod.activity}/>
+        <ActivityDisplay activity={wod.activity} parentContext={parentActivityContext}/>
     </>;
 }

@@ -21,7 +21,7 @@ export default function WodSearchPage() {
                     {wods.length > 0 && (
                         <WodsGrid>
                             {wods.map((wod) => (
-                                <WodCard wod={wod} onClick={() => navigate(wod.id as string, {})}/>
+                                <WodCard key={wod.id} wod={wod} onClick={() => navigate(wod.id as string, {})}/>
                             ))}
                         </WodsGrid>
                     )}

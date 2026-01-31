@@ -6,14 +6,14 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-type Action = {
+export type MoreActionButtonAction = {
     label: string;
     onClick: () => void;
     icon?: ReactNode;
     disabled?: boolean;
 };
 
-export function MoreActionsButton({actions}: { actions: Action[] }) {
+export function MoreActionsButton({actions}: { actions: MoreActionButtonAction[] }) {
     const buttonId = useId();
     const menuId = useId();
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);

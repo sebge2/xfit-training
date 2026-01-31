@@ -3,10 +3,8 @@
 @import '@fontsource/roboto/500.css';
 @import '@fontsource/roboto/700.css';
 
-.sequence-display {
-    border-left: 1px solid black;
-}
+$z-index-1: 10;
 
-.sequence-display-element {
-    margin-left: 20px;
-}
+$activity-box-margin: 1rem;
+$activity-breath-color: #ef4444;
+$activity-box-actions-space: .3rem;

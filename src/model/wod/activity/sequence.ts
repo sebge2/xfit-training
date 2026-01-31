@@ -10,6 +10,7 @@ export class Sequence extends Activity {
     static fromDto(dto: SequenceDto): Sequence {
         return new Sequence(
             mapActivityFromAllDto(dto.activities),
+            dto.name,
             dto.comment
         );
     }
@@ -18,13 +19,15 @@ export class Sequence extends Activity {
         return {
             type: activity.type,
             activities: mapActivityToAllDto(activity.activities),
+            name: activity.name,
             comment: activity.comment,
         };
     }
 
     constructor(
         public readonly activities: Activity[],
-        comment: string | null,
+        public readonly name: string | undefined,
+        comment: string | undefined,
     ) {
         super(ActivityType.SEQUENCE, comment);
     }
