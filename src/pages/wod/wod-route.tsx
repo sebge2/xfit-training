@@ -2,11 +2,10 @@ import {RouteObject} from "react-router";
 import {WOD_SERVICE} from "../../services/wod-service.ts";
 import WodSearchPage from "./wods/WodSearchPage.tsx";
 import {Wod} from "../../model/wod/wod.ts";
-import WodPage from "./viewer/WodPage.tsx";
-import {WodMetadataView} from "./viewer/WodMetadataView.tsx";
-import {WodMetadataEditor} from "./viewer/WodMetadataEditor.tsx";
 import {Params} from "../../App.tsx";
 import {WodMetadataCreator} from "./viewer/WodMetadataCreator.tsx";
+import {WodViewPage} from "./viewer/WodViewPage.tsx";
+import {WodEditPage} from "./viewer/WodEditPage.tsx";
 
 export const WOD_ROUTE: RouteObject = {
     path: 'wods',
@@ -32,15 +31,14 @@ export const WOD_ROUTE: RouteObject = {
             handle: {
                 pageName: ({data}: { data: { wod: Wod } }) => data?.wod?.name,
             },
-            element: <WodPage/>,
             children: [
                 {
                     index: true,
-                    element: <WodMetadataView/>,
+                    element: <WodViewPage/>,
                 },
                 {
                     path: 'edit',
-                    element: <WodMetadataEditor/>,
+                    element: <WodEditPage/>,
                 }
             ]
         },
@@ -50,7 +48,7 @@ export const WOD_ROUTE: RouteObject = {
             handle: {
                 pageName: 'New',
             },
-            element: <WodMetadataCreator />,
+            element: <WodMetadataCreator/>,
         }
     ]
 };

@@ -1,9 +1,11 @@
-import {createInfoTab, TabDescriptor} from "../../../model/core/structure/tab-descriptor.tsx";
+import {TabDescriptor} from "../../../model/core/structure/tab-descriptor.tsx";
 import {Tabs} from "../../../components/core/structure/Tabs.tsx";
 import WodRunnerPage from "../runner/WodRunnerPage.tsx";
 import {WodRecords} from "./WodRecords.tsx";
+import InfoIcon from "@mui/icons-material/Info";
+import {WodMetadataView} from "./WodMetadataView.tsx";
 
-export function WodLoadedPage() {
+export function WodViewPage() {
     const tabs: TabDescriptor[] = generateTabs();
 
     return <Tabs tabs={tabs}/>;
@@ -11,7 +13,11 @@ export function WodLoadedPage() {
 
 function generateTabs(): TabDescriptor[] {
     return [
-        createInfoTab(true),
+        {
+            header: <InfoIcon/>,
+            content: <WodMetadataView/>,
+            defaultSelected: true,
+        },
         {
             header: 'Activity',
             content: <WodRunnerPage/>,
