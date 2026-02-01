@@ -3,6 +3,7 @@ import {ActivityContext, ActivityDisplay, ActivityProps} from "../activity-displ
 import DurationDisplay from "../duration-display.tsx";
 import {ActivityBox} from "../activity-box.tsx";
 import {ACTIVITY_TYPE_LABELS} from "../../../../model/wod/activity/activity-type.ts";
+import {Activity} from "../../../../model/wod/activity/activity.ts";
 
 type Props = ActivityProps & {
     activity: Amrap,
@@ -19,6 +20,10 @@ export function AmrapDisplay({activity, parentContext, onUpdate: onUpdateDelegat
         onUpdateDelegate(activity);
     }
 
+    function onChildUpdate(child: Activity) {
+        onUpdateDelegate(activity.updateActivity(child));
+    }
+
     return (
         <>
             <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
@@ -27,7 +32,7 @@ export function AmrapDisplay({activity, parentContext, onUpdate: onUpdateDelegat
                          actions={parentContext.childrenActions}>
                 <ActivityDisplay activity={activity.activity}
                                  parentContext={currentContext}
-                                 onUpdate={onUpdateDelegate}/>
+                                 onUpdate={onChildUpdate}/>
             </ActivityBox>
         </>
     );

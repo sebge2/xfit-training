@@ -4,6 +4,7 @@ import DurationDisplay from "../duration-display.tsx";
 import {ActivityBox} from "../activity-box.tsx";
 import {ACTIVITY_TYPE_LABELS} from "../../../../model/wod/activity/activity-type.ts";
 import {ReactNode} from "react";
+import {Activity} from "../../../../model/wod/activity/activity.ts";
 
 type Props = ActivityProps & {
     activity: Enom,
@@ -18,6 +19,10 @@ export function EnomDisplay({activity, parentContext, onUpdate: onUpdateDelegate
 
     function onUpdate() {
         onUpdateDelegate(activity);
+    }
+
+    function onChildUpdate(child: Activity) {
+        onUpdateDelegate(activity.updateActivity(child));
     }
 
     let title: ReactNode;
@@ -38,7 +43,7 @@ export function EnomDisplay({activity, parentContext, onUpdate: onUpdateDelegate
                      actions={parentContext.childrenActions}>
             <ActivityDisplay activity={activity.activity}
                              parentContext={currentContext}
-                             onUpdate={onUpdateDelegate}/>
+                             onUpdate={onChildUpdate}/>
         </ActivityBox>
     </>;
 }
