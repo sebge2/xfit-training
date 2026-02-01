@@ -3,7 +3,7 @@ import {Tabs} from "../../../components/core/structure/Tabs.tsx";
 import {WodRecords} from "./WodRecords.tsx";
 import InfoIcon from "@mui/icons-material/Info";
 import {WodMetadataEditor} from "./WodMetadataEditor.tsx";
-import {WodActivityViewPage} from "./WodActivityEditPage.tsx";
+import {WodActivityEditPage} from "./WodActivityEditPage.tsx";
 
 export function WodEditPage() {
     const tabs: TabDescriptor[] = generateTabs();
@@ -20,7 +20,7 @@ function generateTabs(): TabDescriptor[] {
         },
         {
             header: 'Activity',
-            content: <WodActivityViewPage/>,
+            content: <WodActivityEditPage/>,
             defaultSelected: false,
         },
         {

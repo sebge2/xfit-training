@@ -4,5 +4,5 @@ export interface ActivityDto {
 
     get type(): ActivityType;
 
-    get comment(): string | undefined;
+    get comment(): string | null;
 }

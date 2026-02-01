@@ -16,6 +16,6 @@ export interface ExerciseDto extends DocumentData {
 
     get unit(): MeasureUnit;
 
-    get comment(): string | undefined;
+    get comment(): string | null;
 
 }

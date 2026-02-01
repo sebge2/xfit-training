@@ -14,7 +14,7 @@ export class Exercise {
             dto.subCategory,
             dto.tags,
             dto.unit,
-            dto.comment,
+            dto.comment || undefined,
         );
     }
 
@@ -25,7 +25,7 @@ export class Exercise {
             subCategory: exercise.subCategory,
             tags: exercise.tags,
             unit: exercise.unit,
-            comment: exercise.comment,
+            comment: exercise.comment || null,
         };
     }
 

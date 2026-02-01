@@ -13,7 +13,7 @@ export class ForTime extends Activity {
         return new ForTime(
             Duration.fromDto(dto.duration) as Duration,
             mapActivityFromDto(dto.activity),
-            dto.comment
+            dto.comment || undefined,
         );
     }
 
@@ -22,7 +22,7 @@ export class ForTime extends Activity {
             type: activity.type,
             duration: Duration.toDto(activity.duration),
             activity: mapActivityToDto(activity.activity),
-            comment: activity.comment,
+            comment: activity.comment || null,
         };
     }
 
@@ -49,5 +49,9 @@ export class ForTime extends Activity {
                 this.duration
             )
         ]);
+    }
+
+    updateActivity(child: Activity) {
+        return new ForTime(this.duration, child, this.comment);
     }
 }

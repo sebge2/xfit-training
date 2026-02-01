@@ -9,7 +9,7 @@ export class ActivityExercise extends Activity {
         return new ActivityExercise(
             dto.repetitions,
             dto.exercise,
-            dto.comment,
+            dto.comment || undefined,
         );
     }
 
@@ -18,7 +18,7 @@ export class ActivityExercise extends Activity {
             type: activity.type,
             repetitions: activity.repetitions,
             exercise: activity.exercise,
-            comment: activity.comment,
+            comment: activity.comment || null,
         };
     }
 

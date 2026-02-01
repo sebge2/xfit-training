@@ -50,7 +50,7 @@ export class WodService {
         return wod;
     }
 
-    async update(wod: Wod): Promise<Wod | null> {
+    async update(wod: Wod): Promise<Wod> {
         await updateDoc(
             this._getWodReference(wod),
             Wod.toDto(wod) as UpdateData<WodDto>

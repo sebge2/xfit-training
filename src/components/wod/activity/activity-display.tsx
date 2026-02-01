@@ -14,6 +14,7 @@ import {EnomDisplay} from "./enom/enom-display.tsx";
 import {Enom} from "../../../model/wod/activity/enom.ts";
 import {RepetitionsDisplay} from "./repetition/repetitions-display.tsx";
 import {Repetitions} from "../../../model/wod/activity/repetitions.ts";
+import {BoxActionType} from "./activity-box.tsx";
 
 export interface ActivityContext {
 
@@ -24,6 +25,7 @@ export interface ActivityContext {
 
 export type ActionsProps = {
     onUpdate: (activity: Activity) => void,
+    onAction: (action: BoxActionType, param?: string) => void,
 };
 
 type Props = ActionsProps & {
@@ -31,36 +33,43 @@ type Props = ActionsProps & {
     parentContext: ActivityContext;
 };
 
-export function ActivityDisplay({activity, parentContext, onUpdate}: Props) {
+export function ActivityDisplay({activity, parentContext, onUpdate, onAction}: Props) {
     switch (activity.type) {
         case ActivityType.EXERCISE:
             return (<ActivityExerciseDisplay exercise={activity as ActivityExercise}
                                              parentContext={parentContext}
-                                             onUpdate={onUpdate}/>);
+                                             onUpdate={onUpdate}
+                                             onAction={onAction}/>);
         case ActivityType.SEQUENCE:
             return (<SequenceDisplay sequence={activity as Sequence}
                                      parentContext={parentContext}
-                                     onUpdate={onUpdate}/>);
+                                     onUpdate={onUpdate}
+                                     onAction={onAction}/>);
         case ActivityType.REPETITIONS:
             return (<RepetitionsDisplay repetitions={activity as Repetitions}
                                         parentContext={parentContext}
-                                        onUpdate={onUpdate}/>);
+                                        onUpdate={onUpdate}
+                                        onAction={onAction}/>);
         case ActivityType.REST:
             return (<RestDisplay rest={activity as Rest}
                                  parentContext={parentContext}
-                                 onUpdate={onUpdate}/>);
+                                 onUpdate={onUpdate}
+                                 onAction={onAction}/>);
         case ActivityType.AMRAP:
             return (<AmrapDisplay amrap={activity as Amrap}
                                   parentContext={parentContext}
-                                  onUpdate={onUpdate}/>);
+                                  onUpdate={onUpdate}
+                                  onAction={onAction}/>);
         case ActivityType.ENOM:
             return (<EnomDisplay enom={activity as Enom}
                                  parentContext={parentContext}
-                                 onUpdate={onUpdate}/>);
+                                 onUpdate={onUpdate}
+                                 onAction={onAction}/>);
         case ActivityType.FOR_TIME:
             return (<ForTimeDisplay forTime={activity as ForTime}
                                     parentContext={parentContext}
-                                    onUpdate={onUpdate}/>);
+                                    onUpdate={onUpdate}
+                                    onAction={onAction}/>);
         default:
             throw Error(`Unsupported type ${activity.type}.`);
     }

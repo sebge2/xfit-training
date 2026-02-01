@@ -10,8 +10,8 @@ export class Sequence extends Activity {
     static fromDto(dto: SequenceDto): Sequence {
         return new Sequence(
             mapActivityFromAllDto(dto.activities),
-            dto.name,
-            dto.comment
+            dto.name || undefined,
+            dto.comment || undefined,
         );
     }
 
@@ -19,8 +19,8 @@ export class Sequence extends Activity {
         return {
             type: activity.type,
             activities: mapActivityToAllDto(activity.activities),
-            name: activity.name,
-            comment: activity.comment,
+            name: activity.name || null,
+            comment: activity.comment || null,
         };
     }
 
@@ -40,11 +40,68 @@ export class Sequence extends Activity {
         return this.activities.reduce((acc, activity) => acc.merge(activity.toSequencerTasks(parent)), new TaskSet([]));
     }
 
-    addActivity(activity: Activity) {
+    addActivity(child: Activity): Sequence {
         return new Sequence(
-            [...this.activities, activity],
+            [...this.activities, child],
             this.name,
             this.comment,
         );
+    }
+
+    updateActivity(child: Activity): Sequence {
+        const index = this._findIndex(child.id);
+        if (index < 0) {
+            return this;
+        }
+
+        return new Sequence(
+            this.activities.slice(0, index).concat(child).concat(this.activities.slice(index + 1)),
+            this.name,
+            this.comment,
+        );
+    }
+
+    deleteActivity(id: string) {
+        const index = this._findIndex(id);
+        if (index < 0) {
+            return this;
+        }
+
+        return new Sequence(
+            this.activities.slice(0, index).concat(this.activities.slice(index + 1)),
+            this.name,
+            this.comment,
+        );
+    }
+
+    moveActivity(id: string, newIndex: number) {
+        const index = this._findIndex(id);
+        if (index < 0) {
+            return this;
+        }
+
+        const count = this.activities.length;
+        if (count <= 1) {
+            return this;
+        }
+
+        const targetIndex = Math.max(0, Math.min(newIndex, count - 1));
+        if (targetIndex === index) {
+            return this;
+        }
+
+        const updatedActivities = this.activities.slice();
+        const [moved] = updatedActivities.splice(index, 1);
+        updatedActivities.splice(targetIndex, 0, moved);
+
+        return new Sequence(
+            updatedActivities,
+            this.name,
+            this.comment,
+        );
+    }
+
+    private _findIndex(id: string): number {
+        return this.activities.findIndex(child => child.id === id);
     }
 }
