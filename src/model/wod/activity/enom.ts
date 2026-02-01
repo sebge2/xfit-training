@@ -5,7 +5,7 @@ import {EnomDto} from "../../dto/wod/activity/enom.dto.ts";
 import {TaskSet} from "../board/task-set.ts";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
-import {mapActivityFromDto} from "./activity-utils.ts";
+import {mapActivityFromDto, mapActivityToDto} from "./activity-utils.ts";
 
 export class Enom extends Activity {
 
@@ -14,7 +14,7 @@ export class Enom extends Activity {
             Duration.fromDto(dto.duration) as Duration,
             dto.repetitions,
             mapActivityFromDto(dto.activity),
-            dto.comment
+            dto.comment || undefined,
         );
     }
 
@@ -23,8 +23,8 @@ export class Enom extends Activity {
             type: activity.type,
             duration: Duration.toDto(activity.duration) as Duration,
             repetitions: activity.repetitions,
-            activity: activity.activity,
-            comment: activity.comment,
+            activity: mapActivityToDto(activity.activity),
+            comment: activity.comment || null,
         };
     }
 
@@ -50,5 +50,9 @@ export class Enom extends Activity {
                 ))
                 .flat()
         );
+    }
+
+    updateActivity(child: Activity): Enom {
+        return new Enom(this.duration, this.repetitions, child, this.comment);
     }
 }

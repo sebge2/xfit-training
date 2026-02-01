@@ -3,7 +3,7 @@ import {ActivityType} from "./activity-type.ts";
 import {RepetitionsDto} from "../../dto/wod/activity/repetitions.dto.ts";
 import {TaskSet} from "../board/task-set.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
-import {mapActivityFromDto} from "./activity-utils.ts";
+import {mapActivityFromDto, mapActivityToDto} from "./activity-utils.ts";
 
 export class Repetitions extends Activity {
 
@@ -11,7 +11,7 @@ export class Repetitions extends Activity {
         return new Repetitions(
             dto.repetitions,
             mapActivityFromDto(dto.activity),
-            dto.comment
+            dto.comment || undefined,
         );
     }
 
@@ -19,8 +19,8 @@ export class Repetitions extends Activity {
         return {
             type: activity.type,
             repetitions: activity.repetitions,
-            activity: activity.activity,
-            comment: activity.comment,
+            activity: mapActivityToDto(activity.activity),
+            comment: activity.comment || null,
         };
     }
 
@@ -37,5 +37,9 @@ export class Repetitions extends Activity {
             Array.from({length: this.repetitions}, (_, index) => this.activity.toSequencerTasks(BoardTextInfo.single(`${index}/${this.repetitions}`, undefined).mergeWithParent(parent)).tasks)
                 .flat()
         );
+    }
+
+    updateActivity(child: Activity): Repetitions {
+        return new Repetitions(this.repetitions, child, this.comment);
     }
 }

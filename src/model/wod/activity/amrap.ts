@@ -5,7 +5,7 @@ import {AmrapDto} from "../../dto/wod/activity/amrap.dto.ts";
 import {TaskSet} from "../board/task-set.ts";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
-import {mapActivityFromDto} from "./activity-utils.ts";
+import {mapActivityFromDto, mapActivityToDto} from "./activity-utils.ts";
 
 export class Amrap extends Activity {
 
@@ -13,7 +13,7 @@ export class Amrap extends Activity {
         return new Amrap(
             Duration.fromDto(dto.duration) as Duration,
             mapActivityFromDto(dto.activity),
-            dto.comment
+            dto.comment || undefined,
         );
     }
 
@@ -21,8 +21,8 @@ export class Amrap extends Activity {
         return {
             type: activity.type,
             duration: Duration.toDto(activity.duration) as Duration,
-            activity: activity.activity,
-            comment: activity.comment,
+            activity: mapActivityToDto(activity.activity),
+            comment: activity.comment || null,
         };
     }
 
@@ -45,5 +45,9 @@ export class Amrap extends Activity {
                 this.duration
             )
         ]);
+    }
+
+    updateActivity(child: Activity): Amrap {
+        return new Amrap(this.duration, child, this.comment);
     }
 }
