@@ -15,7 +15,7 @@ export const ACTIVITY_TYPE_LABELS: Record<ActivityType, string> = {
     [ActivityType.SEQUENCE]: 'Sequence',
     [ActivityType.REPETITIONS]: 'Repetitions',
     [ActivityType.REST]: 'Rest',
-    [ActivityType.AMRAP]: 'As Many Rounds As Possible',
-    [ActivityType.ENOM]: 'Every Minute On the Minute',
+    [ActivityType.AMRAP]: 'AMRAP',
+    [ActivityType.ENOM]: 'ENOM',
     [ActivityType.FOR_TIME]: 'For Time'
 };

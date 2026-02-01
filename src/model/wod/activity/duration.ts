@@ -38,6 +38,10 @@ export class Duration {
         return this.fromSeconds(Math.floor(milliSeconds / 1000));
     }
 
+    static empty(): Duration {
+        return new Duration(0, 0, 0)
+    }
+
     constructor(
         public readonly hours: number,
         public readonly minutes: number = 0,

@@ -2,7 +2,7 @@ import {ReactNode} from "react";
 import Stack from '@mui/material/Stack';
 
 type Props = {
-    children: ReactNode[],
+    children: ReactNode[] | ReactNode,
 };
 
 export function FormStack({children}: Props) {

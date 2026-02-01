@@ -22,7 +22,7 @@ export function WodMetadataCreator() {
     async function onSave(formData: FormData, form: WodFormType): Promise<void> {
         const wod = new Wod(
             null,
-            new Sequence([], null),
+            Sequence.empty(),
             getTextValue(form.nameField, formData) as string,
             getMeasureUnitValue(form.measureUnitField, formData),
             getWodTagsValue(form.tagsField, formData),

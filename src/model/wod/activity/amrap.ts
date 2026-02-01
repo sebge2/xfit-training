@@ -29,7 +29,7 @@ export class Amrap extends Activity {
     constructor(
         public readonly duration: Duration,
         public readonly activity: Activity,
-        comment: string | null,
+        comment: string | undefined,
     ) {
         super(
             ActivityType.AMRAP,

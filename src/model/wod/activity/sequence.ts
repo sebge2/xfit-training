@@ -24,6 +24,10 @@ export class Sequence extends Activity {
         };
     }
 
+    static empty(): Sequence {
+        return new Sequence([], undefined, undefined);
+    }
+
     constructor(
         public readonly activities: Activity[],
         public readonly name: string | undefined,
@@ -34,5 +38,13 @@ export class Sequence extends Activity {
 
     toSequencerTasks(parent: BoardTextInfo): TaskSet {
         return this.activities.reduce((acc, activity) => acc.merge(activity.toSequencerTasks(parent)), new TaskSet([]));
+    }
+
+    addActivity(activity: Activity) {
+        return new Sequence(
+            [...this.activities, activity],
+            this.name,
+            this.comment,
+        );
     }
 }

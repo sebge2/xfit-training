@@ -4,7 +4,7 @@ export default function DurationDisplay({duration}: { duration: Duration | undef
     return (
         <>
             {duration && duration.hasDuration && <span>
-                {(duration.minutes > 0) && duration?.minutes + 'm'} {(duration.seconds > 0) && duration?.seconds + 's'}
+                {(duration.hours > 0) && duration?.hours + 'h'} {(duration.minutes > 0) && duration?.minutes + 'm'} {(duration.seconds > 0) && duration?.seconds + 's'}
             </span>}
         </>
     );

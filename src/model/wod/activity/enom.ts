@@ -32,7 +32,7 @@ export class Enom extends Activity {
         public readonly duration: Duration,
         public readonly repetitions: number,
         public readonly activity: Activity,
-        comment: string | null,
+        comment: string | undefined,
     ) {
         super(
             ActivityType.ENOM,

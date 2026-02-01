@@ -22,14 +22,14 @@ export class ForTime extends Activity {
             type: activity.type,
             duration: Duration.toDto(activity.duration),
             activity: mapActivityToDto(activity.activity),
-            comment: null,
+            comment: activity.comment,
         };
     }
 
     constructor(
         public readonly duration: Duration | null,
         public readonly activity: Activity,
-        comment: string | null,
+        comment: string | undefined,
     ) {
         super(
             ActivityType.FOR_TIME,

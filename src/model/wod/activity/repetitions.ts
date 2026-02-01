@@ -27,7 +27,7 @@ export class Repetitions extends Activity {
     constructor(
         public readonly repetitions: number,
         public readonly activity: Activity,
-        comment: string | null,
+        comment: string | undefined,
     ) {
         super(ActivityType.REPETITIONS, comment);
     }

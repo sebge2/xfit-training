@@ -15,6 +15,7 @@ import {EnomDto} from "../../dto/wod/activity/enom.dto.ts";
 import {ForTime} from "./for-time.ts";
 import {ForTimeDto} from "../../dto/wod/activity/for-time.dto.ts";
 import {Activity} from "./activity.ts";
+import {Duration} from "./duration.ts";
 
 export function mapActivityFromDto(dto: ActivityDto): Activity {
     switch (dto.type) {
@@ -64,4 +65,25 @@ export function mapActivityToDto(activity: Activity): ActivityDto {
 
 export function mapActivityToAllDto(activities: Activity[]): ActivityDto[] {
     return activities.map(dto => mapActivityToDto(dto));
+}
+
+export function createActivity(type: ActivityType): Activity {
+    switch (type) {
+        case ActivityType.EXERCISE:
+            return new ActivityExercise('0', '', undefined);
+        case ActivityType.SEQUENCE:
+            return Sequence.empty();
+        case ActivityType.REPETITIONS:
+            return new Repetitions(0, Sequence.empty(), undefined)
+        case ActivityType.REST:
+            return new Rest(Duration.empty(), undefined);
+        case ActivityType.AMRAP:
+            return new Amrap(Duration.empty(), Sequence.empty(), undefined);
+        case ActivityType.ENOM:
+            return new Enom(Duration.empty(), 0, Sequence.empty(), undefined);
+        case ActivityType.FOR_TIME:
+            return new ForTime(Duration.empty(), Sequence.empty(), undefined);
+        default:
+            throw Error(`Unsupported type ${type}.`);
+    }
 }
