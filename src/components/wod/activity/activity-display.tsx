@@ -14,62 +14,58 @@ import {EnomDisplay} from "./enom/enom-display.tsx";
 import {Enom} from "../../../model/wod/activity/enom.ts";
 import {RepetitionsDisplay} from "./repetition/repetitions-display.tsx";
 import {Repetitions} from "../../../model/wod/activity/repetitions.ts";
-import {BoxActionType} from "./activity-box.tsx";
+import {MoreActionButtonAction} from "../../core/buttton/MoreActionButton.tsx";
 
 export interface ActivityContext {
 
     editing: boolean,
 
     activity?: Activity,
+
+    childrenActions: MoreActionButtonAction[],
 }
 
-export type ActionsProps = {
+export type ActivityProps = {
+    activity: Activity,
+
+    parentContext: ActivityContext,
+
     onUpdate: (activity: Activity) => void,
-    onAction: (action: BoxActionType, param?: string) => void,
 };
 
-type Props = ActionsProps & {
-    activity: Activity;
-    parentContext: ActivityContext;
+type Props = ActivityProps & {
 };
 
-export function ActivityDisplay({activity, parentContext, onUpdate, onAction}: Props) {
+export function ActivityDisplay({activity, parentContext, onUpdate}: Props) {
     switch (activity.type) {
         case ActivityType.EXERCISE:
-            return (<ActivityExerciseDisplay exercise={activity as ActivityExercise}
+            return (<ActivityExerciseDisplay activity={activity as ActivityExercise}
                                              parentContext={parentContext}
-                                             onUpdate={onUpdate}
-                                             onAction={onAction}/>);
+                                             onUpdate={onUpdate}/>);
         case ActivityType.SEQUENCE:
-            return (<SequenceDisplay sequence={activity as Sequence}
+            return (<SequenceDisplay activity={activity as Sequence}
                                      parentContext={parentContext}
-                                     onUpdate={onUpdate}
-                                     onAction={onAction}/>);
+                                     onUpdate={onUpdate}/>);
         case ActivityType.REPETITIONS:
-            return (<RepetitionsDisplay repetitions={activity as Repetitions}
+            return (<RepetitionsDisplay activity={activity as Repetitions}
                                         parentContext={parentContext}
-                                        onUpdate={onUpdate}
-                                        onAction={onAction}/>);
+                                        onUpdate={onUpdate}/>);
         case ActivityType.REST:
-            return (<RestDisplay rest={activity as Rest}
+            return (<RestDisplay activity={activity as Rest}
                                  parentContext={parentContext}
-                                 onUpdate={onUpdate}
-                                 onAction={onAction}/>);
+                                 onUpdate={onUpdate}/>);
         case ActivityType.AMRAP:
-            return (<AmrapDisplay amrap={activity as Amrap}
+            return (<AmrapDisplay activity={activity as Amrap}
                                   parentContext={parentContext}
-                                  onUpdate={onUpdate}
-                                  onAction={onAction}/>);
+                                  onUpdate={onUpdate}/>);
         case ActivityType.ENOM:
-            return (<EnomDisplay enom={activity as Enom}
+            return (<EnomDisplay activity={activity as Enom}
                                  parentContext={parentContext}
-                                 onUpdate={onUpdate}
-                                 onAction={onAction}/>);
+                                 onUpdate={onUpdate}/>);
         case ActivityType.FOR_TIME:
-            return (<ForTimeDisplay forTime={activity as ForTime}
+            return (<ForTimeDisplay activity={activity as ForTime}
                                     parentContext={parentContext}
-                                    onUpdate={onUpdate}
-                                    onAction={onAction}/>);
+                                    onUpdate={onUpdate}/>);
         default:
             throw Error(`Unsupported type ${activity.type}.`);
     }

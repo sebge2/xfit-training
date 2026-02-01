@@ -1,30 +1,31 @@
 import {Amrap} from "../../../../model/wod/activity/amrap.ts";
-import {ActionsProps, ActivityContext, ActivityDisplay} from "../activity-display.tsx";
+import {ActivityContext, ActivityDisplay, ActivityProps} from "../activity-display.tsx";
 import DurationDisplay from "../duration-display.tsx";
-import {ActivityBox, BoxActionType} from "../activity-box.tsx";
+import {ActivityBox} from "../activity-box.tsx";
 import {ACTIVITY_TYPE_LABELS} from "../../../../model/wod/activity/activity-type.ts";
 
-type Props = ActionsProps & {
-    amrap: Amrap,
-    parentContext: ActivityContext,
+type Props = ActivityProps & {
+    activity: Amrap,
 };
 
-export function AmrapDisplay({amrap, parentContext, onUpdate: onUpdateDelegate}: Props) {
-    const currentContext = {
+export function AmrapDisplay({activity, parentContext, onUpdate: onUpdateDelegate}: Props) {
+    const currentContext: ActivityContext = {
         editing: parentContext.editing,
-        parent: amrap,
+        activity: activity,
+        childrenActions: [],
     };
+
     function onUpdate() {
-        onUpdateDelegate(amrap);
+        onUpdateDelegate(activity);
     }
 
     return (
         <>
-            <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[amrap.type]}
-                         innerTitle={amrap.duration &&
-                             <span>Duration: <DurationDisplay duration={amrap.duration}/></span>}
-                         context={currentContext}>
-                <ActivityDisplay activity={amrap.activity}
+            <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
+                         innerTitle={activity.duration &&
+                             <span>Duration: <DurationDisplay duration={activity.duration}/></span>}
+                         actions={parentContext.childrenActions}>
+                <ActivityDisplay activity={activity.activity}
                                  parentContext={currentContext}
                                  onUpdate={onUpdateDelegate}/>
             </ActivityBox>

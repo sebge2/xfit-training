@@ -1,29 +1,25 @@
 import {Repetitions} from "../../../../model/wod/activity/repetitions.ts";
-import {ActionsProps, ActivityContext, ActivityDisplay} from "../activity-display.tsx";
+import {ActivityContext, ActivityDisplay, ActivityProps} from "../activity-display.tsx";
 import {ActivityBox} from "../activity-box.tsx";
 import {ACTIVITY_TYPE_LABELS} from "../../../../model/wod/activity/activity-type.ts";
 
-type Props = ActionsProps & {
-    repetitions: Repetitions,
-    parentContext: ActivityContext,
+type Props = ActivityProps & {
+    activity: Repetitions,
 };
 
-export function RepetitionsDisplay({repetitions, parentContext, onUpdate: onUpdateDelegate}: Props) {
-    const currentContext = {
+export function RepetitionsDisplay({activity, parentContext, onUpdate: onUpdateDelegate}: Props) {
+    const currentContext: ActivityContext = {
         editing: parentContext.editing,
-        parent: repetitions,
+        activity: activity,
+        childrenActions: [],
     };
-
-    function onUpdate() {
-        onUpdateDelegate(repetitions);
-    }
 
     return (
         <>
-            <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[repetitions.type]}
-                         innerTitle={repetitions.repetitions + ' rounds'}
-                         context={currentContext}>
-                <ActivityDisplay activity={repetitions.activity}
+            <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
+                         innerTitle={activity.repetitions + ' rounds'}
+                         actions={parentContext.childrenActions}>
+                <ActivityDisplay activity={activity.activity}
                                  parentContext={currentContext}
                                  onUpdate={onUpdateDelegate}/>
             </ActivityBox>

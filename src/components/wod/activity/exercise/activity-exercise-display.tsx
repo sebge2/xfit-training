@@ -1,25 +1,29 @@
-import {ActivityExercise} from "../../../../model/wod/activity/activity-exercise.ts";
 import {ActivityBox} from "../activity-box.tsx";
-import {ActionsProps, ActivityContext} from "../activity-display.tsx";
+import {ActivityContext, ActivityProps} from "../activity-display.tsx";
+import {ActivityExerciseDataEditor} from "./activity-exercise-data-editor.tsx";
+import {ActivityExercise} from "../../../../model/wod/activity/activity-exercise.ts";
 
-type Props = ActionsProps & {
-    exercise: ActivityExercise,
-    parentContext: ActivityContext,
+type Props = ActivityProps & {
+    activity: ActivityExercise,
 };
 
-export function ActivityExerciseDisplay({exercise, parentContext, onUpdate: onUpdateDelegate}: Props) {
-    const currentContext = {
+export function ActivityExerciseDisplay({activity, parentContext, onUpdate: onUpdateDelegate}: Props) {
+    const currentContext: ActivityContext = {
         editing: parentContext.editing,
-        parent: exercise,
+        activity: activity,
+        childrenActions: [],
     };
 
     function onUpdate() {
-        onUpdateDelegate(exercise);
+        onUpdateDelegate(activity);
     }
 
     return (
-        <ActivityBox context={currentContext}>
-            {exercise.repetitions} {exercise.exercise} {!!exercise.comment && '(' + exercise.comment + ')'}
+        <ActivityBox actions={parentContext.childrenActions}>
+            {!currentContext.editing && <>
+                {activity.repetitions} {activity.exercise} {!!activity.comment && '(' + activity.comment + ')'}
+            </>}
+            {currentContext.editing && <ActivityExerciseDataEditor exercise={activity} onUpdate={onUpdate}/>}
         </ActivityBox>
     );
 }

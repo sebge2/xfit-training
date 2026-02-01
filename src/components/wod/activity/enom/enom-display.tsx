@@ -1,44 +1,42 @@
 import {Enom} from "../../../../model/wod/activity/enom.ts";
-import {ActionsProps, ActivityContext, ActivityDisplay} from "../activity-display.tsx";
+import {ActivityContext, ActivityDisplay, ActivityProps} from "../activity-display.tsx";
 import DurationDisplay from "../duration-display.tsx";
-import {ActivityBox, BoxActionType} from "../activity-box.tsx";
+import {ActivityBox} from "../activity-box.tsx";
 import {ACTIVITY_TYPE_LABELS} from "../../../../model/wod/activity/activity-type.ts";
 import {ReactNode} from "react";
-import {InputMinuteSecond} from "../../../core/form/InputMinuteSecond.tsx";
-import * as React from "react";
 
-type Props = ActionsProps & {
-    enom: Enom,
-    parentContext: ActivityContext,
+type Props = ActivityProps & {
+    activity: Enom,
 };
 
-export function EnomDisplay({enom, parentContext, onUpdate: onUpdateDelegate}: Props) {
-    const currentContext = {
+export function EnomDisplay({activity, parentContext, onUpdate: onUpdateDelegate}: Props) {
+    const currentContext: ActivityContext = {
         editing: parentContext.editing,
-        parent: enom,
+        activity: activity,
+        childrenActions: [],
     };
 
     function onUpdate() {
-        onUpdateDelegate(enom);
+        onUpdateDelegate(activity);
     }
 
     let title: ReactNode;
-    if(parentContext.editing) {
+    if (parentContext.editing) {
 
-        <InputMinuteSecond key={`value-${enom.id}`} formField={valueField}
-                           onChange={(value) => {
-                               setValueField(initValueField(value))
-                           }}
-        />
+        // <InputMinuteSecond key={`value-${activity.id}`} formField={valueField}
+        //                    onChange={(value) => {
+        //                        setValueField(initValueField(value))
+        //                    }}
+        // />
     } else {
-        title = <>ENOM <DurationDisplay duration={enom.duration}/> {enom.repetitions} repetitions</>;
+        title = <>ENOM <DurationDisplay duration={activity.duration}/> {activity.repetitions} repetitions</>;
     }
 
     return <>
-        <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[enom.type]}
+        <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
                      innerTitle={title}
-                     context={currentContext}>
-            <ActivityDisplay activity={enom.activity}
+                     actions={parentContext.childrenActions}>
+            <ActivityDisplay activity={activity.activity}
                              parentContext={currentContext}
                              onUpdate={onUpdateDelegate}/>
         </ActivityBox>

@@ -2,28 +2,22 @@ import {Rest} from "../../../../model/wod/activity/rest.ts";
 import DurationDisplay from "../duration-display.tsx";
 import {ActivityBox} from "../activity-box.tsx";
 import {ACTIVITY_TYPE_LABELS} from "../../../../model/wod/activity/activity-type.ts";
-import {ActionsProps, ActivityContext} from "../activity-display.tsx";
+import {ActivityProps} from "../activity-display.tsx";
 
-type Props = ActionsProps & {
-    rest: Rest,
-    parentContext: ActivityContext,
+type Props = ActivityProps & {
+    activity: Rest,
 };
 
-export function RestDisplay({rest, parentContext, onUpdate: onUpdateDelegate}: Props) {
-    const currentContext = {
-        editing: parentContext.editing,
-        parent: rest,
-    };
-
+export function RestDisplay({activity, parentContext, onUpdate: onUpdateDelegate}: Props) {
     function onUpdate() {
-        onUpdateDelegate(rest);
+        onUpdateDelegate(activity);
     }
 
     return (
         <>
-            <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[rest.type]}
-                         context={currentContext}>
-                {rest.duration && <span>Rest: <DurationDisplay duration={rest.duration}/></span>}
+            <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
+                         actions={parentContext.childrenActions}>
+                {activity.duration && <span>Rest: <DurationDisplay duration={activity.duration}/></span>}
             </ActivityBox>
         </>
     );

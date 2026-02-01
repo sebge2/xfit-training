@@ -12,6 +12,7 @@ export const WodActivityEditPage = () => {
     const parentActivityContext: ActivityContext = {
         editing: true,
         activity: undefined,
+        childrenActions: [],
     };
 
     async function onUpdate(activity: Activity) {
