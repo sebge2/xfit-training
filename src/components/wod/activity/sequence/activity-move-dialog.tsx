@@ -25,7 +25,7 @@ export function ActivityMoveSelector({
                                          onCancel
                                      }: Props) {
 
-    const indexField = new FormField<number>('index', 'Index', childIndexToMove, true);
+    const indexField = new FormField<number>('index', 'Index', childIndexToMove + 1, true);
     const originalFormState = FormState.create([indexField]);
     const [state, formAction] = useActionState<FormState, FormData>(onSelected, originalFormState);
     const formRef = useRef<HTMLFormElement>(null);
