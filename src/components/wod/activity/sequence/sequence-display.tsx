@@ -75,12 +75,12 @@ export function SequenceDisplay({activity, parentContext, onUpdate: onUpdateDele
         <ActivityMoveSelector key={childToMove?.id}
                               open={!!childToMove}
                               activities={activity.activities}
-                              childIndexToMove={activity.activities.findIndex(act => act.id === childToMove?.id) + 1}
+                              childIndexToMove={activity.activities.findIndex(act => act.id === childToMove?.id)}
                               onSelected={onChildMove}
                               onCancel={onCancelMoveChildActivity}/>
 
         <ActivityBox delimiterTitle={activity.name}
-                     actions={[...sequenceActions, ...parentContext.childrenActions]}>
+                     actions={[...sequenceActions, ...(parentContext.childrenActions || [])]}>
             <div className={style.sequenceActivity}>
                 {activity.activities.map(child => {
                     const currentContext: ActivityContext = {
