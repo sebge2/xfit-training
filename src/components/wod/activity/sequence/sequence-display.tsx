@@ -72,9 +72,10 @@ export function SequenceDisplay({activity, parentContext, onUpdate: onUpdateDele
         <ActivitySelectorDialog open={showAddDialog}
                                 onSelected={onAddChildActivity}
                                 onCancel={onCancelAddChildActivity}/>
-        <ActivityMoveSelector open={!!childToMove}
+        <ActivityMoveSelector key={childToMove?.id}
+                              open={!!childToMove}
                               activities={activity.activities}
-                              childToMove={childToMove as Activity}
+                              childIndexToMove={activity.activities.findIndex(act => act.id === childToMove?.id) + 1}
                               onSelected={onChildMove}
                               onCancel={onCancelMoveChildActivity}/>
 
