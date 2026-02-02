@@ -9,10 +9,12 @@ export type InputNumberFormField = FormField<number | unknown>;
 type Props = {
     formField: InputNumberFormField,
     endAdornment?: React.ReactNode,
+    min?: number,
+    max?: number,
     onChange?: (value: number | undefined) => Promise<void> | void,
 };
 
-export function InputNumber({formField, endAdornment, onChange: onChangeDelegate}: Props): ReactElement {
+export function InputNumber({formField, endAdornment, min, max, onChange: onChangeDelegate}: Props): ReactElement {
     async function onChange(event: React.ChangeEvent<HTMLInputElement>) {
         if (onChangeDelegate) {
             await onChangeDelegate((event.target.value !== '') ? +event.target.value : undefined);
@@ -25,6 +27,7 @@ export function InputNumber({formField, endAdornment, onChange: onChangeDelegate
             id={formField.id}
             name={formField.id}
             defaultValue={formField.defaultValue}
+            inputProps={{ min: min, max: max }}
             error={formField.hasErrors}
             endAdornment={endAdornment}
             onChange={onChange}/>

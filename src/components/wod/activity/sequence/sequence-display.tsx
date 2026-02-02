@@ -1,36 +1,46 @@
 import {ActivityContext, ActivityDisplay, ActivityProps} from "../activity-display.tsx";
 import {Sequence} from "../../../../model/wod/activity/sequence.ts";
 import style from "../Activity.module.scss";
-import {ActivityBox} from "../activity-box.tsx";
 import {useState} from "react";
 import {ActivityType} from "../../../../model/wod/activity/activity-type.ts";
-import {ActivitySelectorDialog} from "../activity-selector-dialog.tsx";
+import {ActivitySelectorDialog} from "./activity-selector-dialog.tsx";
 import {createActivity} from "../../../../model/wod/activity/activity-utils.ts";
 import {Activity} from "../../../../model/wod/activity/activity.ts";
 import {MoreActionButtonAction} from "../../../core/buttton/MoreActionButton.tsx";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoveUpIcon from "@mui/icons-material/MoveUp";
+import {ActivityMoveSelector} from "./activity-move-dialog.tsx";
+import {ActivityBox} from "../activity-box.tsx";
 
 type Props = ActivityProps & {
     activity: Sequence,
 };
 
 export function SequenceDisplay({activity, parentContext, onUpdate: onUpdateDelegate}: Props) {
-    const [showDialog, setShowDialog] = useState<boolean>(false);
+    const [showAddDialog, setShowAddDialog] = useState<boolean>(false);
+    const [childToMove, setChildToMove] = useState<Activity | undefined>(undefined);
 
     function onAddChildActivityRequested() {
-        setShowDialog(true);
+        setShowAddDialog(true);
     }
 
     function onCancelAddChildActivity() {
-        setShowDialog(false);
+        setShowAddDialog(false);
     }
 
     function onAddChildActivity(activityType: ActivityType) {
-        setShowDialog(false);
+        setShowAddDialog(false);
 
         onUpdateDelegate(activity.addActivity(createActivity(activityType)));
+    }
+
+    function onMoveChildActivityRequested(child: Activity) {
+        setChildToMove(child);
+    }
+
+    function onCancelMoveChildActivity() {
+        setChildToMove(undefined);
     }
 
     function onChildUpdate(child: Activity) {
@@ -41,8 +51,10 @@ export function SequenceDisplay({activity, parentContext, onUpdate: onUpdateDele
         onUpdateDelegate(activity.deleteActivity(id));
     }
 
-    function onChildMove(id: string, index: number) {
-        onUpdateDelegate(activity.moveActivity(id, index));
+    function onChildMove(newIndex: number) {
+        setChildToMove(undefined);
+
+        onUpdateDelegate(activity.moveActivity(childToMove?.id as string, newIndex));
     }
 
     const sequenceActions: MoreActionButtonAction[] = [];
@@ -57,8 +69,14 @@ export function SequenceDisplay({activity, parentContext, onUpdate: onUpdateDele
     }
 
     return <>
-        <ActivitySelectorDialog open={showDialog} onSelected={onAddChildActivity} onCancel={onCancelAddChildActivity}>
-        </ActivitySelectorDialog>
+        <ActivitySelectorDialog open={showAddDialog}
+                                onSelected={onAddChildActivity}
+                                onCancel={onCancelAddChildActivity}/>
+        <ActivityMoveSelector open={!!childToMove}
+                              activities={activity.activities}
+                              childToMove={childToMove as Activity}
+                              onSelected={onChildMove}
+                              onCancel={onCancelMoveChildActivity}/>
 
         <ActivityBox delimiterTitle={activity.name}
                      actions={[...sequenceActions, ...parentContext.childrenActions]}>
@@ -78,10 +96,10 @@ export function SequenceDisplay({activity, parentContext, onUpdate: onUpdateDele
                         });
 
                         currentContext.childrenActions.push({
-                                label: "Move",
-                                onClick: () => onChildMove(child.id, 0), // TODO
-                                icon: <MoveUpIcon fontSize="small"/>
-                            });
+                            label: "Move",
+                            onClick: () => onMoveChildActivityRequested(child),
+                            icon: <MoveUpIcon fontSize="small"/>
+                        });
                     }
 
                     return <div key={child.id}>
