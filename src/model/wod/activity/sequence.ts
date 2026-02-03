@@ -4,6 +4,7 @@ import {SequenceDto} from "../../dto/wod/activity/sequence.dto.ts";
 import {TaskSet} from "../board/task-set.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
 import {mapActivityFromAllDto, mapActivityToAllDto} from "./activity-utils.ts";
+import {v4 as uuidv4} from "uuid";
 
 export class Sequence extends Activity {
 
@@ -11,6 +12,7 @@ export class Sequence extends Activity {
         return new Sequence(
             mapActivityFromAllDto(dto.activities),
             dto.name || undefined,
+            uuidv4(),
             dto.comment || undefined,
         );
     }
@@ -25,15 +27,16 @@ export class Sequence extends Activity {
     }
 
     static empty(): Sequence {
-        return new Sequence([], undefined, undefined);
+        return new Sequence([], undefined, uuidv4(),undefined);
     }
 
     constructor(
         public readonly activities: Activity[],
         public readonly name: string | undefined,
+        id: string,
         comment: string | undefined,
     ) {
-        super(ActivityType.SEQUENCE, comment);
+        super(id, ActivityType.SEQUENCE, comment);
     }
 
     toSequencerTasks(parent: BoardTextInfo): TaskSet {
@@ -44,6 +47,7 @@ export class Sequence extends Activity {
         return new Sequence(
             [...this.activities, child],
             this.name,
+            this.id,
             this.comment,
         );
     }
@@ -51,12 +55,13 @@ export class Sequence extends Activity {
     updateActivity(child: Activity): Sequence {
         const index = this._findIndex(child.id);
         if (index < 0) {
-            return this;
+            throw Error(`Activity with id ${child.id} not found in sequence.`);
         }
 
         return new Sequence(
             this.activities.slice(0, index).concat(child).concat(this.activities.slice(index + 1)),
             this.name,
+            this.id,
             this.comment,
         );
     }
@@ -64,12 +69,13 @@ export class Sequence extends Activity {
     deleteActivity(id: string) {
         const index = this._findIndex(id);
         if (index < 0) {
-            return this;
+            throw Error(`Activity with id ${id} not found in sequence.`);
         }
 
         return new Sequence(
             this.activities.slice(0, index).concat(this.activities.slice(index + 1)),
             this.name,
+            this.id,
             this.comment,
         );
     }
@@ -77,7 +83,7 @@ export class Sequence extends Activity {
     moveActivity(id: string, newIndex: number) {
         const index = this._findIndex(id);
         if (index < 0) {
-            return this;
+            throw Error(`Activity with id ${id} not found in sequence.`);
         }
 
         const count = this.activities.length;
@@ -97,6 +103,7 @@ export class Sequence extends Activity {
         return new Sequence(
             updatedActivities,
             this.name,
+            this.id,
             this.comment,
         );
     }
