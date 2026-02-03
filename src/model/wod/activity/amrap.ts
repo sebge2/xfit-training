@@ -6,6 +6,8 @@ import {TaskSet} from "../board/task-set.ts";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
 import {mapActivityFromDto, mapActivityToDto} from "./activity-utils.ts";
+import {v4 as uuidv4} from "uuid";
+import {Sequence} from "./sequence.ts";
 
 export class Amrap extends Activity {
 
@@ -13,6 +15,7 @@ export class Amrap extends Activity {
         return new Amrap(
             Duration.fromDto(dto.duration) as Duration,
             mapActivityFromDto(dto.activity),
+            uuidv4(),
             dto.comment || undefined,
         );
     }
@@ -26,12 +29,18 @@ export class Amrap extends Activity {
         };
     }
 
+    static empty() {
+        return new Amrap(Duration.empty(), Sequence.empty(), uuidv4(), undefined);
+    }
+
     constructor(
         public readonly duration: Duration,
         public readonly activity: Activity,
+        id: string,
         comment: string | undefined,
     ) {
         super(
+            id,
             ActivityType.AMRAP,
             comment,
         );
@@ -48,6 +57,6 @@ export class Amrap extends Activity {
     }
 
     updateActivity(child: Activity): Amrap {
-        return new Amrap(this.duration, child, this.comment);
+        return new Amrap(this.duration, child, this.id, this.comment);
     }
 }

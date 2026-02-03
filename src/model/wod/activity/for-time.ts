@@ -6,6 +6,8 @@ import {TaskSet} from "../board/task-set.ts";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
 import {mapActivityFromDto, mapActivityToDto} from "./activity-utils.ts";
+import {v4 as uuidv4} from "uuid";
+import {Sequence} from "./sequence.ts";
 
 export class ForTime extends Activity {
 
@@ -13,6 +15,7 @@ export class ForTime extends Activity {
         return new ForTime(
             Duration.fromDto(dto.duration) as Duration,
             mapActivityFromDto(dto.activity),
+            uuidv4(),
             dto.comment || undefined,
         );
     }
@@ -26,12 +29,18 @@ export class ForTime extends Activity {
         };
     }
 
+    static empty() {
+        return new ForTime(Duration.empty(), Sequence.empty(),  uuidv4(), undefined);
+    }
+
     constructor(
         public readonly duration: Duration | null,
         public readonly activity: Activity,
+        id: string,
         comment: string | undefined,
     ) {
         super(
+            id,
             ActivityType.FOR_TIME,
             comment,
         );
@@ -52,6 +61,6 @@ export class ForTime extends Activity {
     }
 
     updateActivity(child: Activity) {
-        return new ForTime(this.duration, child, this.comment);
+        return new ForTime(this.duration, child, this.id, this.comment);
     }
 }

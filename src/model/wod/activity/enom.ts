@@ -6,6 +6,8 @@ import {TaskSet} from "../board/task-set.ts";
 import {Task} from "../board/task.ts";
 import {BoardTextInfo} from "../board/board-text-info.ts";
 import {mapActivityFromDto, mapActivityToDto} from "./activity-utils.ts";
+import {v4 as uuidv4} from "uuid";
+import {Sequence} from "./sequence.ts";
 
 export class Enom extends Activity {
 
@@ -14,6 +16,7 @@ export class Enom extends Activity {
             Duration.fromDto(dto.duration) as Duration,
             dto.repetitions,
             mapActivityFromDto(dto.activity),
+            uuidv4(),
             dto.comment || undefined,
         );
     }
@@ -28,13 +31,19 @@ export class Enom extends Activity {
         };
     }
 
+    static empty() {
+        return new Enom(Duration.empty(), 0, Sequence.empty(), uuidv4(), undefined);
+    }
+
     constructor(
         public readonly duration: Duration,
         public readonly repetitions: number,
         public readonly activity: Activity,
+        id: string,
         comment: string | undefined,
     ) {
         super(
+            id,
             ActivityType.ENOM,
             comment,
         );
@@ -53,6 +62,6 @@ export class Enom extends Activity {
     }
 
     updateActivity(child: Activity): Enom {
-        return new Enom(this.duration, this.repetitions, child, this.comment);
+        return new Enom(this.duration, this.repetitions, child, this.id, this.comment);
     }
 }

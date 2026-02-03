@@ -2,6 +2,7 @@ import {Activity} from "./activity.ts";
 import {ActivityType} from "./activity-type.ts";
 import {ActivityExerciseDto} from "../../dto/wod/activity/activity-exercise.dto.ts";
 import {TaskSet} from "../board/task-set.ts";
+import {v4 as uuidv4} from "uuid";
 
 export class ActivityExercise extends Activity {
 
@@ -9,6 +10,7 @@ export class ActivityExercise extends Activity {
         return new ActivityExercise(
             dto.repetitions,
             dto.exercise,
+            uuidv4(),
             dto.comment || undefined,
         );
     }
@@ -22,12 +24,17 @@ export class ActivityExercise extends Activity {
         };
     }
 
+    static empty() {
+        return new ActivityExercise('0', '', uuidv4(), undefined);
+    }
+
     constructor(
         public readonly repetitions: string,
         public readonly exercise: string,
+        id: string,
         comment: string | undefined,
     ) {
-        super(ActivityType.EXERCISE, comment);
+        super(id, ActivityType.EXERCISE, comment);
     }
 
     toSequencerTasks(): TaskSet {
