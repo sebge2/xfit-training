@@ -40,4 +40,8 @@ export class ActivityExercise extends Activity {
     toSequencerTasks(): TaskSet {
         return new TaskSet([]);
     }
+
+    update(param: { repetitions: string; exercise: string; comment: string | undefined }): ActivityExercise {
+        return new ActivityExercise(param.repetitions, param.exercise, this.id, param.comment);
+    }
 }

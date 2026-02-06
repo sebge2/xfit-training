@@ -4,12 +4,14 @@ import {ActivityExercise} from "../../../../model/wod/activity/activity-exercise
 import {MoreActionButtonAction} from "../../../core/buttton/MoreActionButton.tsx";
 import EditIcon from '@mui/icons-material/Edit';
 import {ActivityExerciseDataEditor} from "./activity-exercise-data-editor.tsx";
+import {useState} from "react";
 
 type Props = ActivityProps & {
     activity: ActivityExercise,
 };
 
 export function ActivityExerciseDisplay({activity, parentContext, onUpdate: onUpdateDelegate}: Props) {
+    const [editing, setEditing] = useState<boolean>(false);
     const currentContext: ActivityContext = {
         editing: parentContext.editing,
         activity: activity,
@@ -21,7 +23,7 @@ export function ActivityExerciseDisplay({activity, parentContext, onUpdate: onUp
         actions.push({
             label: "Edit",
             icon: <EditIcon/>,
-            onClick: () => onUpdateDelegate(activity),
+            onClick: () => setEditing(true),
         });
     }
 
@@ -29,9 +31,13 @@ export function ActivityExerciseDisplay({activity, parentContext, onUpdate: onUp
         onUpdateDelegate(activity);
     }
 
+    function onCancelEdit() {
+        setEditing(false);
+    }
+
     return (
         <>
-            {currentContext.editing && <ActivityExerciseDataEditor exercise={activity} onUpdate={onUpdate}/>}
+            <ActivityExerciseDataEditor exercise={activity} editing={editing} onUpdate={onUpdate} onCancel={onCancelEdit}/>
 
             <ActivityBox actions={[...actions, ...parentContext.childrenActions]}>
                 {activity.repetitions} {activity.exercise} {!!activity.comment && '(' + activity.comment + ')'}
