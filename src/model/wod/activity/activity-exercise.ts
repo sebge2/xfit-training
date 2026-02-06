@@ -41,7 +41,7 @@ export class ActivityExercise extends Activity {
         return new TaskSet([]);
     }
 
-    update(param: { repetitions: string; exercise: string; comment: string | undefined }): ActivityExercise {
+    updateData(param: { repetitions: string; exercise: string; comment: string | undefined }): ActivityExercise {
         return new ActivityExercise(param.repetitions, param.exercise, this.id, param.comment);
     }
 }

@@ -27,17 +27,18 @@ export function ActivityExerciseDisplay({activity, parentContext, onUpdate: onUp
         });
     }
 
-    function onUpdate() {
-        onUpdateDelegate(activity);
+    function onUpdateData(updatedActivity: ActivityExercise) {
+        setEditing(false);
+        onUpdateDelegate(updatedActivity);
     }
 
-    function onCancelEdit() {
+    function onCancelEditData() {
         setEditing(false);
     }
 
     return (
         <>
-            <ActivityExerciseDataEditor exercise={activity} editing={editing} onUpdate={onUpdate} onCancel={onCancelEdit}/>
+            <ActivityExerciseDataEditor exercise={activity} editing={editing} onUpdate={onUpdateData} onCancel={onCancelEditData}/>
 
             <ActivityBox actions={[...actions, ...parentContext.childrenActions]}>
                 {activity.repetitions} {activity.exercise} {!!activity.comment && '(' + activity.comment + ')'}

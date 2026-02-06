@@ -8,6 +8,7 @@ import {EditButton} from "../../../components/core/buttton/EditButton.tsx";
 import {DeleteButton} from "../../../components/core/buttton/DeleteButton.tsx";
 import {WodTags} from "../../../components/activity/WodTags.tsx";
 import {ActionsContainer} from "../../../components/core/interaction/ActionsContainer.tsx";
+import {WOD_SERVICE} from "../../../services/wod-service.ts";
 
 export function WodMetadataView() {
     const routeData = useRouteLoaderData('wod-details') as { wod: Wod };
@@ -17,6 +18,10 @@ export function WodMetadataView() {
 
     function onDelete() {
         // TODO
+        WOD_SERVICE.delete(wod.id as string)
+            .then(() => {
+                navigate("../");
+            });
     }
 
     function onEdit() {

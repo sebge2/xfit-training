@@ -59,4 +59,8 @@ export class Amrap extends Activity {
     updateActivity(child: Activity): Amrap {
         return new Amrap(this.duration, child, this.id, this.comment);
     }
+
+    updateData(param: { duration: Duration; comment: string | undefined }): Amrap {
+        return new Amrap(param.duration, this.activity, this.id, param.comment);
+    }
 }
