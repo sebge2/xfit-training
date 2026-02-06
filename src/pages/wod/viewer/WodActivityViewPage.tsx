@@ -9,9 +9,10 @@ export const WodActivityViewPage = () => {
     const parentActivityContext: ActivityContext = {
         editing: false,
         activity: undefined,
+        childrenActions: [],
     };
 
     return <>
-        <ActivityDisplay activity={wod.activity} parentContext={parentActivityContext}/>
+        <ActivityDisplay activity={wod.activity} parentContext={parentActivityContext} onUpdate={() => {}}/>
     </>;
 }

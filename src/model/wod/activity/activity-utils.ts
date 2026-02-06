@@ -73,7 +73,7 @@ export function createActivity(type: ActivityType): Activity {
         case ActivityType.SEQUENCE:
             return Sequence.empty();
         case ActivityType.REPETITIONS:
-            return new Repetitions(0, Sequence.empty(), undefined)
+            return Repetitions.empty();
         case ActivityType.REST:
             return Rest.empty();
         case ActivityType.AMRAP:
