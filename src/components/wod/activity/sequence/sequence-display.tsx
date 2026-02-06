@@ -91,15 +91,15 @@ export function SequenceDisplay({activity, parentContext, onUpdate: onUpdateDele
 
                     if (currentContext.editing) {
                         currentContext.childrenActions.push({
-                            label: "Delete",
-                            onClick: () => onChildDelete(child.id),
-                            icon: <DeleteIcon fontSize="small"/>
-                        });
-
-                        currentContext.childrenActions.push({
                             label: "Move",
                             onClick: () => onMoveChildActivityRequested(child),
                             icon: <MoveUpIcon fontSize="small"/>
+                        });
+
+                        currentContext.childrenActions.push({
+                            label: "Delete",
+                            onClick: () => onChildDelete(child.id),
+                            icon: <DeleteIcon fontSize="small"/>
                         });
                     }
 

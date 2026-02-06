@@ -1,7 +1,9 @@
 import {ActivityBox} from "../activity-box.tsx";
 import {ActivityContext, ActivityProps} from "../activity-display.tsx";
-import {ActivityExerciseDataEditor} from "./activity-exercise-data-editor.tsx";
 import {ActivityExercise} from "../../../../model/wod/activity/activity-exercise.ts";
+import {MoreActionButtonAction} from "../../../core/buttton/MoreActionButton.tsx";
+import EditIcon from '@mui/icons-material/Edit';
+import {ActivityExerciseDataEditor} from "./activity-exercise-data-editor.tsx";
 
 type Props = ActivityProps & {
     activity: ActivityExercise,
@@ -14,16 +16,26 @@ export function ActivityExerciseDisplay({activity, parentContext, onUpdate: onUp
         childrenActions: [],
     };
 
+    const actions: MoreActionButtonAction[] = [];
+    if (currentContext.editing) {
+        actions.push({
+            label: "Edit",
+            icon: <EditIcon/>,
+            onClick: () => onUpdateDelegate(activity),
+        });
+    }
+
     function onUpdate() {
         onUpdateDelegate(activity);
     }
 
     return (
-        <ActivityBox actions={parentContext.childrenActions}>
-            {!currentContext.editing && <>
-                {activity.repetitions} {activity.exercise} {!!activity.comment && '(' + activity.comment + ')'}
-            </>}
+        <>
             {currentContext.editing && <ActivityExerciseDataEditor exercise={activity} onUpdate={onUpdate}/>}
-        </ActivityBox>
+
+            <ActivityBox actions={[...actions, ...parentContext.childrenActions]}>
+                {activity.repetitions} {activity.exercise} {!!activity.comment && '(' + activity.comment + ')'}
+            </ActivityBox>
+        </>
     );
 }
