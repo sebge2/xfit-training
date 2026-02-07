@@ -4,7 +4,7 @@ import {FormStack} from "../../../core/form/FormStack.tsx";
 import {FormDialog} from "../../../core/interaction/FormDialog.tsx";
 import {ACTIVITY_TYPE_LABELS, ActivityType} from "../../../../model/wod/activity/activity-type.ts";
 import {FormField} from "../../../../model/core/form/form-field.ts";
-import {getTextValue, validateRequiredFields} from "../../../../utils/form-utils.ts";
+import {getTextValue, sendFormOnEnter, validateRequiredFields} from "../../../../utils/form-utils.ts";
 import {Selector, SelectorItem} from "../../../core/form/Selector.tsx";
 
 export type Props = {
@@ -14,12 +14,14 @@ export type Props = {
     onCancel: () => void,
 }
 
-// TODO handle autofocus
 export function ActivitySelectorDialog({open, onSelected: onSelectedDelegate, onCancel}: Props) {
     const activityField = new FormField<ActivityType>('activity', 'Activity', ActivityType.EXERCISE, true);
     const originalFormState = FormState.create([activityField]);
     const [state, formAction] = useActionState<FormState, FormData>(onSelected, originalFormState);
-    const items: SelectorItem<ActivityType>[] = Object.values(ActivityType).map(type => ({value: type, label: ACTIVITY_TYPE_LABELS[type]}));
+    const items: SelectorItem<ActivityType>[] = Object.values(ActivityType).map(type => ({
+        value: type,
+        label: ACTIVITY_TYPE_LABELS[type]
+    }));
     const formRef = useRef<HTMLFormElement>(null);
 
     function onConfirmed() {
@@ -40,10 +42,10 @@ export function ActivitySelectorDialog({open, onSelected: onSelectedDelegate, on
 
     return <FormDialog text="Add activity to sequence" open={open} onOk={onConfirmed} onCancel={onCancel}>
         <form ref={formRef} action={formAction}>
-            <FormStack>
+            <FormStack onKeyDown={sendFormOnEnter}>
                 <Selector formField={state.fieldById[activityField.id] as FormField<string | undefined>}
                           items={items}
-                          autoFocus={true} />
+                          autoFocus={true}/>
             </FormStack>
         </form>
     </FormDialog>;

@@ -11,6 +11,7 @@ import {ExerciseTag} from "../model/exercise/exercise-tag.ts";
 import {WodTag} from "../model/wod/wod-tag.ts";
 import {WodTagFormField} from "../components/activity/WodTagSelector.tsx";
 import {MainCategory} from "../model/exercise/main-category.ts";
+import React from "react";
 
 export function validateRequiredFields(state: FormState, formData: FormData) {
     state.fields
@@ -65,6 +66,17 @@ export function getExerciseTagsValue(formField: ExerciseTagFormField, formData: 
 
 export function getWodTagsValue(formField: WodTagFormField, formData: FormData): WodTag[] {
     return ((formData.get(formField.id) || '') as string).split(',') as WodTag[];
+}
+
+export function sendFormOnEnter(e: React.KeyboardEvent<HTMLElement>): boolean {
+    if (e.key !== "Enter") {
+        return false;
+    }
+
+    const form = (e.currentTarget as HTMLElement).closest("form") as HTMLFormElement | null;
+    form?.requestSubmit();
+
+    return true;
 }
 
 function _isEmpty(fieldValue: File | string | null | undefined) {
