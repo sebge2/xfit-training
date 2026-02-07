@@ -18,7 +18,7 @@ type Props = {
 
 export function ForTimeDataEditor({forTime, editing, onUpdate, onCancel}: Props) {
     const durationField = new FormField<string>('duration', 'Duration', forTime.duration.hours + '', true);
-    const commentField = new FormField<string | undefined>('comment', 'comment', forTime.comment, false);
+    const commentField = new FormField<string | undefined>('comment', 'Comment', forTime.comment, false);
 
     const originalFormState = FormState.create([durationField, commentField]);
     const [state, formAction] = useActionState<FormState, FormData>(onSelected, originalFormState);

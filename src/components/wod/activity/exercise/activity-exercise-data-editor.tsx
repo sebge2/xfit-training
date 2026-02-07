@@ -17,7 +17,7 @@ type Props = {
 export function ActivityExerciseDataEditor({exercise, editing, onUpdate, onCancel}: Props) {
     const repetitionField = new FormField<string>('repetitions', 'Repetitions', exercise.repetitions, true);
     const exerciseField = new FormField<string>('exercise', 'Exercise', exercise.exercise, true);
-    const commentField = new FormField<string | undefined>('comment', 'comment', exercise.comment, false);
+    const commentField = new FormField<string | undefined>('comment', 'Comment', exercise.comment, false);
 
     const originalFormState = FormState.create([repetitionField, exerciseField, commentField]);
     const [state, formAction] = useActionState<FormState, FormData>(onSelected, originalFormState);

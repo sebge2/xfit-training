@@ -17,7 +17,7 @@ type Props = {
 
 export function AmrapDataEditor({amrap, editing, onUpdate, onCancel}: Props) {
     const durationField = new FormField<string>('duration', 'Duration', amrap.duration.hours + '', true);
-    const commentField = new FormField<string | undefined>('comment', 'comment', amrap.comment, false);
+    const commentField = new FormField<string | undefined>('comment', 'Comment', amrap.comment, false);
 
     const originalFormState = FormState.create([durationField, commentField]);
     const [state, formAction] = useActionState<FormState, FormData>(onSelected, originalFormState);
