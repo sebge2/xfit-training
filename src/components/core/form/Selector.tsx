@@ -1,5 +1,4 @@
 import {ReactElement} from "react";
-import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
@@ -21,8 +20,7 @@ type Props<T> = {
 export function Selector<T>({formField, items, autoFocus = false}: Props<T>): ReactElement {
     const labelId = `${formField.id}-label`;
 
-    return <Box sx={{minWidth: '5rem', paddingTop: '1rem'}}>
-        <FormControl fullWidth variant="outlined">
+    return <FormControl fullWidth variant="outlined" sx={{mt: '0.3rem'}}>
             <InputLabel id={labelId}>{formField.label}</InputLabel>
             <Select
                 labelId={labelId}
@@ -35,6 +33,5 @@ export function Selector<T>({formField, items, autoFocus = false}: Props<T>): Re
                 {items.map(item => <MenuItem value={item.value as string}>{item.label}</MenuItem>)}
             </Select>
             {formField.required && <FormHelperText>{formField.joinedError || 'Required'}</FormHelperText>}
-        </FormControl>
-    </Box>;
+        </FormControl>;
 }

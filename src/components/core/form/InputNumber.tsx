@@ -11,6 +11,7 @@ type Props = {
     endAdornment?: React.ReactNode,
     min?: number,
     max?: number,
+    autoFocus?: boolean,
     onChange?: (value: number | undefined) => Promise<void> | void,
 };
 
@@ -21,7 +22,7 @@ export function InputNumber({formField, endAdornment, min, max, onChange: onChan
         }
     }
 
-    return <FormControl fullWidth>
+    return <FormControl fullWidth sx={{mt: '0.3rem'}}>
         <Input
             type="number"
             id={formField.id}

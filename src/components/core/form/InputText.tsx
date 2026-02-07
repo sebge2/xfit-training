@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function InputText({formField,}: Props): ReactElement {
-    return <FormControl fullWidth>
+    return <FormControl fullWidth sx={{mt: '0.3rem'}}>
         <TextField
             id={formField.id}
             name={formField.id}
