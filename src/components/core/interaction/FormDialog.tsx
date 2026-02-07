@@ -19,7 +19,7 @@ type Props = {
 };
 
 export function FormDialog({text, open, onOk, onCancel, confirmationText, confirmationCancel, children}: Props) {
-    return <Dialog open={open} onKeyDown={onCancel} onClose={onCancel} aria-labelledby={text}>
+    return <Dialog open={open} onClose={onCancel} aria-labelledby={text}>
         <DialogTitle>{text}</DialogTitle>
         <DialogContent>
             <FormStack>

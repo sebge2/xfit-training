@@ -41,7 +41,9 @@ export function ActivitySelectorDialog({open, onSelected: onSelectedDelegate, on
     return <FormDialog text="Add activity to sequence" open={open} onOk={onConfirmed} onCancel={onCancel}>
         <form ref={formRef} action={formAction}>
             <FormStack>
-                <Selector formField={state.fieldById[activityField.id] as FormField<string | undefined>} items={items} />
+                <Selector formField={state.fieldById[activityField.id] as FormField<string | undefined>}
+                          items={items}
+                          autoFocus={true} />
             </FormStack>
         </form>
     </FormDialog>;

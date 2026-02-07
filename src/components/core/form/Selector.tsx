@@ -14,10 +14,11 @@ export interface SelectorItem<T> {
 
 type Props<T> = {
     formField: FormField<T>,
+    autoFocus?: boolean,
     items: SelectorItem<T>[],
 };
 
-export function Selector<T>({formField, items}: Props<T>): ReactElement {
+export function Selector<T>({formField, items, autoFocus = false}: Props<T>): ReactElement {
     const labelId = `${formField.id}-label`;
 
     return <Box sx={{minWidth: '5rem', paddingTop: '1rem'}}>
@@ -29,6 +30,7 @@ export function Selector<T>({formField, items}: Props<T>): ReactElement {
                 name={formField.id}
                 defaultValue={formField.defaultValue}
                 label={formField.label}
+                autoFocus={autoFocus}
             >
                 {items.map(item => <MenuItem value={item.value as string}>{item.label}</MenuItem>)}
             </Select>
