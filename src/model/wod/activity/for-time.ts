@@ -34,7 +34,7 @@ export class ForTime extends Activity {
     }
 
     constructor(
-        public readonly duration: Duration | null,
+        public readonly duration: Duration,
         public readonly activity: Activity,
         id: string,
         comment: string | undefined,
@@ -62,5 +62,9 @@ export class ForTime extends Activity {
 
     updateActivity(child: Activity) {
         return new ForTime(this.duration, child, this.id, this.comment);
+    }
+
+    updateData(param: { duration: Duration; comment: string | undefined }) {
+        return new ForTime(param.duration, this.activity, this.id, param.comment);
     }
 }

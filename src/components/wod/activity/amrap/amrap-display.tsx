@@ -40,7 +40,7 @@ export function AmrapDisplay({activity, parentContext, onUpdate: onUpdateDelegat
         setEditing(false);
     }
 
-    function onActivityUpdate(child: Activity) {
+    function onChildActivityUpdate(child: Activity) {
         onUpdateDelegate(activity.updateActivity(child));
     }
 
@@ -54,7 +54,7 @@ export function AmrapDisplay({activity, parentContext, onUpdate: onUpdateDelegat
                          actions={[...actions, ...parentContext.childrenActions]}>
                 <ActivityDisplay activity={activity.activity}
                                  parentContext={currentContext}
-                                 onUpdate={onActivityUpdate}/>
+                                 onUpdate={onChildActivityUpdate}/>
             </ActivityBox>
         </>
     );
