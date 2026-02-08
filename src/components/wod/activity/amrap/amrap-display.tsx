@@ -49,7 +49,7 @@ export function AmrapDisplay({activity, parentContext, onUpdate: onUpdateDelegat
             <AmrapDataEditor amrap={activity} editing={editing} onUpdate={onUpdateData} onCancel={onCancelEditData}/>
 
             <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
-                         innerTitle={activity.duration &&
+                         title={activity.duration &&
                              <span>Duration: <DurationDisplay duration={activity.duration}/></span>}
                          actions={[...actions, ...parentContext.childrenActions]}>
                 <ActivityDisplay activity={activity.activity}

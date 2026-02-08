@@ -49,7 +49,7 @@ export function ForTimeDisplay({activity, parentContext, onUpdate: onUpdateDeleg
             <ForTimeDataEditor forTime={activity} editing={editing} onUpdate={onUpdateData} onCancel={onCancelEditData}/>
 
             <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
-                         innerTitle={activity.duration &&
+                         title={activity.duration &&
                              <span>Time Cap: <DurationDisplay duration={activity.duration}/></span>}
                          actions={[...actions, ...parentContext.childrenActions]}>
                 <ActivityDisplay activity={activity.activity}

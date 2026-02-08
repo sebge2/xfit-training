@@ -2,7 +2,7 @@
 
 .sequenceActivity {
   div {
-    margin-bottom: v.$activity-box-margin;
+    margin-bottom: v.$sequence-children-margin;
   }
 }
 
@@ -44,8 +44,8 @@
   border: 1px solid v.$activity-border-color;
   border-radius: v.$activity-border-radius;
 
-  height: 100%;
-  width: 100%;
+  height: calc(100% - v.$activity-box-height-removal);
+  width: calc(100% - v.$activity-box-width-removal);
   display: grid;
   overflow: hidden;
 }
@@ -69,9 +69,21 @@
   height: 100%;
   width: 100%;
   display: grid;
+  margin: v.$activity-content-space;
+}
+
+.activityBoxContentFull {
   grid-template-rows: v.$activity-title-height 1fr;
   grid-gap: v.$activity-title-space;
-  margin: v.$activity-content-space;
+}
+
+.activityBoxContentOnlyTitle {
+}
+
+.activityBoxContentOnlyChildren {
+}
+
+.activityBoxContentEmpty {
 }
 
 .activityBoxTitle {

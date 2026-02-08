@@ -6,7 +6,7 @@
 $z-index-1: 10;
 
 // activity-box
-$activity-box-margin: 1rem;
+$sequence-children-margin: 0.4rem;
 $activity-breath-color: #ef4444;
 $activity-box-actions-space: .3rem;
 $activity-border-radius: 0.5rem;
@@ -15,7 +15,9 @@ $activity-delimiter-bg: #111;
 $activity-delimiter-color: #fff;
 $activity-delimiter-padding: 0.9rem;
 $activity-delimiter-width: 3rem;
-$activity-title-height: 1rem;
+$activity-title-height: 1.5rem;
 $activity-title-space: 0.5rem;
 $activity-title-font-size: 700;
 $activity-content-space: 0.8rem;
+$activity-box-width-removal: 2.5rem;
+$activity-box-height-removal: 1.5rem;

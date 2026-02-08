@@ -39,7 +39,7 @@ export function EnomDisplay({activity, parentContext, onUpdate: onUpdateDelegate
 
     return <>
         <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
-                     innerTitle={title}
+                     title={title}
                      actions={parentContext.childrenActions}>
             <ActivityDisplay activity={activity.activity}
                              parentContext={currentContext}

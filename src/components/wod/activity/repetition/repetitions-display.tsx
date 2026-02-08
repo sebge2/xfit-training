@@ -22,7 +22,7 @@ export function RepetitionsDisplay({activity, parentContext, onUpdate: onUpdateD
     return (
         <>
             <ActivityBox delimiterTitle={ACTIVITY_TYPE_LABELS[activity.type]}
-                         innerTitle={activity.repetitions + ' rounds'}
+                         title={activity.repetitions + ' rounds'}
                          actions={parentContext.childrenActions}>
                 <ActivityDisplay activity={activity.activity}
                                  parentContext={currentContext}
