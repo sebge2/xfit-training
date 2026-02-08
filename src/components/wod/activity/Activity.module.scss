@@ -1,0 +1,75 @@
+@use "../../../index" as v;
+
+.sequenceActivity {
+  div {
+    margin-bottom: v.$activity-box-margin;
+  }
+}
+
+.activityBoxActions {
+  position: absolute;
+  top: v.$activity-box-actions-space;
+  right: v.$activity-box-actions-space;
+  z-index: v.$z-index-1;
+}
+
+@keyframes activityBoxBreath {
+  0% {
+    background-color: rgba(v.$activity-breath-color, 0.06);
+    box-shadow:
+            0 0 0 0 rgba(v.$activity-breath-color, 0.00),
+            0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+  50% {
+    background-color: rgba(v.$activity-breath-color, 0.12);
+    box-shadow:
+            0 0 0 10px rgba(v.$activity-breath-color, 0.10),
+            0 10px 26px rgba(0, 0, 0, 0.10);
+  }
+  100% {
+    background-color: rgba(v.$activity-breath-color, 0.06);
+    box-shadow:
+            0 0 0 0 rgba(v.$activity-breath-color, 0.00),
+            0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.activityBoxBreath {
+  animation: activityBoxBreath 2.6s ease-in-out infinite;
+  will-change: background-color, box-shadow;
+}
+
+.activityBox {
+  position: relative;
+  border: 1px solid v.$activity-border-color;
+  border-radius: v.$activity-border-radius;
+
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: v.$activity-delimiter-width 1fr;
+  overflow: hidden;
+}
+
+.activityBoxRightTitle {
+  background: v.$activity-delimiter-bg;
+  color: v.$activity-delimiter-color;
+  padding: v.$activity-delimiter-padding;
+  writing-mode: vertical-rl;
+}
+
+.activityBoxContent {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: v.$activity-title-height 1fr;
+  grid-gap: v.$activity-title-space;
+  margin: v.$activity-content-space;
+}
+
+.activityBoxTitle {
+  font-weight: v.$activity-title-font-size;
+}
+
+.activityBoxChildren {
+}
