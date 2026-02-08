@@ -11,20 +11,20 @@ type Props = {
 };
 
 export function ActivityBox({delimiterTitle, innerTitle, children, actions = []}: Props) {
+    const hasDelimiterTitle = delimiterTitle && delimiterTitle.length > 0;
+
     return (
-        <div className={style.activityBox}>
+        <div className={`${style.activityBox} ${hasDelimiterTitle ? style.activityBoxWithDelimiter : style.activityBoxNoDelimiter}`}>
             {actions.length > 0 && (
                 <div className={style.activityBoxActions}>
                     <MoreActionsButton actions={actions}/>
                 </div>
             )}
 
-            {delimiterTitle && <div className={style.activityBoxRightTitle}>
-                {delimiterTitle}
-            </div>}
+            {hasDelimiterTitle && <div className={style.activityBoxDelimiter}>{delimiterTitle}</div>}
 
             <div className={style.activityBoxContent}>
-                {innerTitle && <div className={style.activityBoxTitle}>{innerTitle}</div>}
+                <div className={style.activityBoxTitle}>{innerTitle}</div>
 
                 <div className={style.activityBoxChildren}>
                     {children}

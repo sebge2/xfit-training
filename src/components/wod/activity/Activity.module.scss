@@ -47,11 +47,18 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: v.$activity-delimiter-width 1fr;
   overflow: hidden;
 }
 
-.activityBoxRightTitle {
+.activityBoxNoDelimiter {
+  grid-template-columns: 1fr;
+}
+
+.activityBoxWithDelimiter {
+  grid-template-columns: v.$activity-delimiter-width 1fr;
+}
+
+.activityBoxDelimiter {
   background: v.$activity-delimiter-bg;
   color: v.$activity-delimiter-color;
   padding: v.$activity-delimiter-padding;
